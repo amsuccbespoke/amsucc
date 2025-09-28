@@ -1,5 +1,12 @@
-// Add event listener to the form submission
-document.querySelector('form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Add form submission logic here
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const burger = document.getElementById('hamburger');
+  const nav = document.getElementById('primary-nav');
+  if(burger && nav){
+    burger.addEventListener('click', ()=>{
+      nav.classList.toggle('open');
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!expanded));
+    });
+  }
 });

@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       }
     });
 
-    // Close menu when clicking on a link (optional)
+    // Close menu when clicking on a link
     nav.addEventListener('click', (e) => {
       if(e.target.tagName === 'A') {
         nav.classList.remove('open');
@@ -27,3 +27,21 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 });
+
+// ===== SCROLL ANIMATIONS =====
+const fadeElements = document.querySelectorAll('.fade-in');
+
+const fadeInOnScroll = () => {
+  fadeElements.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    const elementVisible = 150;
+    
+    if (elementTop < window.innerHeight - elementVisible) {
+      element.classList.add('visible');
+    }
+  });
+};
+
+// Run on load and scroll
+window.addEventListener('load', fadeInOnScroll);
+window.addEventListener('scroll', fadeInOnScroll);

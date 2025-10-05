@@ -28,16 +28,20 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 });
 
-// ===== SCROLL ANIMATIONS =====
+// ===== IMPROVED SCROLL ANIMATIONS =====
 const fadeElements = document.querySelectorAll('.fade-in');
 
 const fadeInOnScroll = () => {
   fadeElements.forEach(element => {
     const elementTop = element.getBoundingClientRect().top;
+    const elementBottom = element.getBoundingClientRect().bottom;
     const elementVisible = 150;
     
-    if (elementTop < window.innerHeight - elementVisible) {
+    // Add visible when entering viewport, remove when completely gone
+    if (elementTop < window.innerHeight - elementVisible && elementBottom > 0) {
       element.classList.add('visible');
+    } else if (elementBottom < 0 || elementTop > window.innerHeight) {
+      element.classList.remove('visible');
     }
   });
 };

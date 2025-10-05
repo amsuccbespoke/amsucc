@@ -50,8 +50,19 @@ a:hover{text-decoration:underline}
 .btn-ghost{border:1px solid #303030}
 .btn-ghost:hover{background:#141414}
 
-/* Sections */
-.about{padding:56px 20px;max-width:var(--maxw);margin:0 auto}
+/* About Section - FIXED PADDING */
+.about.container {
+    padding: 56px 20px;
+}
+
+.about.container h2,
+.about.container p, 
+.about.container .pill-list {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+}
+
 .pill-list{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;padding:0;list-style:none}
 .pill-list li{border:1px solid #2a2a2a;padding:8px 12px;border-radius:999px;color:#ddd}
 .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:56px}

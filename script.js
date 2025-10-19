@@ -203,3 +203,117 @@ function initPortfolioSlider() {
 
 // Initialize slider when page loads
 document.addEventListener('DOMContentLoaded', initPortfolioSlider);
+
+
+// Individual Portfolio Sliders
+function initPortfolioSliders() {
+  const sliders = document.querySelectorAll('.small-slider');
+  
+  sliders.forEach(slider => {
+    const slides = slider.querySelectorAll('.portfolio-slide');
+    const dots = slider.querySelectorAll('.dot');
+    const prevArrow = slider.querySelector('.prev-arrow');
+    const nextArrow = slider.querySelector('.next-arrow');
+    let currentSlide = 0;
+    let autoSlideInterval;
+
+    function showSlide(n) {
+      // Hide all slides
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Calculate new slide index
+      currentSlide = (n + slides.length) % slides.length;
+      
+      // Show new slide and activate dot
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+      
+      // Update arrow states
+      updateArrowStates();
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    function updateArrowStates() {
+      // For 2-slide sliders, we can disable arrows if needed
+      // But for better UX, we'll keep them enabled and loop
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 4000); // 4 seconds
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    // Event listeners for arrows
+    nextArrow.addEventListener('click', () => {
+      stopAutoSlide();
+      nextSlide();
+      startAutoSlide();
+    });
+
+    prevArrow.addEventListener('click', () => {
+      stopAutoSlide();
+      prevSlide();
+      startAutoSlide();
+    });
+
+    // Event listeners for dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        stopAutoSlide();
+        showSlide(index);
+        startAutoSlide();
+      });
+    });
+
+    // Start auto-sliding
+    startAutoSlide();
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', stopAutoSlide);
+    slider.addEventListener('mouseleave', startAutoSlide);
+    
+    // Touch support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoSlide();
+    });
+    
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      startAutoSlide();
+    });
+    
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          // Swipe left - next slide
+          nextSlide();
+        } else {
+          // Swipe right - previous slide
+          prevSlide();
+        }
+      }
+    }
+  });
+}
+
+// Initialize all portfolio sliders
+document.addEventListener('DOMContentLoaded', initPortfolioSliders);

@@ -152,7 +152,7 @@ a:hover{text-decoration:underline}
   background: #1a1a1a;
 }
 
-/* Testimonials Section - IMPROVED */
+/* Testimonials Section - IMPROVED WITH ANIMATIONS */
 .testimonials {
   padding: 5rem 0;
   text-align: center;
@@ -184,7 +184,15 @@ a:hover{text-decoration:underline}
   text-align: left;
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s var(--ease) forwards;
 }
+
+/* Staggered animation delays for each card */
+.testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+.testimonial-card:nth-child(2) { animation-delay: 0.3s; }
+.testimonial-card:nth-child(3) { animation-delay: 0.5s; }
 
 .testimonial-card::before {
   content: '';
@@ -194,6 +202,12 @@ a:hover{text-decoration:underline}
   right: 0;
   height: 3px;
   background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.6s var(--ease);
+}
+
+.testimonial-card:hover::before {
+  transform: scaleX(1);
 }
 
 .testimonial-card:hover {
@@ -207,6 +221,13 @@ a:hover{text-decoration:underline}
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
   letter-spacing: 3px;
+  transform: scale(0.9);
+  transition: all 0.4s var(--ease);
+}
+
+.testimonial-card:hover .stars {
+  transform: scale(1);
+  letter-spacing: 4px;
 }
 
 .testimonial-card p {
@@ -217,6 +238,11 @@ a:hover{text-decoration:underline}
   font-size: 1.1rem;
   position: relative;
   padding-left: 1rem;
+  transition: color 0.3s var(--ease);
+}
+
+.testimonial-card:hover p {
+  color: var(--text);
 }
 
 .testimonial-card p::before {
@@ -228,6 +254,11 @@ a:hover{text-decoration:underline}
   color: var(--gold);
   opacity: 0.3;
   font-family: serif;
+  transition: opacity 0.3s var(--ease);
+}
+
+.testimonial-card:hover p::before {
+  opacity: 0.6;
 }
 
 .client {
@@ -237,6 +268,19 @@ a:hover{text-decoration:underline}
   border-top: 1px solid #2a2a2a;
   padding-top: 1rem;
   margin-top: 1rem;
+  transition: border-color 0.3s var(--ease);
+}
+
+.testimonial-card:hover .client {
+  border-color: var(--gold);
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
@@ -256,10 +300,217 @@ a:hover{text-decoration:underline}
   
   .testimonial-card {
     padding: 2rem 1.5rem;
+    animation-delay: 0.1s !important; /* Same delay on mobile */
   }
   
   .testimonial-card p {
     font-size: 1rem;
     padding-left: 0.5rem;
   }
+}
+
+/* Portfolio Highlights Section */
+.portfolio-highlights {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, #0c0c0c 0%, var(--bg) 100%);
+}
+
+.portfolio-highlights h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.portfolio-item {
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+  box-shadow: var(--shadow);
+  transition: all 0.4s var(--ease);
+}
+
+.portfolio-item:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold);
+  box-shadow: 0 20px 50px rgba(212, 175, 55, 0.15);
+}
+
+.portfolio-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+}
+
+.portfolio-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.portfolio-item:hover .portfolio-image img {
+  transform: scale(1.05);
+}
+
+.portfolio-overlay {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(10, 10, 10, 0.9);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--gold);
+  backdrop-filter: blur(10px);
+}
+
+.portfolio-category {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.portfolio-info {
+  padding: 1.5rem;
+}
+
+.portfolio-info h3 {
+  color: var(--text);
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.portfolio-info p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.portfolio-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .portfolio-highlights {
+    padding: 3rem 0;
+  }
+  
+  .portfolio-highlights h2 {
+    font-size: 2rem;
+  }
+  
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .portfolio-cta {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .portfolio-cta .btn-ghost,
+  .portfolio-cta .btn-cta {
+    text-align: center;
+  }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-spinner.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(212, 175, 55, 0.3);
+  border-top: 3px solid var(--gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.loading-spinner p {
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: var(--gold);
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s var(--ease);
+  z-index: 100;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
+}
+
+.back-to-top.show {
+  display: flex;
 }

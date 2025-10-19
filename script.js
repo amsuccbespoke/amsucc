@@ -49,3 +49,29 @@ const fadeInOnScroll = () => {
 // Run on load and scroll
 window.addEventListener('load', fadeInOnScroll);
 window.addEventListener('scroll', fadeInOnScroll);
+
+// Loading Spinner
+window.addEventListener('load', function() {
+  const spinner = document.getElementById('loading-spinner');
+  setTimeout(() => {
+    spinner.classList.add('hidden');
+  }, 1000); // Shows for 1 second
+});
+
+// Back to Top Button
+const backToTopButton = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    backToTopButton.classList.add('show');
+  } else {
+    backToTopButton.classList.remove('show');
+  }
+});
+
+backToTopButton.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});

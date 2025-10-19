@@ -107,70 +107,73 @@
   <h2>Our Featured Work</h2>
   <p class="section-subtitle">A glimpse of our craftsmanship in agbada, kaftan, and bespoke tailoring</p>
   
-  <div class="portfolio-grid">
-    <!-- Agbada - Single Image -->
-    <div class="portfolio-item">
-      <div class="portfolio-image">
+  <div class="portfolio-slider">
+    <!-- Slide 1 - Agbada -->
+    <div class="portfolio-slide active">
+      <div class="slide-image">
         <img src="https://i.postimg.cc/dDPn3Lq8/6-E22-B2-B9-5147-4-A12-80-A7-8105947-F1672.jpg" alt="Premium Agbada with gold embroidery by AMSUCC BESPOKE" loading="lazy">
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Agbada</span>
-        </div>
       </div>
-      <div class="portfolio-info">
+      <div class="slide-info">
         <h3>Royal Agbada</h3>
         <p>Traditional elegance with premium embroidery and modern fit</p>
+        <span class="slide-category">Agbada</span>
       </div>
     </div>
     
-    <!-- Kaftan - Two Different Designs -->
-    <div class="portfolio-item">
-      <div class="portfolio-image double-image">
-        <div class="image-pair">
-          <img src="https://i.postimg.cc/HxJvZGnR/2-CF76677-775-F-45-CD-8316-897-A9525-FA1-E.jpg" alt="Embroidered Kaftan design by AMSUCC BESPOKE" loading="lazy">
-          <img src="https://i.postimg.cc/Ls1d0ZJF/726-F423-D-A05-E-43-EC-9103-56968043-ADCF.jpg" alt="Detailed Kaftan embroidery work by AMSUCC BESPOKE" loading="lazy">
-        </div>
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Kaftan</span>
-        </div>
+    <!-- Slide 2 - Kaftan -->
+    <div class="portfolio-slide">
+      <div class="slide-image">
+        <img src="https://i.postimg.cc/HxJvZGnR/2-CF76677-775-F-45-CD-8316-897-A9525-FA1-E.jpg" alt="Embroidered Kaftan design by AMSUCC BESPOKE" loading="lazy">
       </div>
-      <div class="portfolio-info">
+      <div class="slide-info">
         <h3>Embroidered Kaftan</h3>
-        <p>Premium kaftan designs with detailed hand embroidery</p>
+        <p>Premium kaftan with detailed hand embroidery on luxury fabric</p>
+        <span class="slide-category">Kaftan</span>
       </div>
     </div>
     
-    <!-- Shirt & Trousers - Two Different Pieces -->
-    <div class="portfolio-item">
-      <div class="portfolio-image double-image">
-        <div class="image-pair">
-          <img src="https://i.postimg.cc/MHQ4TkJC/1-DE946-ED-13-A9-4-A88-B72-C-C857690-E688-C.jpg" alt="Bespoke dress shirt by AMSUCC BESPOKE" loading="lazy">
-          <img src="https://i.postimg.cc/1z9RkB17/6606-A1-B9-ED4-A-4-DCC-9-EF1-FA4-BE8642-D04.jpg" alt="Custom tailored trousers by AMSUCC BESPOKE" loading="lazy">
-        </div>
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Shirt & Trousers</span>
-        </div>
+    <!-- Slide 3 - Shirt & Trousers -->
+    <div class="portfolio-slide">
+      <div class="slide-image">
+        <img src="https://i.postimg.cc/MHQ4TkJC/1-DE946-ED-13-A9-4-A88-B72-C-C857690-E688-C.jpg" alt="Bespoke dress shirt by AMSUCC BESPOKE" loading="lazy">
       </div>
-      <div class="portfolio-info">
-        <h3>Bespoke Shirt & Trousers</h3>
-        <p>Custom tailored shirts and perfectly fitted trousers</p>
+      <div class="slide-info">
+        <h3>Bespoke Shirt</h3>
+        <p>Perfectly tailored dress shirt with custom measurements</p>
+        <span class="slide-category">Shirt & Trousers</span>
       </div>
     </div>
     
-    <!-- Native Set - Two Different Styles -->
-    <div class="portfolio-item">
-      <div class="portfolio-image double-image">
-        <div class="image-pair">
-          <img src="https://i.postimg.cc/MG8DY2wW/F23-CBE3-E-6-FC8-404-E-B8-F1-BE3-E96-EA758-C.jpg" alt="Traditional native attire by AMSUCC BESPOKE" loading="lazy">
-          <img src="https://i.postimg.cc/QxFgcN2c/F88-AD4-C4-A386-4058-ADA8-0-E5-BE93-C12-F6.jpg" alt="Complete native wear set by AMSUCC BESPOKE" loading="lazy">
-        </div>
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Native Wear</span>
-        </div>
+    <!-- Slide 4 - Native Set -->
+    <div class="portfolio-slide">
+      <div class="slide-image">
+        <img src="https://i.postimg.cc/MG8DY2wW/F23-CBE3-E-6-FC8-404-E-B8-F1-BE3-E96-EA758-C.jpg" alt="Traditional native attire by AMSUCC BESPOKE" loading="lazy">
       </div>
-      <div class="portfolio-info">
+      <div class="slide-info">
         <h3>Complete Native Set</h3>
-        <p>Traditional native attire in various styles and designs</p>
+        <p>Full traditional attire with premium detailing and perfect fit</p>
+        <span class="slide-category">Native Wear</span>
       </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="slider-arrow prev-arrow" aria-label="Previous image">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+    <button class="slider-arrow next-arrow" aria-label="Next image">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+      </svg>
+    </button>
+
+    <!-- Dots Indicator -->
+    <div class="slider-dots">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+      <span class="dot" data-slide="3"></span>
     </div>
   </div>
   
@@ -178,6 +181,7 @@
     <a href="gallery.html" class="btn-cta">View Full Gallery</a>
   </div>
 </section>
+
 <!-- Ct band -->
 <section class="cta-band fade-in">
   <div class="container">

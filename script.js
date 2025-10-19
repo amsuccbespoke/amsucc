@@ -116,3 +116,90 @@ const statsSection = document.querySelector('.stats-section');
 if (statsSection) {
   statsObserver.observe(statsSection);
 }
+
+// Portfolio Slider
+function initPortfolioSlider() {
+  const slides = document.querySelectorAll('.portfolio-slide');
+  const dots = document.querySelectorAll('.dot');
+  const prevArrow = document.querySelector('.prev-arrow');
+  const nextArrow = document.querySelector('.next-arrow');
+  let currentSlide = 0;
+  let autoSlideInterval;
+
+  // Show specific slide
+  function showSlide(n) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    currentSlide = (n + slides.length) % slides.length;
+    
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classlist.add('active');
+  }
+
+  // Next slide
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  // Previous slide
+  function prevSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  // Auto slide every 5 seconds
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(nextSlide, 5000);
+  }
+
+  // Stop auto slide on user interaction
+  function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+  }
+
+  // Event listeners
+  nextArrow.addEventListener('click', () => {
+    stopAutoSlide();
+    nextSlide();
+    startAutoSlide();
+  });
+
+  prevArrow.addEventListener('click', () => {
+    stopAutoSlide();
+    prevSlide();
+    startAutoSlide();
+  });
+
+  // Dot click events
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      stopAutoSlide();
+      showSlide(index);
+      startAutoSlide();
+    });
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      stopAutoSlide();
+      prevSlide();
+      startAutoSlide();
+    } else if (e.key === 'ArrowRight') {
+      stopAutoSlide();
+      nextSlide();
+      startAutoSlide();
+    }
+  });
+
+  // Start auto sliding
+  startAutoSlide();
+
+  // Pause auto slide on hover
+  const slider = document.querySelector('.portfolio-slider');
+  slider.addEventListener('mouseenter', stopAutoSlide);
+  slider.addEventListener('mouseleave', startAutoSlide);
+}
+
+// Initialize slider when page loads
+document.addEventListener('DOMContentLoaded', initPortfolioSlider);

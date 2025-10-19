@@ -152,9 +152,9 @@ a:hover{text-decoration:underline}
   background: #1a1a1a;
 }
 
-/* Testimonials Section - IMPROVED WITH ANIMATIONS */
+/* Testimonials Section - IMPROVED WITH ANIMATIONS & BETTER PADDING */
 .testimonials {
-  padding: 5rem 0;
+  padding: 5rem 20px; /* Added horizontal padding */
   text-align: center;
   background: linear-gradient(180deg, var(--bg) 0%, #0c0c0c 100%);
 }
@@ -275,7 +275,7 @@ a:hover{text-decoration:underline}
   border-color: var(--gold);
 }
 
-/* Fade In Up Animation */
+/* Fade In Up Animation - ONLY ONCE! */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -285,7 +285,7 @@ a:hover{text-decoration:underline}
 
 @media (max-width: 768px) {
   .testimonials {
-    padding: 3rem 0;
+    padding: 3rem 20px; /* Consistent horizontal padding for mobile */
   }
   
   .testimonials h2 {
@@ -300,7 +300,7 @@ a:hover{text-decoration:underline}
   
   .testimonial-card {
     padding: 2rem 1.5rem;
-    animation-delay: 0.1s !important; /* Same delay on mobile */
+    animation-delay: 0.1s !important;
   }
   
   .testimonial-card p {
@@ -513,4 +513,69 @@ a:hover{text-decoration:underline}
 
 .back-to-top.show {
   display: flex;
+}
+
+
+/* Statistics Counter Section */
+.stats-section {
+  padding: 5rem 20px;
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+  border-top: 1px solid #2a2a2a;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3rem;
+  text-align: center;
+}
+
+.stat-item {
+  padding: 2rem 1rem;
+}
+
+.stat-number {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Pulse animation for numbers */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.stat-number.animated {
+  animation: pulse 0.6s var(--ease);
+}
+
+@media (max-width: 768px) {
+  .stats-section {
+    padding: 3rem 20px;
+  }
+  
+  .stats-grid {
+    gap: 2rem;
+  }
+  
+  .stat-number {
+    font-size: 3rem;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
+  }
 }

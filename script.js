@@ -75,3 +75,46 @@ backToTopButton.addEventListener('click', () => {
     behavior: 'smooth'
   });
 });
+
+
+
+// Animated Statistics Counter
+function animateCounter() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+  
+  statNumbers.forEach(stat => {
+    const target = parseInt(stat.getAttribute('data-target'));
+    const duration = 2000; // 2 seconds
+    const step = target / (duration / 16); // 60fps
+    let current = 0;
+    
+    const updateCounter = () => {
+      current += step;
+      if (current < target) {
+        stat.textContent = Math.ceil(current) + (stat.getAttribute('data-target') === '98' ? '%' : '+');
+        requestAnimationFrame(updateCounter);
+      } else {
+        stat.textContent = target + (stat.getAttribute('data-target') === '98' ? '%' : '+');
+        stat.classList.add('animated');
+      }
+    };
+    
+    updateCounter();
+  });
+}
+
+// Intersection Observer to trigger animation when visible
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter();
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+// Observe stats section
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) {
+  statsObserver.observe(statsSection);
+}

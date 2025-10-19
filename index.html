@@ -83,25 +83,55 @@
 <!-- Testimonials Section -->
 <section class="testimonials container fade-in">
   <h2>What Our Clients Say</h2>
-  <div class="testimonial-grid">
-    <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
-      <p>"AMSUCC delivered beyond my expectations! The fit of my agbada was perfect for my wedding. Attention to detail is exceptional."</p>
-      <div class="client">— Ibrahim A.</div>
+  
+  <div class="testimonials-slider">
+    <!-- Testimonial 1 -->
+    <div class="testimonial-slide active">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"AMSUCC delivered beyond my expectations! The fit of my agbada was perfect for my wedding. Attention to detail is exceptional."</p>
+        <div class="client">— Ibrahim A.</div>
+      </div>
     </div>
-    <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
-      <p>"Fast turnaround and premium quality. I've gotten multiple kaftans and shirts made - consistently excellent work."</p>
-      <div class="client">— Chinedu M.</div>
+    
+    <!-- Testimonial 2 -->
+    <div class="testimonial-slide">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Fast turnaround and premium quality. I've gotten multiple kaftans and shirts made - consistently excellent work."</p>
+        <div class="client">— Chinedu M.</div>
+      </div>
     </div>
-    <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
-      <p>"The best tailor in Lagos! Professional measurements, quality fabrics, and perfect stitching. Highly recommended!"</p>
-      <div class="client">— Adewale S.</div>
+    
+    <!-- Testimonial 3 -->
+    <div class="testimonial-slide">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"The best tailor in Lagos! Professional measurements, quality fabrics, and perfect stitching. Highly recommended!"</p>
+        <div class="client">— Adewale S.</div>
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="testimonial-arrow prev-testimonial" aria-label="Previous testimonial">
+      <svg viewBox="0 0 24 24" width="20" height="20">
+        <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+    <button class="testimonial-arrow next-testimonial" aria-label="Next testimonial">
+      <svg viewBox="0 0 24 24" width="20" height="20">
+        <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+      </svg>
+    </button>
+
+    <!-- Dots Indicator -->
+    <div class="testimonial-dots">
+      <span class="testimonial-dot active" data-slide="0"></span>
+      <span class="testimonial-dot" data-slide="1"></span>
+      <span class="testimonial-dot" data-slide="2"></span>
     </div>
   </div>
 </section>
-
 <!-- Portfolio Highlights -->
 <section class="portfolio-highlights container fade-in">
   <h2>Our Featured Work</h2>

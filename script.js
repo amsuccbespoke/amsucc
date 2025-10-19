@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 });
 
-// ===== IMPROVED SCROLL ANIMATIONS =====
+// ===== SCROLL ANIMATIONS =====
 const fadeElements = document.querySelectorAll('.fade-in');
 
 const fadeInOnScroll = () => {
@@ -75,8 +75,6 @@ backToTopButton.addEventListener('click', () => {
     behavior: 'smooth'
   });
 });
-
-
 
 // Animated Statistics Counter
 function animateCounter() {

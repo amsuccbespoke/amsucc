@@ -1,256 +1,400 @@
-// script.js - FAWLUX BESPOKE
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Loading Spinner
-  const loadingSpinner = document.getElementById('loading-spinner');
+// Theme Management
+function initTheme() {
+  const themeSwitcher = document.getElementById('themeSwitcher');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   
-  // Hide loading spinner after page loads
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      loadingSpinner.classList.add('hidden');
-    }, 1000);
-  });
-
-  // Mobile Navigation Toggle
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('primary-nav');
+  // Get saved theme or use system preference
+  const savedTheme = localStorage.getItem('fawlux-theme');
+  const currentTheme = savedTheme || (prefersDark ? 'dark' : 'white');
   
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', function() {
-      this.classList.toggle('active');
-      navLinks.classList.toggle('active');
-      
-      // Update aria-expanded attribute
-      const isExpanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', !isExpanded);
-    });
-    
-    // Close mobile menu when clicking on a link
-    const navAnchors = navLinks.querySelectorAll('a');
-    navAnchors.forEach(anchor => {
-      anchor.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-
-  // Testimonials Slider
-  const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-  const testimonialDots = document.querySelectorAll('.testimonial-dot');
-  const prevTestimonialBtn = document.querySelector('.prev-testimonial');
-  const nextTestimonialBtn = document.querySelector('.next-testimonial');
-  let currentTestimonial = 0;
+  // Apply theme
+  document.documentElement.setAttribute('data-theme', currentTheme);
   
-  function showTestimonial(index) {
-    // Hide all slides
-    testimonialSlides.forEach(slide => {
-      slide.classList.remove('active');
-    });
-    
-    // Remove active class from all dots
-    testimonialDots.forEach(dot => {
-      dot.classList.remove('active');
-    });
-    
-    // Show current slide and activate corresponding dot
-    testimonialSlides[index].classList.add('active');
-    testimonialDots[index].classList.add('active');
-    
-    currentTestimonial = index;
+  // Update switcher state
+  if (themeSwitcher) {
+    themeSwitcher.setAttribute('aria-label', 
+      currentTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+    );
   }
   
-  // Previous testimonial button
-  if (prevTestimonialBtn) {
-    prevTestimonialBtn.addEventListener('click', function() {
-      let newIndex = currentTestimonial - 1;
-      if (newIndex < 0) {
-        newIndex = testimonialSlides.length - 1;
+  console.log('Theme initialized:', currentTheme);
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'white' : 'dark';
+  
+  // Apply new theme
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('fawlux-theme', newTheme);
+  
+  // Update switcher
+  const themeSwitcher = document.getElementById('themeSwitcher');
+  if (themeSwitcher) {
+    themeSwitcher.setAttribute('aria-label', 
+      newTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+    );
+  }
+  
+  console.log('Theme toggled to:', newTheme);
+}
+
+// Initialize theme on load
+document.addEventListener('DOMContentLoaded', initTheme);
+
+// Mobile Navigation
+document.addEventListener('DOMContentLoaded',()=>{
+  const burger = document.getElementById('hamburger');
+  const nav = document.getElementById('primary-nav');
+
+  if(burger && nav){
+    burger.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      nav.classList.toggle('open');
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!expanded));
+    });
+
+    // Close menu when clicking anywhere outside
+    document.addEventListener('click', (e) => {
+      if(!nav.contains(e.target) && !burger.contains(e.target)) {
+        nav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
       }
-      showTestimonial(newIndex);
     });
-  }
-  
-  // Next testimonial button
-  if (nextTestimonialBtn) {
-    nextTestimonialBtn.addEventListener('click', function() {
-      let newIndex = currentTestimonial + 1;
-      if (newIndex >= testimonialSlides.length) {
-        newIndex = 0;
+
+    // Close menu when clicking on a link
+    nav.addEventListener('click', (e) => {
+      if(e.target.tagName === 'A') {
+        nav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
       }
-      showTestimonial(newIndex);
     });
   }
   
-  // Testimonial dots
-  testimonialDots.forEach((dot, index) => {
-    dot.addEventListener('click', function() {
-      showTestimonial(index);
-    });
-  });
-  
-  // Auto-rotate testimonials
-  let testimonialInterval = setInterval(function() {
-    let newIndex = currentTestimonial + 1;
-    if (newIndex >= testimonialSlides.length) {
-      newIndex = 0;
+  // Theme switcher event listener
+  const themeSwitcher = document.getElementById('themeSwitcher');
+  if (themeSwitcher) {
+    themeSwitcher.addEventListener('click', toggleTheme);
+  }
+});
+
+// ===== SCROLL ANIMATIONS =====
+const fadeElements = document.querySelectorAll('.fade-in');
+
+const fadeInOnScroll = () => {
+  fadeElements.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    const elementBottom = element.getBoundingClientRect().bottom;
+    const elementVisible = 150;
+
+    // Add visible when entering viewport, remove when completely gone
+    if (elementTop < window.innerHeight - elementVisible && elementBottom > 0) {
+      element.classList.add('visible');
+    } else if (elementBottom < 0 || elementTop > window.innerHeight) {
+      element.classList.remove('visible');
     }
-    showTestimonial(newIndex);
-  }, 5000);
-  
-  // Pause auto-rotation on hover
-  const testimonialSlider = document.querySelector('.testimonials-slider');
-  if (testimonialSlider) {
-    testimonialSlider.addEventListener('mouseenter', function() {
-      clearInterval(testimonialInterval);
-    });
-    
-    testimonialSlider.addEventListener('mouseleave', function() {
-      testimonialInterval = setInterval(function() {
-        let newIndex = currentTestimonial + 1;
-        if (newIndex >= testimonialSlides.length) {
-          newIndex = 0;
-        }
-        showTestimonial(newIndex);
-      }, 5000);
-    });
-  }
+  });
+};
 
-  // Portfolio Sliders
-  const portfolioSliders = document.querySelectorAll('.portfolio-slider');
-  
-  portfolioSliders.forEach(slider => {
+// Run on load and scroll
+window.addEventListener('load', fadeInOnScroll);
+window.addEventListener('scroll', fadeInOnScroll);
+
+// Loading Spinner
+window.addEventListener('load', function() {
+  const spinner = document.getElementById('loading-spinner');
+  setTimeout(() => {
+    if (spinner) {
+      spinner.classList.add('hidden');
+    }
+  }, 1000);
+});
+
+// Back to Top Button
+const backToTopButton = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+  if (backToTopButton) {
+    if (window.pageYOffset > 300) {
+      backToTopButton.classList.add('show');
+    } else {
+      backToTopButton.classList.remove('show');
+    }
+  }
+});
+
+if (backToTopButton) {
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
+// Animated Statistics Counter
+function animateCounter() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+
+  statNumbers.forEach(stat => {
+    const target = parseInt(stat.getAttribute('data-target'));
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+
+    const updateCounter = () => {
+      current += step;
+      if (current < target) {
+        stat.textContent = Math.ceil(current) + (stat.getAttribute('data-target') === '98' ? '%' : '+');
+        requestAnimationFrame(updateCounter);
+      } else {
+        stat.textContent = target + (stat.getAttribute('data-target') === '98' ? '%' : '+');
+        stat.classList.add('animated');
+      }
+    };
+
+    updateCounter();
+  });
+}
+
+// Intersection Observer to trigger animation when visible
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter();
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+// Observe stats section
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) {
+  statsObserver.observe(statsSection);
+}
+
+// Individual Portfolio Sliders
+function initPortfolioSliders() {
+  const sliders = document.querySelectorAll('.small-slider');
+
+  sliders.forEach(slider => {
     const slides = slider.querySelectorAll('.portfolio-slide');
+    const dots = slider.querySelectorAll('.dot');
     const prevArrow = slider.querySelector('.prev-arrow');
     const nextArrow = slider.querySelector('.next-arrow');
-    const dots = slider.querySelectorAll('.dot');
     let currentSlide = 0;
-    
-    function showSlide(index) {
-      // Hide all slides
-      slides.forEach(slide => {
-        slide.classList.remove('active');
-      });
-      
-      // Remove active class from all dots
-      dots.forEach(dot => {
-        dot.classList.remove('active');
-      });
-      
-      // Show current slide and activate corresponding dot
-      slides[index].classList.add('active');
-      dots[index].classList.add('active');
-      
-      currentSlide = index;
+    let autoSlideInterval;
+
+    function showSlide(n) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+
+      currentSlide = (n + slides.length) % slides.length;
+
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+      updateArrowStates();
     }
-    
-    // Previous arrow
-    if (prevArrow) {
-      prevArrow.addEventListener('click', function() {
-        let newIndex = currentSlide - 1;
-        if (newIndex < 0) {
-          newIndex = slides.length - 1;
-        }
-        showSlide(newIndex);
-      });
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
     }
-    
-    // Next arrow
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    function updateArrowStates() {
+      // Keep arrows enabled for looping
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 4000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    // Event listeners for arrows
     if (nextArrow) {
-      nextArrow.addEventListener('click', function() {
-        let newIndex = currentSlide + 1;
-        if (newIndex >= slides.length) {
-          newIndex = 0;
-        }
-        showSlide(newIndex);
+      nextArrow.addEventListener('click', () => {
+        stopAutoSlide();
+        nextSlide();
+        startAutoSlide();
       });
     }
-    
-    // Dots
+
+    if (prevArrow) {
+      prevArrow.addEventListener('click', () => {
+        stopAutoSlide();
+        prevSlide();
+        startAutoSlide();
+      });
+    }
+
+    // Event listeners for dots
     dots.forEach((dot, index) => {
-      dot.addEventListener('click', function() {
+      dot.addEventListener('click', () => {
+        stopAutoSlide();
         showSlide(index);
+        startAutoSlide();
       });
     });
-  });
 
-  // Statistics Counter Animation
-  const statNumbers = document.querySelectorAll('.stat-number');
-  
-  function animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-target'));
-    const duration = 2000; // 2 seconds
-    const step = target / (duration / 16); // 60fps
-    let current = 0;
-    
-    const timer = setInterval(function() {
-      current += step;
-      if (current >= target) {
-        current = target;
-        clearInterval(timer);
-      }
-      element.textContent = Math.floor(current);
-    }, 16);
-  }
-  
-  // Intersection Observer for animations
-  const fadeElements = document.querySelectorAll('.fade-in');
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-  
-  const observer = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        
-        // If it's a stat number, animate it
-        if (entry.target.classList.contains('stat-number')) {
-          animateCounter(entry.target);
+    // Start auto-sliding
+    startAutoSlide();
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', stopAutoSlide);
+    slider.addEventListener('mouseleave', startAutoSlide);
+
+    // Touch support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoSlide();
+    });
+
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      startAutoSlide();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
         }
-        
-        observer.unobserve(entry.target);
       }
-    });
-  }, observerOptions);
-  
-  fadeElements.forEach(element => {
-    observer.observe(element);
+    }
   });
+}
 
-  // Back to Top Button
-  const backToTopBtn = document.getElementById('back-to-top');
+// Initialize all portfolio sliders
+document.addEventListener('DOMContentLoaded', initPortfolioSliders);
+
+// Testimonials Slider
+function initTestimonialsSlider() {
+  const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+  const testimonialDots = document.querySelectorAll('.testimonial-dot');
+  const prevTestimonial = document.querySelector('.prev-testimonial');
+  const nextTestimonial = document.querySelector('.next-testimonial');
   
-  if (backToTopBtn) {
-    window.addEventListener('scroll', function() {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('visible');
-      } else {
-        backToTopBtn.classList.remove('visible');
-      }
-    });
-    
-    backToTopBtn.addEventListener('click', function() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+  if (!testimonialSlides.length) return;
+  
+  let currentTestimonial = 0;
+  let testimonialInterval;
+
+  function showTestimonial(n) {
+    testimonialSlides.forEach(slide => slide.classList.remove('active'));
+    testimonialDots.forEach(dot => dot.classList.remove('active'));
+
+    currentTestimonial = (n + testimonialSlides.length) % testimonialSlides.length;
+
+    testimonialSlides[currentTestimonial].classList.add('active');
+    testimonialDots[currentTestimonial].classList.add('active');
+  }
+
+  function nextTestimonialSlide() {
+    showTestimonial(currentTestimonial + 1);
+  }
+
+  function prevTestimonialSlide() {
+    showTestimonial(currentTestimonial - 1);
+  }
+
+  function startTestimonialAutoSlide() {
+    testimonialInterval = setInterval(nextTestimonialSlide, 5000);
+  }
+
+  function stopTestimonialAutoSlide() {
+    clearInterval(testimonialInterval);
+  }
+
+  if (nextTestimonial) {
+    nextTestimonial.addEventListener('click', () => {
+      stopTestimonialAutoSlide();
+      nextTestimonialSlide();
+      startTestimonialAutoSlide();
     });
   }
 
-  // Header scroll effect
-  const header = document.querySelector('.site-header');
-  
-  if (header) {
-    window.addEventListener('scroll', function() {
-      if (window.pageYOffset > 100) {
-        header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-      } else {
-        header.style.boxShadow = 'none';
-      }
+  if (prevTestimonial) {
+    prevTestimonial.addEventListener('click', () => {
+      stopTestimonialAutoSlide();
+      prevTestimonialSlide();
+      startTestimonialAutoSlide();
     });
+  }
+
+  testimonialDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      stopTestimonialAutoSlide();
+      showTestimonial(index);
+      startTestimonialAutoSlide();
+    });
+  });
+
+  startTestimonialAutoSlide();
+
+  const testimonialSlider = document.querySelector('.testimonials-slider');
+  if (testimonialSlider) {
+    testimonialSlider.addEventListener('mouseenter', stopTestimonialAutoSlide);
+    testimonialSlider.addEventListener('mouseleave', startTestimonialAutoSlide);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initTestimonialsSlider);
+
+// Google Business Integration
+function initGoogleBusiness() {
+  // This function can be expanded to load Google Reviews API if needed
+  console.log('Google Business integration ready');
+  
+  // Add business hours dynamically to contact page
+  const contactTopRow = document.querySelector('.contact-top-row');
+  if (contactTopRow && window.location.pathname.includes('contact.html')) {
+    const businessHoursHTML = `
+      <div class="business-hours">
+        <h4>Business Hours</h4>
+        <ul class="hours-list">
+          <li><span>Monday - Friday</span> <span>9:00 AM - 7:00 PM</span></li>
+          <li><span>Saturday</span> <span>9:00 AM - 6:00 PM</span></li>
+          <li class="closed"><span>Sunday</span> <span>Closed</span></li>
+        </ul>
+      </div>
+    `;
+    
+    // Add business hours to the contact card
+    const contactCard = contactTopRow.querySelector('.contact-card:last-child');
+    if (contactCard) {
+      contactCard.insertAdjacentHTML('beforeend', businessHoursHTML);
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initGoogleBusiness);
+
+// Enhanced error handling and performance
+window.addEventListener('error', (e) => {
+  console.error('Script error:', e.error);
+});
+
+// Performance monitoring
+window.addEventListener('load', () => {
+  if ('performance' in window) {
+    const perfData = performance.timing;
+    const loadTime = perfData.loadEventEnd - perfData.navigationStart;
+    console.log('Page load time:', loadTime + 'ms');
   }
 });

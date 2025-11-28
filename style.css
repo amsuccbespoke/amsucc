@@ -36,7 +36,7 @@ a:hover{text-decoration:underline}
 [data-theme="white"] .site-header{background:rgba(255,255,255,.75);border-bottom-color:#e0e0e0}
 .nav-wrapper{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
 .brand{display:flex;gap:12px;align-items:center;font-weight:800;letter-spacing:.5px}
-.brand-text{font-weight:800;letter-spacing:.5px}
+.brand-text{font-family:"Playfair Display", serif;font-weight:700;letter-spacing:3px}
 
 /* Header Controls */
 .header-controls{display:flex;align-items:center;gap:12px}
@@ -709,4 +709,21 @@ a:hover{text-decoration:underline}
   .portfolio-info {
     padding: 1rem;
   }
+}
+
+/* ===== CENTERED HEADER LAYOUT ===== */
+.nav-wrapper {
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+}
+
+.brand {
+  grid-column: 2 !important;
+  justify-self: center !important;
+}
+
+.header-controls {
+  grid-column: 3 !important;
+  justify-self: end !important;
 }

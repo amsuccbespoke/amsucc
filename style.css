@@ -715,8 +715,9 @@ a:hover{text-decoration:underline}
 /* ===== CENTERED HEADER LAYOUT ===== */
 .nav-wrapper {
   display: grid !important;
-  grid-template-columns: 1fr auto 1fr !important;
+  grid-template-columns: auto auto auto !important;
   align-items: center !important;
+  justify-content: space-between !important;
 }
 
 .brand {

@@ -712,31 +712,22 @@ a:hover{text-decoration:underline}
 }
 
 
-/* ===== BEST CENTERED HEADER SOLUTION ===== */
+/* ===== CENTERED HEADER LAYOUT ===== */
 .nav-wrapper {
-  display: flex !important;
-  justify-content: space-between !important;
+  display: grid !important;
+  grid-template-columns: auto 1fr auto !important;
   align-items: center !important;
-  position: relative !important;
-  padding: 14px 0 !important;
+  gap: 20px !important;
 }
 
 .brand {
-  position: absolute !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+  grid-column: 2 !important;
+  justify-self: center !important;
 }
 
-/* Ensure controls stay visible */
 .header-controls {
+  grid-column: 3 !important;
+  justify-self: end !important;
   display: flex !important;
   gap: 12px !important;
-  z-index: 2 !important;
-}
-
-.nav-links {
-  display: flex !important;
-  gap: 18px !important;
-  align-items: center !important;
-  z-index: 2 !important;
 }

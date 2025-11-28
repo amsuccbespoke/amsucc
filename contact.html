@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAWLUX BESPOKE — Contact</title>
-  <meta name="description" content="Contact FAWLUX BESPOKE for premium agbada, kaftan, shirts and trousers in Lagos. Visit us at Oko-Afo, Badagry or book appointment on WhatsApp.">
+  <title>FAWLUX — Contact</title>
+  <meta name="description" content="Contact FAWLUX for premium agbada, kaftan, shirts and trousers in Lagos. Visit us at Oko-Afo, Badagry or book appointment on WhatsApp.">
   <meta name="keywords" content="FAWLUX, bespoke, tailor, contact, menswear, agbada, kaftan, native wear, Lagos, Badagry, Oko-Afo, tailoring">
   <link rel="icon" type="image/png" href="favicon.png">
   <!-- Google Search Console Verification -->
@@ -15,8 +15,8 @@
   {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contact FAWLUX BESPOKE",
-    "description": "Contact page for FAWLUX BESPOKE premium tailoring services",
+    "name": "Contact FAWLUX",
+    "description": "Contact page for FAWLUX premium tailoring services",
     "url": "https://fawlux.netlify.app/contact.html",
     "mainEntity": {
       "@type": "LocalBusiness",
@@ -46,6 +46,12 @@
 
 <body>
 
+<!-- Loading Spinner -->
+<div id="loading-spinner" class="loading-spinner">
+  <div class="spinner"></div>
+  <p>FAWLUX</p>
+</div>
+
 <!-- Floating WhatsApp Button -->
 <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'd%20like%20to%20book%20an%20appointment." 
    class="whatsapp-float" 
@@ -60,7 +66,7 @@
 <header class="site-header">
   <div class="container nav-wrapper">
     <a class="brand" href="index.html" aria-label="FAWLUX Home">
-      <span class="brand-text">FAWLUX <em>BESPOKE</em></span>
+      <span class="brand-text">FAWLUX</span>
     </a>
 
     <div class="header-controls">
@@ -111,7 +117,7 @@
       </div>
       
       <!-- Google Business Review Prompt -->
-      <div class="google-business" style="margin-top: 1.5rem;">
+      <div class="google-business">
         <h3>Love Our Work?</h3>
         <p>Fawlux would love your feedback. Post a review to our profile.</p>
         <a class="btn-cta" href="https://g.page/r/CfCWR3VL1ALXEBE/review" target="_blank" rel="noopener">
@@ -205,10 +211,10 @@
 
 <footer class="site-footer">
   <div class="container footer-grid">
-    <div class="foot-brand">
-      <div class="brand-line">FAWLUX <em>BESPOKE</em></div>
+    <a href="index.html" class="foot-brand">
+      <div class="brand-line">FAWLUX</div>
       <div class="tagline">Perfectly stitched.</div>
-    </div>
+    </a>
     <div class="foot-links">
       <a href="index.html">Home</a>
       <a href="gallery.html">Gallery</a>
@@ -226,7 +232,7 @@
       </a>
     </div>
   </div>
-  <div class="copyright">© 2025 FAWLUX BESPOKE. All Rights Reserved.</div>
+  <div class="copyright">© 2025 FAWLUX. All Rights Reserved.</div>
 </footer>
 
 <script>
@@ -238,7 +244,7 @@ function redirectToWhatsApp(event) {
   const garment = document.getElementById('garment').value;
   const message = document.getElementById('message').value;
 
-  const whatsappMessage = `Hello FAWLUX BESPOKE! 👋\n\nI'm *${name}*\nPhone: *${phone}*\nGarment: *${garment}*\n\nMessage: ${message}\n\nI'd like to book an appointment.`;
+  const whatsappMessage = `Hello FAWLUX! 👋\n\nI'm *${name}*\nPhone: *${phone}*\nGarment: *${garment}*\n\nMessage: ${message}\n\nI'd like to book an appointment.`;
 
   const encodedMessage = encodeURIComponent(whatsappMessage);
   window.open(`https://wa.me/2348079444199?text=${encodedMessage}`, '_blank');

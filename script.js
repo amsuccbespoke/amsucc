@@ -16,8 +16,6 @@ function initTheme() {
       currentTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
     );
   }
-  
-  console.log('Theme initialized:', currentTheme);
 }
 
 function toggleTheme() {
@@ -35,15 +33,13 @@ function toggleTheme() {
       newTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
     );
   }
-  
-  console.log('Theme toggled to:', newTheme);
 }
 
 // Initialize theme on load
 document.addEventListener('DOMContentLoaded', initTheme);
 
 // Mobile Navigation
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMContentLoaded', function() {
   const burger = document.getElementById('hamburger');
   const nav = document.getElementById('primary-nav');
 
@@ -88,7 +84,6 @@ const fadeInOnScroll = () => {
     const elementBottom = element.getBoundingClientRect().bottom;
     const elementVisible = 150;
 
-    // Add visible when entering viewport, remove when completely gone
     if (elementTop < window.innerHeight - elementVisible && elementBottom > 0) {
       element.classList.add('visible');
     } else if (elementBottom < 0 || elementTop > window.innerHeight) {
@@ -174,15 +169,18 @@ if (statsSection) {
   statsObserver.observe(statsSection);
 }
 
-// Individual Portfolio Sliders
+// Portfolio Sliders
 function initPortfolioSliders() {
-  const sliders = document.querySelectorAll('.small-slider');
-
+  const sliders = document.querySelectorAll('.portfolio-slider');
+  
   sliders.forEach(slider => {
     const slides = slider.querySelectorAll('.portfolio-slide');
     const dots = slider.querySelectorAll('.dot');
     const prevArrow = slider.querySelector('.prev-arrow');
     const nextArrow = slider.querySelector('.next-arrow');
+    
+    if (!slides.length) return;
+    
     let currentSlide = 0;
     let autoSlideInterval;
 
@@ -193,8 +191,9 @@ function initPortfolioSliders() {
       currentSlide = (n + slides.length) % slides.length;
 
       slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
-      updateArrowStates();
+      if (dots[currentSlide]) {
+        dots[currentSlide].classList.add('active');
+      }
     }
 
     function nextSlide() {
@@ -205,10 +204,6 @@ function initPortfolioSliders() {
       showSlide(currentSlide - 1);
     }
 
-    function updateArrowStates() {
-      // Keep arrows enabled for looping
-    }
-
     function startAutoSlide() {
       autoSlideInterval = setInterval(nextSlide, 4000);
     }
@@ -217,7 +212,6 @@ function initPortfolioSliders() {
       clearInterval(autoSlideInterval);
     }
 
-    // Event listeners for arrows
     if (nextArrow) {
       nextArrow.addEventListener('click', () => {
         stopAutoSlide();
@@ -234,7 +228,6 @@ function initPortfolioSliders() {
       });
     }
 
-    // Event listeners for dots
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         stopAutoSlide();
@@ -243,10 +236,8 @@ function initPortfolioSliders() {
       });
     });
 
-    // Start auto-sliding
     startAutoSlide();
 
-    // Pause on hover
     slider.addEventListener('mouseenter', stopAutoSlide);
     slider.addEventListener('mouseleave', startAutoSlide);
 
@@ -280,9 +271,6 @@ function initPortfolioSliders() {
   });
 }
 
-// Initialize all portfolio sliders
-document.addEventListener('DOMContentLoaded', initPortfolioSliders);
-
 // Testimonials Slider
 function initTestimonialsSlider() {
   const testimonialSlides = document.querySelectorAll('.testimonial-slide');
@@ -302,7 +290,9 @@ function initTestimonialsSlider() {
     currentTestimonial = (n + testimonialSlides.length) % testimonialSlides.length;
 
     testimonialSlides[currentTestimonial].classList.add('active');
-    testimonialDots[currentTestimonial].classList.add('active');
+    if (testimonialDots[currentTestimonial]) {
+      testimonialDots[currentTestimonial].classList.add('active');
+    }
   }
 
   function nextTestimonialSlide() {
@@ -354,13 +344,8 @@ function initTestimonialsSlider() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', initTestimonialsSlider);
-
 // Google Business Integration
 function initGoogleBusiness() {
-  // This function can be expanded to load Google Reviews API if needed
-  console.log('Google Business integration ready');
-  
   // Add business hours dynamically to contact page
   const contactTopRow = document.querySelector('.contact-top-row');
   if (contactTopRow && window.location.pathname.includes('contact.html')) {
@@ -383,18 +368,23 @@ function initGoogleBusiness() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', initGoogleBusiness);
-
-// Enhanced error handling and performance
-window.addEventListener('error', (e) => {
-  console.error('Script error:', e.error);
+// Initialize all functionality
+document.addEventListener('DOMContentLoaded', function() {
+  initTheme();
+  initPortfolioSliders();
+  initTestimonialsSlider();
+  initGoogleBusiness();
+  
+  // Loading spinner
+  const spinner = document.getElementById('loading-spinner');
+  if (spinner) {
+    setTimeout(() => {
+      spinner.classList.add('hidden');
+    }, 1000);
+  }
 });
 
-// Performance monitoring
-window.addEventListener('load', () => {
-  if ('performance' in window) {
-    const perfData = performance.timing;
-    const loadTime = perfData.loadEventEnd - perfData.navigationStart;
-    console.log('Page load time:', loadTime + 'ms');
-  }
+// Enhanced error handling
+window.addEventListener('error', (e) => {
+  console.error('Script error:', e.error);
 });

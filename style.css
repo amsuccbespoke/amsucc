@@ -711,11 +711,13 @@ a:hover{text-decoration:underline}
   }
 }
 
+
 /* ===== CENTERED HEADER LAYOUT ===== */
 .nav-wrapper {
   display: grid !important;
-  grid-template-columns: 1fr auto 1fr !important;
+  grid-template-columns: auto 1fr auto !important;
   align-items: center !important;
+  gap: 20px !important;
 }
 
 .brand {
@@ -726,4 +728,6 @@ a:hover{text-decoration:underline}
 .header-controls {
   grid-column: 3 !important;
   justify-self: end !important;
+  display: flex !important;
+  gap: 12px !important;
 }

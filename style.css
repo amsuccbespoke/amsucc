@@ -500,17 +500,15 @@ a:hover{text-decoration:underline}
   line-height: 1.5;
 }
 
-/* Slider Controls */
+/* Slider Controls - FIXED POSITION */
 .slider-controls {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
+  position: static;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  z-index: 10;
+  margin-top: 15px;
+  padding: 10px 0;
 }
 
 .slider-arrow {
@@ -526,6 +524,8 @@ a:hover{text-decoration:underline}
   justify-content: center;
   transition: all 0.3s var(--ease);
   backdrop-filter: blur(10px);
+  position: static;
+  transform: none;
 }
 
 .slider-arrow:hover {

@@ -715,9 +715,8 @@ a:hover{text-decoration:underline}
 /* ===== CENTERED HEADER LAYOUT ===== */
 .nav-wrapper {
   display: grid !important;
-  grid-template-columns: auto 1fr auto !important;
+  grid-template-columns: 1fr auto 1fr !important;
   align-items: center !important;
-  gap: 20px !important;
 }
 
 .brand {
@@ -726,8 +725,13 @@ a:hover{text-decoration:underline}
 }
 
 .header-controls {
-  grid-column: 3 !important;
-  justify-self: end !important;
+  grid-column: 1 !important;
+  justify-self: start !important;
   display: flex !important;
   gap: 12px !important;
+}
+
+.nav-links {
+  grid-column: 3 !important;
+  justify-self: end !important;
 }

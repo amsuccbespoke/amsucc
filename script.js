@@ -417,3 +417,11 @@ if (themeSwitcher) {
   themeSwitcher.addEventListener('click', toggleTheme);
 }
 }
+
+// Force hide loading spinner after 3 seconds
+setTimeout(function() {
+  const spinner = document.getElementById('loading-spinner');
+  if (spinner) {
+    spinner.classList.add('hidden');
+  }
+}, 3000);

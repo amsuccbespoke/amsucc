@@ -735,20 +735,3 @@ a:hover{text-decoration:underline}
 
 
 
-
-/* ===== MINIMAL LUXURY THEME - TEST ===== */
-[data-theme="luxury"] {
-  --bg: #ffffff;
-  --card: #f8f8f8;
-  --text: #000000;
-  --muted: #666666;
-  --gold: #d4af37;
-  --accent: #d4af37;
-  --link: #000000;
-  --shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* Temporary: Hide loading spinner */
-.loading-spinner {
-  display: none !important;
-}

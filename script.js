@@ -392,36 +392,3 @@ window.addEventListener('error', (e) => {
 
 
 
-
-// ===== MINIMAL LUXURY THEME TOGGLE - TEST =====
-function toggleTheme() {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'luxury' : 'dark';
-  
-  // Apply new theme
-  document.documentElement.setAttribute('data-theme', newTheme);
-  localStorage.setItem('fawlux-theme', newTheme);
-  
-  // Update switcher state
-  const themeSwitcher = document.getElementById('themeSwitcher');
-  if (themeSwitcher) {
-    themeSwitcher.setAttribute('aria-label', 
-      newTheme === 'dark' ? 'Switch to Luxury theme' : 'Switch to FAWLUX theme'
-    );
-  }
-}
-
-// Update existing theme switcher event listener
-const themeSwitcher = document.getElementById('themeSwitcher');
-if (themeSwitcher) {
-  themeSwitcher.addEventListener('click', toggleTheme);
-}
-}
-
-// Force hide loading spinner after 3 seconds
-setTimeout(function() {
-  const spinner = document.getElementById('loading-spinner');
-  if (spinner) {
-    spinner.classList.add('hidden');
-  }
-}, 3000);

@@ -393,10 +393,10 @@ window.addEventListener('error', (e) => {
 
 
 
-// ===== GUCCI THEME TOGGLE - TEST =====
+// ===== MINIMAL LUXURY THEME TOGGLE - TEST =====
 function toggleTheme() {
   const currentTheme = document.documentElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'gucci' : 'dark';
+  const newTheme = currentTheme === 'dark' ? 'luxury' : 'dark';
   
   // Apply new theme
   document.documentElement.setAttribute('data-theme', newTheme);
@@ -406,7 +406,7 @@ function toggleTheme() {
   const themeSwitcher = document.getElementById('themeSwitcher');
   if (themeSwitcher) {
     themeSwitcher.setAttribute('aria-label', 
-      newTheme === 'dark' ? 'Switch to Gucci theme' : 'Switch to FAWLUX theme'
+      newTheme === 'dark' ? 'Switch to Luxury theme' : 'Switch to FAWLUX theme'
     );
   }
 }
@@ -415,4 +415,5 @@ function toggleTheme() {
 const themeSwitcher = document.getElementById('themeSwitcher');
 if (themeSwitcher) {
   themeSwitcher.addEventListener('click', toggleTheme);
+}
 }

@@ -736,14 +736,14 @@ a:hover{text-decoration:underline}
 
 
 
-/* ===== GUCCI THEME - TEST ===== */
-[data-theme="gucci"] {
-  --bg: #1a0d0b;
-  --card: #2a1512;
-  --text: #f5f5f5;
-  --muted: #c9a87c;
+/* ===== MINIMAL LUXURY THEME - TEST ===== */
+[data-theme="luxury"] {
+  --bg: #ffffff;
+  --card: #f8f8f8;
+  --text: #000000;
+  --muted: #666666;
   --gold: #d4af37;
   --accent: #d4af37;
-  --link: #e8d27e;
-  --shadow: 0 10px 30px rgba(0,0,0,.5);
+  --link: #000000;
+  --shadow: 0 10px 30px rgba(0,0,0,0.1);
 }

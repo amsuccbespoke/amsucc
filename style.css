@@ -768,22 +768,23 @@ a:hover{text-decoration:underline}
 }
 
 
-/* ===== THEME-AWARE BUTTON TEXT ===== */
 
-/* On dark theme: White text on colored buttons */
-[data-theme="dark"] .btn-cta,
-html:not([data-theme="white"]) .btn-cta {
+
+/* ===== GUARANTEED THEME BUTTONS ===== */
+
+/* Force white text on ALL colored buttons by default */
+.btn-cta {
   color: white !important;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
-/* On white theme: Black text on colored buttons */
-[data-theme="white"] .btn-cta {
+/* Only override to black if white theme is explicitly set */
+html[data-theme="white"] .btn-cta {
   color: black !important;
+  text-shadow: none;
 }
 
-/* Ghost buttons use theme text color */
+/* Ghost buttons fine as is */
 .btn-ghost {
-  color: var(--text) !important;
+  color: var(--text);
 }
-

@@ -738,11 +738,11 @@ a:hover{text-decoration:underline}
 
 
 
-/* Quick test: Make ALL gray text bright red */
-body[data-theme="white"] { color: red !important; }
 
-/* Test: Add gray to white theme */
-[data-theme="white"] .lead { color: red !important; }
-
-
-
+/* Apply muted gray to secondary text in white theme */
+[data-theme="white"] .lead,
+[data-theme="white"] .section-subtitle,
+[data-theme="white"] .tagline,
+[data-theme="white"] .form-note {
+  color: var(--muted);
+}

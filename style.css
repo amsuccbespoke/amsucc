@@ -734,4 +734,37 @@ a:hover{text-decoration:underline}
 
 
 
+/* ===== ENHANCED HEADER TEXT ===== */
+.brand-text {
+  font-size: 1.8rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 4px !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.3s var(--ease);
+}
+
+[data-theme="white"] .brand-text {
+  text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.brand:hover .brand-text {
+  transform: scale(1.03);
+  text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+/* Mobile adjustment */
+@media (max-width: 860px) {
+  .brand-text {
+    font-size: 1.5rem !important;
+    letter-spacing: 3px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-text {
+    font-size: 1.3rem !important;
+    letter-spacing: 2px !important;
+  }
+}
+
 

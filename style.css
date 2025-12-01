@@ -788,3 +788,45 @@ html[data-theme="white"] .btn-cta {
 .btn-ghost {
   color: var(--text);
 }
+
+
+
+
+
+/* ===== ALL COLORED BUTTONS - WHITE TEXT ===== */
+
+/* TARGET ALL .btn-cta buttons (colored buttons) */
+.btn-cta,
+a.btn-cta,
+button.btn-cta,
+.nav-links a.btn-cta,
+.hero-cta a.btn-cta,
+.portfolio-cta a.btn-cta,
+.cta-band a.btn-cta,
+.contact-card a.btn-cta,
+.google-business a.btn-cta,
+.contact-form button.btn-cta {
+  /* Force white text on ALL themes */
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+}
+
+/* Dark theme: Gold background */
+:root:not([data-theme="white"]) .btn-cta,
+body:not([data-theme="white"]) .btn-cta {
+  background-color: var(--accent) !important; /* Gold */
+}
+
+/* White theme: Black background */
+[data-theme="white"] .btn-cta,
+html[data-theme="white"] .btn-cta {
+  background-color: #000000 !important; /* Black */
+  border-color: #000000 !important;
+}
+
+/* Ghost buttons stay as is (not affected) */
+.btn-ghost {
+  background-color: transparent !important;
+  color: var(--text) !important;
+  border-color: var(--muted) !important;
+}

@@ -80,7 +80,6 @@ const fadeInOnScroll = () => {
 function initLoadingSpinner() {
   const spinner = document.getElementById('loading-spinner');
   if (spinner) {
-    // Show spinner for minimum 500ms to prevent flash
     setTimeout(() => {
       spinner.classList.add('hidden');
     }, 500);
@@ -111,7 +110,7 @@ function initBackToTop() {
   }
 }
 
-// Animated Statistics Counter - FIXED VERSION
+// Animated Statistics Counter - FIXED
 function animateCounter() {
   const statNumbers = document.querySelectorAll('.stat-number');
 
@@ -214,34 +213,6 @@ function initPortfolioSliders() {
 
     slider.addEventListener('mouseenter', stopAutoSlide);
     slider.addEventListener('mouseleave', startAutoSlide);
-
-    // Touch support
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    slider.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-      stopAutoSlide();
-    });
-
-    slider.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-      startAutoSlide();
-    });
-
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = touchStartX - touchEndX;
-
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
-      }
-    }
   });
 }
 
@@ -427,9 +398,4 @@ document.addEventListener('DOMContentLoaded', function() {
   statItems.forEach(item => {
     statsObserver.observe(item);
   });
-});
-
-// Error handling
-window.addEventListener('error', (e) => {
-  console.error('Script error:', e.error);
 });

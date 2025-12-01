@@ -737,6 +737,7 @@ a:hover{text-decoration:underline}
 
 
 
+
 /* ===== ADDITIONAL ENHANCEMENTS ===== */
 
 /* Lazy image loading enhancement */
@@ -792,16 +793,4 @@ img[loading="lazy"].loaded {
 
 [data-theme="white"] .slider-controls {
   background: linear-gradient(to top, rgba(255,255,255,0.7), transparent) !important;
-}
-
-/* Mobile header adjustment */
-@media (max-width: 860px) {
-  .brand {
-    justify-self: start !important;
-    grid-column: 1 !important;
-  }
-  
-  .header-controls {
-    grid-column: 2 !important;
-  }
 }

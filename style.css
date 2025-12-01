@@ -735,3 +735,11 @@ a:hover{text-decoration:underline}
 
 
 
+
+
+
+/* Quick test: Make ALL gray text bright red */
+body[data-theme="white"] { color: red !important; }
+
+
+

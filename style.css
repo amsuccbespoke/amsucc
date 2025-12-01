@@ -737,12 +737,71 @@ a:hover{text-decoration:underline}
 
 
 
+/* ===== ADDITIONAL ENHANCEMENTS ===== */
 
+/* Lazy image loading enhancement */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-/* Apply muted gray to secondary text in white theme */
-[data-theme="white"] .lead,
-[data-theme="white"] .section-subtitle,
-[data-theme="white"] .tagline,
-[data-theme="white"] .form-note {
-  color: var(--muted);
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Statistics counter pulse animation */
+.stat-number.animated {
+  animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Better form input focus styles */
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+[data-theme="white"] .contact-form input:focus,
+[data-theme="white"] .contact-form textarea:focus,
+[data-theme="white"] .contact-form select:focus {
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.2);
+}
+
+/* Improved slider arrow positioning */
+.slider-controls {
+  position: absolute !important;
+  bottom: 10px !important;
+  left: 0 !important;
+  right: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  padding: 10px 0 !important;
+  z-index: 20 !important;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent) !important;
+}
+
+[data-theme="white"] .slider-controls {
+  background: linear-gradient(to top, rgba(255,255,255,0.7), transparent) !important;
+}
+
+/* Mobile header adjustment */
+@media (max-width: 860px) {
+  .brand {
+    justify-self: start !important;
+    grid-column: 1 !important;
+  }
+  
+  .header-controls {
+    grid-column: 2 !important;
+  }
 }

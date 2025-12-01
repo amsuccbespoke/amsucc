@@ -2,15 +2,12 @@
 function initTheme() {
   const themeSwitcher = document.getElementById('themeSwitcher');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
-  // Get saved theme or use system preference
+
   const savedTheme = localStorage.getItem('fawlux-theme');
   const currentTheme = savedTheme || (prefersDark ? 'dark' : 'white');
-  
-  // Apply theme
+
   document.documentElement.setAttribute('data-theme', currentTheme);
-  
-  // Update switcher state
+
   if (themeSwitcher) {
     themeSwitcher.setAttribute('aria-label', 
       currentTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
@@ -21,12 +18,10 @@ function initTheme() {
 function toggleTheme() {
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const newTheme = currentTheme === 'dark' ? 'white' : 'dark';
-  
-  // Apply new theme
+
   document.documentElement.setAttribute('data-theme', newTheme);
   localStorage.setItem('fawlux-theme', newTheme);
-  
-  // Update switcher
+
   const themeSwitcher = document.getElementById('themeSwitcher');
   if (themeSwitcher) {
     themeSwitcher.setAttribute('aria-label', 
@@ -35,11 +30,8 @@ function toggleTheme() {
   }
 }
 
-// Initialize theme on load
-document.addEventListener('DOMContentLoaded', initTheme);
-
 // Mobile Navigation
-document.addEventListener('DOMContentLoaded', function() {
+function initMobileNav() {
   const burger = document.getElementById('hamburger');
   const nav = document.getElementById('primary-nav');
 
@@ -51,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
       burger.setAttribute('aria-expanded', String(!expanded));
     });
 
-    // Close menu when clicking anywhere outside
     document.addEventListener('click', (e) => {
       if(!nav.contains(e.target) && !burger.contains(e.target)) {
         nav.classList.remove('open');
@@ -59,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Close menu when clicking on a link
     nav.addEventListener('click', (e) => {
       if(e.target.tagName === 'A') {
         nav.classList.remove('open');
@@ -67,15 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
-  // Theme switcher event listener
-  const themeSwitcher = document.getElementById('themeSwitcher');
-  if (themeSwitcher) {
-    themeSwitcher.addEventListener('click', toggleTheme);
-  }
-});
+}
 
-// ===== SCROLL ANIMATIONS =====
+// Scroll Animations
 const fadeElements = document.querySelectorAll('.fade-in');
 
 const fadeInOnScroll = () => {
@@ -92,59 +76,65 @@ const fadeInOnScroll = () => {
   });
 };
 
-// Run on load and scroll
-window.addEventListener('load', fadeInOnScroll);
-window.addEventListener('scroll', fadeInOnScroll);
-
 // Loading Spinner
-window.addEventListener('load', function() {
+function initLoadingSpinner() {
   const spinner = document.getElementById('loading-spinner');
-  setTimeout(() => {
-    if (spinner) {
+  if (spinner) {
+    // Show spinner for minimum 500ms to prevent flash
+    setTimeout(() => {
       spinner.classList.add('hidden');
-    }
-  }, 1000);
-});
-
-// Back to Top Button
-const backToTopButton = document.getElementById('back-to-top');
-
-window.addEventListener('scroll', () => {
-  if (backToTopButton) {
-    if (window.pageYOffset > 300) {
-      backToTopButton.classList.add('show');
-    } else {
-      backToTopButton.classList.remove('show');
-    }
+    }, 500);
   }
-});
-
-if (backToTopButton) {
-  backToTopButton.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
 }
 
-// Animated Statistics Counter
+// Back to Top Button
+function initBackToTop() {
+  const backToTopButton = document.getElementById('back-to-top');
+
+  window.addEventListener('scroll', () => {
+    if (backToTopButton) {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('show');
+      } else {
+        backToTopButton.classList.remove('show');
+      }
+    }
+  });
+
+  if (backToTopButton) {
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+}
+
+// Animated Statistics Counter - FIXED VERSION
 function animateCounter() {
   const statNumbers = document.querySelectorAll('.stat-number');
 
   statNumbers.forEach(stat => {
+    if (stat.classList.contains('animated')) return;
+
     const target = parseInt(stat.getAttribute('data-target'));
     const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
+    const startTime = Date.now();
+    const suffix = stat.getAttribute('data-target') === '98' ? '%' : '+';
 
     const updateCounter = () => {
-      current += step;
-      if (current < target) {
-        stat.textContent = Math.ceil(current) + (stat.getAttribute('data-target') === '98' ? '%' : '+');
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOutQuad = progress * (2 - progress);
+      
+      const current = Math.floor(easeOutQuad * target);
+      stat.textContent = current + suffix;
+
+      if (progress < 1) {
         requestAnimationFrame(updateCounter);
       } else {
-        stat.textContent = target + (stat.getAttribute('data-target') === '98' ? '%' : '+');
+        stat.textContent = target + suffix;
         stat.classList.add('animated');
       }
     };
@@ -153,34 +143,18 @@ function animateCounter() {
   });
 }
 
-// Intersection Observer to trigger animation when visible
-const statsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      animateCounter();
-      statsObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-
-// Observe stats section
-const statsSection = document.querySelector('.stats-section');
-if (statsSection) {
-  statsObserver.observe(statsSection);
-}
-
 // Portfolio Sliders
 function initPortfolioSliders() {
   const sliders = document.querySelectorAll('.portfolio-slider');
-  
+
   sliders.forEach(slider => {
     const slides = slider.querySelectorAll('.portfolio-slide');
     const dots = slider.querySelectorAll('.dot');
     const prevArrow = slider.querySelector('.prev-arrow');
     const nextArrow = slider.querySelector('.next-arrow');
-    
+
     if (!slides.length) return;
-    
+
     let currentSlide = 0;
     let autoSlideInterval;
 
@@ -241,7 +215,7 @@ function initPortfolioSliders() {
     slider.addEventListener('mouseenter', stopAutoSlide);
     slider.addEventListener('mouseleave', startAutoSlide);
 
-    // Touch support for mobile
+    // Touch support
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -277,9 +251,9 @@ function initTestimonialsSlider() {
   const testimonialDots = document.querySelectorAll('.testimonial-dot');
   const prevTestimonial = document.querySelector('.prev-testimonial');
   const nextTestimonial = document.querySelector('.next-testimonial');
-  
+
   if (!testimonialSlides.length) return;
-  
+
   let currentTestimonial = 0;
   let testimonialInterval;
 
@@ -346,7 +320,6 @@ function initTestimonialsSlider() {
 
 // Google Business Integration
 function initGoogleBusiness() {
-  // Add business hours dynamically to contact page
   const contactTopRow = document.querySelector('.contact-top-row');
   if (contactTopRow && window.location.pathname.includes('contact.html')) {
     const businessHoursHTML = `
@@ -359,8 +332,7 @@ function initGoogleBusiness() {
         </ul>
       </div>
     `;
-    
-    // Add business hours to the contact card
+
     const contactCard = contactTopRow.querySelector('.contact-card:last-child');
     if (contactCard) {
       contactCard.insertAdjacentHTML('beforeend', businessHoursHTML);
@@ -368,27 +340,96 @@ function initGoogleBusiness() {
   }
 }
 
+// Lazy Image Loading
+function initLazyImages() {
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+  
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.classList.add('loaded');
+          imageObserver.unobserve(img);
+        }
+      });
+    }, { rootMargin: '50px' });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+  } else {
+    lazyImages.forEach(img => img.classList.add('loaded'));
+  }
+}
+
+// Contact Form Validation
+function initContactForm() {
+  const form = document.querySelector('.contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    const phone = document.getElementById('phone');
+    const name = document.getElementById('name');
+    
+    const phoneRegex = /^(?:\+234|0)[789][01]\d{8}$/;
+    if (phone && !phoneRegex.test(phone.value.replace(/\s/g, ''))) {
+      e.preventDefault();
+      alert('Please enter a valid Nigerian phone number (e.g., 08079444199)');
+      phone.focus();
+      return false;
+    }
+    
+    if (name && name.value.trim().length < 2) {
+      e.preventDefault();
+      alert('Please enter your full name');
+      name.focus();
+      return false;
+    }
+    
+    return true;
+  });
+}
+
 // Initialize all functionality
 document.addEventListener('DOMContentLoaded', function() {
   initTheme();
+  initMobileNav();
+  initLoadingSpinner();
+  initBackToTop();
   initPortfolioSliders();
   initTestimonialsSlider();
   initGoogleBusiness();
+  initLazyImages();
+  initContactForm();
   
-  // Loading spinner
-  const spinner = document.getElementById('loading-spinner');
-  if (spinner) {
-    setTimeout(() => {
-      spinner.classList.add('hidden');
-    }, 1000);
+  // Theme switcher
+  const themeSwitcher = document.getElementById('themeSwitcher');
+  if (themeSwitcher) {
+    themeSwitcher.addEventListener('click', toggleTheme);
   }
+
+  // Fade animations
+  window.addEventListener('load', fadeInOnScroll);
+  window.addEventListener('scroll', fadeInOnScroll);
+  
+  // Stats counter observer
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter();
+      }
+    });
+  }, { 
+    threshold: 0.5,
+    rootMargin: '0px 0px -100px 0px'
+  });
+
+  const statItems = document.querySelectorAll('.stat-item');
+  statItems.forEach(item => {
+    statsObserver.observe(item);
+  });
 });
 
-// Enhanced error handling
+// Error handling
 window.addEventListener('error', (e) => {
   console.error('Script error:', e.error);
 });
-
-
-
-

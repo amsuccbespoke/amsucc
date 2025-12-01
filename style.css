@@ -830,3 +830,36 @@ html[data-theme="white"] .btn-cta {
   color: var(--text) !important;
   border-color: var(--muted) !important;
 }
+
+
+
+
+
+
+
+/* ===== BACK TO TOP BUTTON THEME ===== */
+
+/* Default (dark theme): Gold background, white text */
+.back-to-top {
+  background-color: var(--accent) !important; /* Gold */
+  color: #ffffff !important; /* White text */
+  border: none !important;
+}
+
+/* White theme: Black background, white text */
+[data-theme="white"] .back-to-top,
+html[data-theme="white"] .back-to-top {
+  background-color: #000000 !important; /* Black */
+  color: #ffffff !important; /* White text */
+  border: none !important;
+}
+
+/* Hover effects */
+.back-to-top:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4) !important;
+}
+
+[data-theme="white"] .back-to-top:hover {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4) !important;
+}

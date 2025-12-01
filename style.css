@@ -794,3 +794,48 @@ img[loading="lazy"].loaded {
 [data-theme="white"] .slider-controls {
   background: linear-gradient(to top, rgba(255,255,255,0.7), transparent) !important;
 }
+
+
+
+/* ===== PERFORMANCE ENHANCEMENTS ===== */
+
+/* Lazy image loading */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Statistics counter pulse animation */
+.stat-number.animated {
+  animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Better form input focus */
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+[data-theme="white"] .contact-form input:focus,
+[data-theme="white"] .contact-form textarea:focus,
+[data-theme="white"] .contact-form select:focus {
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.2);
+}
+
+/* Faster WhatsApp button (remove animation) */
+.whatsapp-float {
+  animation: none !important;
+}

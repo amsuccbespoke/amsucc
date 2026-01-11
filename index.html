@@ -56,7 +56,7 @@
 </head>
 
 <body>
-<!-- Welcome Screen - FAWLUX -->
+
 <div id="welcome-screen" style="
   position: fixed;
   top: 0;
@@ -104,7 +104,7 @@
         font-weight: 300;
       ">Premium Bespoke Tailoring</p>
     </div>
-    
+
     <!-- Enter Button -->
     <button id="welcome-continue" style="
       background: transparent;
@@ -121,7 +121,7 @@
       margin-top: 20px;
       outline: none;
     ">ENTER</button>
-    
+
     <!-- Auto-hide notice -->
     <p style="
       color: rgba(255, 255, 255, 0.5);
@@ -129,8 +129,20 @@
       margin-top: 25px;
       letter-spacing: 1px;
     ">Screen will auto-close in 8 seconds</p>
+    
+    <!-- ▼▼▼ ADDED: SPINNER HIDE SCRIPT ▼▼▼ -->
+    <script>
+    // Hide loading spinner immediately for welcome screen
+    setTimeout(function() {
+      var spinner = document.getElementById('loading-spinner');
+      if (spinner) {
+        spinner.style.display = 'none';
+      }
+    }, 50);
+    </script>
+    <!-- ▲▲▲ ADDED: SPINNER HIDE SCRIPT ▲▲▲ -->
+    
   </div>
-</div>
 
 <!-- Loading Spinner -->
 <div id="loading-spinner" class="loading-spinner">

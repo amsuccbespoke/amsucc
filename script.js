@@ -371,7 +371,6 @@ function initGoogleBusiness() {
 // Initialize all functionality
 document.addEventListener('DOMContentLoaded', function() {
   initTheme();
-  initWelcomeScreen();  // <-- ADD THIS LINE HERE
   initPortfolioSliders();
   initTestimonialsSlider();
   initGoogleBusiness();
@@ -391,57 +390,3 @@ window.addEventListener('error', (e) => {
   console.error('Script error:', e.error);
 });
 
-// ===== WELCOME SCREEN =====
-function initWelcomeScreen() {
-  const welcomeScreen = document.getElementById('welcome-screen');
-  const continueBtn = document.getElementById('welcome-continue');
-  
-  if (!welcomeScreen || !continueBtn) return;
-  
-  // Check sessionStorage (shows once per browser session)
-  if (sessionStorage.getItem('fawlux-welcome-seen')) {
-    welcomeScreen.style.display = 'none';
-    return;
-  }
-  
-  // Hide function
-  function hideWelcome() {
-    welcomeScreen.style.opacity = '0';
-    setTimeout(() => {
-      welcomeScreen.style.display = 'none';
-    }, 600);
-  }
-  
-  // Continue button click
-  continueBtn.addEventListener('click', () => {
-    sessionStorage.setItem('fawlux-welcome-seen', 'true');
-    hideWelcome();
-  });
-  
-  // ESC key to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      sessionStorage.setItem('fawlux-welcome-seen', 'true');
-      hideWelcome();
-    }
-  });
-  
-  // Auto-hide after 8 seconds
-  setTimeout(() => {
-    if (welcomeScreen.style.display !== 'none') {
-      sessionStorage.setItem('fawlux-welcome-seen', 'true');
-      hideWelcome();
-    }
-  }, 8000);
-  
-  // Also hide if user clicks outside content (optional)
-  welcomeScreen.addEventListener('click', (e) => {
-    if (e.target === welcomeScreen) {
-      sessionStorage.setItem('fawlux-welcome-seen', 'true');
-      hideWelcome();
-    }
-  });
-}
-
-// Initialize when page loads
-window.addEventListener('load', initWelcomeScreen);

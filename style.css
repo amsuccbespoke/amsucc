@@ -979,3 +979,25 @@ a:hover { text-decoration: underline; }
   .testimonial-card { padding: 1.5rem 1rem; }
   .portfolio-info { padding: 1rem; }
 }
+
+
+/* Optional: Style for the developer credit */
+.copyright a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.copyright a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+[data-theme="white"] .copyright a {
+  color: #666;
+}
+
+[data-theme="white"] .copyright a:hover {
+  color: #000;
+}

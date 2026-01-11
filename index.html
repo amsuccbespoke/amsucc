@@ -58,54 +58,94 @@
 <body>
 
 <div id="welcome-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0a url('https://i.postimg.cc/NM36vwXD/137-F46-BE-4514-48-C6-B1-D5-169-F976271-DD.jpg') center/cover no-repeat;display:flex;justify-content:center;align-items:center;z-index:10000;opacity:1;transition:opacity 0.6s ease;">
-  <div style="text-align:center;color:white;padding:20px;max-width:500px;width:90%;background:rgba(0,0,0,0.7);border-radius:15px;">
-    <h1 style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;letter-spacing:10px;margin:0 0 10px 0;">F A W L U X</h1>
-    <p style="color:#d4af37;font-size:1rem;letter-spacing:3px;margin:0;text-transform:uppercase;">Premium Bespoke Tailoring</p>
-    <button id="welcome-continue" style="background:transparent;color:#d4af37;border:2px solid #d4af37;padding:14px 45px;font-size:1rem;font-weight:700;letter-spacing:3px;border-radius:30px;cursor:pointer;margin-top:30px;">ENTER</button>
-    <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;margin-top:20px;">Screen closes in 8 seconds</p>
+  <div style="text-align:center;color:white;padding:25px;max-width:480px;width:90%;background:rgba(0,0,0,0.75);border-radius:12px;backdrop-filter:blur(5px);">
+    <!-- Brand Title - One Line -->
+    <h1 style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;letter-spacing:6px;margin:0 0 12px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px;">F A W L U X</h1>
+    
+    <!-- Tagline -->
+    <p style="color:#d4af37;font-size:0.95rem;letter-spacing:2.5px;margin:0 0 30px 0;text-transform:uppercase;font-weight:300;">Premium Bespoke Tailoring</p>
+    
+    <!-- CONTINUE Button -->
+    <button id="welcome-continue" style="background:transparent;color:#d4af37;border:2px solid #d4af37;padding:14px 40px;font-size:1rem;font-weight:700;letter-spacing:2px;border-radius:30px;cursor:pointer;transition:all 0.3s;margin-bottom:20px;display:block;width:100%;max-width:220px;margin-left:auto;margin-right:auto;">CONTINUE</button>
+    
+    <!-- Skip Link -->
+    <a href="#" id="welcome-skip" style="color:rgba(255,255,255,0.6);font-size:0.85rem;text-decoration:none;letter-spacing:1px;transition:color 0.3s;display:inline-block;margin-top:10px;">Skip</a>
   </div>
 </div>
 
 <script>
-// Welcome screen functionality
+// Welcome Screen Functionality
 document.addEventListener('DOMContentLoaded', function() {
   var welcome = document.getElementById('welcome-screen');
-  var btn = document.getElementById('welcome-continue');
+  var continueBtn = document.getElementById('welcome-continue');
+  var skipLink = document.getElementById('welcome-skip');
   var spinner = document.getElementById('loading-spinner');
   
-  // Hide spinner immediately
+  // Hide loading spinner
   if (spinner) spinner.style.display = 'none';
   
-  // Check if already seen
-  if (sessionStorage.getItem('fawlux-welcome')) {
+  // Check if already seen this session
+  if (sessionStorage.getItem('fawlux-welcome-seen')) {
     if (welcome) welcome.style.display = 'none';
     return;
   }
   
-  // ENTER button click
-  if (btn && welcome) {
-    btn.addEventListener('click', function() {
-      welcome.style.opacity = '0';
-      setTimeout(function() {
-        welcome.style.display = 'none';
-      }, 600);
-      sessionStorage.setItem('fawlux-welcome', 'seen');
+  // Hide function
+  function hideWelcome() {
+    if (!welcome) return;
+    welcome.style.opacity = '0';
+    setTimeout(function() {
+      welcome.style.display = 'none';
+    }, 600);
+    sessionStorage.setItem('fawlux-welcome-seen', 'true');
+  }
+  
+  // CONTINUE button
+  if (continueBtn) {
+    continueBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      this.style.background = '#d4af37';
+      this.style.color = '#000';
+      hideWelcome();
     });
   }
   
-  // Auto-hide after 8 seconds
-  setTimeout(function() {
+  // SKIP link
+  if (skipLink) {
+    skipLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      hideWelcome();
+    });
+  }
+  
+  // Auto-hide after 10 seconds
+  var autoCloseTimer = setTimeout(function() {
     if (welcome && welcome.style.display !== 'none') {
-      welcome.style.opacity = '0';
-      setTimeout(function() {
-        welcome.style.display = 'none';
-      }, 600);
-      sessionStorage.setItem('fawlux-welcome', 'seen');
+      hideWelcome();
     }
-  }, 8000);
+  }, 10000);
+  
+  // Clear timer if manually closed
+  if (continueBtn) {
+    continueBtn.addEventListener('click', function() {
+      clearTimeout(autoCloseTimer);
+    });
+  }
+  if (skipLink) {
+    skipLink.addEventListener('click', function() {
+      clearTimeout(autoCloseTimer);
+    });
+  }
+  
+  // ESC key also closes (optional convenience)
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && welcome && welcome.style.display !== 'none') {
+      hideWelcome();
+      clearTimeout(autoCloseTimer);
+    }
+  });
 });
 </script>
-
 <!-- Loading Spinner -->
 <div id="loading-spinner" class="loading-spinner">
   <div class="spinner"></div>

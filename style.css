@@ -980,47 +980,54 @@ a:hover { text-decoration: underline; }
   .portfolio-info { padding: 1rem; }
 }
 
-/* ===== GALLERY EDGE FIX ===== */
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    width: 100%;
-    max-width: 100%; /* Prevents overflow */
-    box-sizing: border-box;
+/* ===== EMERGENCY GALLERY EDGE FIX - ADD TO BOTTOM ===== */
+.container.gallery-grid {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: var(--maxw, 1100px) !important;
+    margin: 0 auto !important;
 }
 
-.gallery-item {
-    margin: 0;
-    background: var(--card);
-    border: 1px solid #1c1c1c;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    width: 100%; /* Ensures items don't stretch */
+.container.gallery-grid .image-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-.gallery-item img {
-    width: 100%;
-    aspect-ratio: 4/5;
-    object-fit: cover;
-    transition: transform .4s ease;
-    display: block; /* Removes extra space below images */
+.container.gallery-grid .gallery-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    display: block !important;
 }
 
-/* Mobile responsive */
+.container.gallery-grid .gallery-item img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    max-width: 100% !important;
+}
+
+/* Mobile fixes */
 @media (max-width: 860px) {
-    .image-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+    .container.gallery-grid .image-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
     }
 }
 
 @media (max-width: 520px) {
-    .image-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
+    .container.gallery-grid .image-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
     }
 }
-

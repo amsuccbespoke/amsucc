@@ -57,92 +57,54 @@
 
 <body>
 
-<div id="welcome-screen" style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.9)), url('https://i.postimg.cc/NM36vwXD/137F46BE-4514-48C6-B1D5-169F976271DD.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  opacity: 1;
-  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  font-family: system-ui, -apple-system, sans-serif;
-">
-  <div style="
-    text-align: center;
-    color: white;
-    padding: 20px;
-    max-width: 500px;
-    width: 90%;
-  ">
-    <!-- Logo/Title -->
-    <div style="
-      margin-bottom: 30px;
-    ">
-      <h1 style="
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(2.5rem, 6vw, 3.5rem);
-        font-weight: 900;
-        letter-spacing: 10px;
-        margin: 0 0 10px 0;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        line-height: 1.1;
-      ">F A W L U X</h1>
-      <p style="
-        color: #d4af37;
-        font-size: 1rem;
-        letter-spacing: 3px;
-        margin: 0;
-        text-transform: uppercase;
-        font-weight: 300;
-      ">Premium Bespoke Tailoring</p>
-    </div>
-
-    <!-- Enter Button -->
-    <button id="welcome-continue" style="
-      background: transparent;
-      color: #d4af37;
-      border: 2px solid #d4af37;
-      padding: 14px 45px;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      margin-top: 20px;
-      outline: none;
-    ">ENTER</button>
-
-    <!-- Auto-hide notice -->
-    <p style="
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.8rem;
-      margin-top: 25px;
-      letter-spacing: 1px;
-    ">Screen will auto-close in 8 seconds</p>
-    
-    <!-- ▼▼▼ ADDED: SPINNER HIDE SCRIPT ▼▼▼ -->
-    <script>
-    // Hide loading spinner immediately for welcome screen
-    setTimeout(function() {
-      var spinner = document.getElementById('loading-spinner');
-      if (spinner) {
-        spinner.style.display = 'none';
-      }
-    }, 50);
-    </script>
-    <!-- ▲▲▲ ADDED: SPINNER HIDE SCRIPT ▲▲▲ -->
-    
+<div id="welcome-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0a url('https://i.postimg.cc/NM36vwXD/137-F46-BE-4514-48-C6-B1-D5-169-F976271-DD.jpg') center/cover no-repeat;display:flex;justify-content:center;align-items:center;z-index:10000;opacity:1;transition:opacity 0.6s ease;">
+  <div style="text-align:center;color:white;padding:20px;max-width:500px;width:90%;background:rgba(0,0,0,0.7);border-radius:15px;">
+    <h1 style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;letter-spacing:10px;margin:0 0 10px 0;">F A W L U X</h1>
+    <p style="color:#d4af37;font-size:1rem;letter-spacing:3px;margin:0;text-transform:uppercase;">Premium Bespoke Tailoring</p>
+    <button id="welcome-continue" style="background:transparent;color:#d4af37;border:2px solid #d4af37;padding:14px 45px;font-size:1rem;font-weight:700;letter-spacing:3px;border-radius:30px;cursor:pointer;margin-top:30px;">ENTER</button>
+    <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;margin-top:20px;">Screen closes in 8 seconds</p>
   </div>
+</div>
+
+<script>
+// Welcome screen functionality
+document.addEventListener('DOMContentLoaded', function() {
+  var welcome = document.getElementById('welcome-screen');
+  var btn = document.getElementById('welcome-continue');
+  var spinner = document.getElementById('loading-spinner');
+  
+  // Hide spinner immediately
+  if (spinner) spinner.style.display = 'none';
+  
+  // Check if already seen
+  if (sessionStorage.getItem('fawlux-welcome')) {
+    if (welcome) welcome.style.display = 'none';
+    return;
+  }
+  
+  // ENTER button click
+  if (btn && welcome) {
+    btn.addEventListener('click', function() {
+      welcome.style.opacity = '0';
+      setTimeout(function() {
+        welcome.style.display = 'none';
+      }, 600);
+      sessionStorage.setItem('fawlux-welcome', 'seen');
+    });
+  }
+  
+  // Auto-hide after 8 seconds
+  setTimeout(function() {
+    if (welcome && welcome.style.display !== 'none') {
+      welcome.style.opacity = '0';
+      setTimeout(function() {
+        welcome.style.display = 'none';
+      }, 600);
+      sessionStorage.setItem('fawlux-welcome', 'seen');
+    }
+  }, 8000);
+});
+</script>
 
 <!-- Loading Spinner -->
 <div id="loading-spinner" class="loading-spinner">

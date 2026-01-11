@@ -58,12 +58,12 @@
 <body>
 
 <div id="welcome-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0a url('https://i.postimg.cc/NM36vwXD/137-F46-BE-4514-48-C6-B1-D5-169-F976271-DD.jpg') center/cover no-repeat;display:flex;justify-content:center;align-items:center;z-index:10000;opacity:1;transition:opacity 0.6s ease;">
-  <div style="text-align:center;color:white;padding:25px;max-width:480px;width:90%;background:rgba(0,0,0,0.75);border-radius:12px;backdrop-filter:blur(5px);">
-    <!-- Brand Title - One Line -->
-    <h1 style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;letter-spacing:6px;margin:0 0 12px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px;">F A W L U X</h1>
+  <div style="text-align:center;color:white;padding:20px;max-width:500px;width:90%;background:rgba(0,0,0,0.75);border-radius:12px;backdrop-filter:blur(5px);">
+    <!-- Brand Title - Responsive Scaling -->
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem, 5vw, 2.8rem);font-weight:900;letter-spacing:clamp(4px, 1vw, 6px);margin:0 0 12px 0;white-space:nowrap;overflow:visible;padding:0 5px;line-height:1.2;">F A W L U X</h1>
     
     <!-- Tagline -->
-    <p style="color:#d4af37;font-size:0.95rem;letter-spacing:2.5px;margin:0 0 30px 0;text-transform:uppercase;font-weight:300;">Premium Bespoke Tailoring</p>
+    <p style="color:#d4af37;font-size:clamp(0.85rem, 2vw, 0.95rem);letter-spacing:2px;margin:0 0 30px 0;text-transform:uppercase;font-weight:300;">Premium Bespoke Tailoring</p>
     
     <!-- CONTINUE Button -->
     <button id="welcome-continue" style="background:transparent;color:#d4af37;border:2px solid #d4af37;padding:14px 40px;font-size:1rem;font-weight:700;letter-spacing:2px;border-radius:30px;cursor:pointer;transition:all 0.3s;margin-bottom:20px;display:block;width:100%;max-width:220px;margin-left:auto;margin-right:auto;">CONTINUE</button>
@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var welcome = document.getElementById('welcome-screen');
   var continueBtn = document.getElementById('welcome-continue');
   var skipLink = document.getElementById('welcome-skip');
+  var welcomeContent = welcome ? welcome.querySelector('div') : null;
   var spinner = document.getElementById('loading-spinner');
   
   // Hide loading spinner
@@ -104,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (continueBtn) {
     continueBtn.addEventListener('click', function(e) {
       e.preventDefault();
+      e.stopPropagation();
       this.style.background = '#d4af37';
       this.style.color = '#000';
       hideWelcome();
@@ -114,7 +116,24 @@ document.addEventListener('DOMContentLoaded', function() {
   if (skipLink) {
     skipLink.addEventListener('click', function(e) {
       e.preventDefault();
+      e.stopPropagation();
       hideWelcome();
+    });
+  }
+  
+  // PREVENT closing when clicking outside content
+  if (welcome && welcomeContent) {
+    welcome.addEventListener('click', function(e) {
+      // Only allow clicks on the content div itself
+      if (e.target === welcome) {
+        e.preventDefault();
+        e.stopPropagation();
+        // Optional: Add visual feedback that it won't close
+        welcomeContent.style.transform = 'scale(0.98)';
+        setTimeout(function() {
+          welcomeContent.style.transform = 'scale(1)';
+        }, 200);
+      }
     });
   }
   
@@ -146,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
 <!-- Loading Spinner -->
 <div id="loading-spinner" class="loading-spinner">
   <div class="spinner"></div>

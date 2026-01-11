@@ -980,4 +980,47 @@ a:hover { text-decoration: underline; }
   .portfolio-info { padding: 1rem; }
 }
 
+/* ===== GALLERY EDGE FIX ===== */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 100%; /* Prevents overflow */
+    box-sizing: border-box;
+}
+
+.gallery-item {
+    margin: 0;
+    background: var(--card);
+    border: 1px solid #1c1c1c;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    width: 100%; /* Ensures items don't stretch */
+}
+
+.gallery-item img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    transition: transform .4s ease;
+    display: block; /* Removes extra space below images */
+}
+
+/* Mobile responsive */
+@media (max-width: 860px) {
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (max-width: 520px) {
+    .image-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
 

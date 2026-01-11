@@ -375,8 +375,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initPortfolioSliders();
   initTestimonialsSlider();
   initGoogleBusiness();
-  // 
-});
+  
 
   // Loading spinner
   const spinner = document.getElementById('loading-spinner');

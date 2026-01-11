@@ -1,7 +1,3 @@
-
-// Hide loading spinner for welcome screen
-document.getElementById('loading-spinner').style.display = 'none';
-
 // Theme Management
 function initTheme() {
   const themeSwitcher = document.getElementById('themeSwitcher');

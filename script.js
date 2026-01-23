@@ -390,3 +390,21 @@ window.addEventListener('error', (e) => {
   console.error('Script error:', e.error);
 });
 
+// Add this to your existing script.js at the end of DOMContentLoaded event
+
+document.addEventListener('DOMContentLoaded', function() {
+  // ... existing code ...
+  
+  // Add smooth transitions for new design
+  const style = document.createElement('style');
+  style.textContent = `
+    * {
+      transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  `;
+  document.head.appendChild(style);
+});

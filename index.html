@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 <!-- ===== HERO SLIDER WITH 3 IMAGES ===== -->
-<!-- ===== HERO SLIDER WITH 3 IMAGES (Pure CSS - No JS needed!) ===== -->
+<!-- ===== HERO SLIDER WITH LOCAL IMAGES & FIXED NAVIGATION ===== -->
 <section class="hero hero-slider">
   <!-- Radio buttons for navigation -->
   <input type="radio" name="hero-slide" id="slide1" checked>
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <!-- Slides -->
   <div class="hero-slides">
     <!-- Slide 1 -->
-    <div class="hero-slide" id="slide1-content" style="background-image: url('https://i.postimg.cc/rmdXqJVt/9C023524-8F97-4D4E-B0D7-AF3437BA29DB.jpg');">
+    <div class="hero-slide" id="slide1-content" style="background-image: url('images/hero-1.jpg');">
       <div class="hero-overlay"></div>
       <div class="container hero-inner">
         <h1>Premium Menswear, <span class="accent">Perfectly Stitched</span>.</h1>
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     
     <!-- Slide 2 -->
-    <div class="hero-slide" id="slide2-content" style="background-image: url('https://i.postimg.cc/bwW16xCx/1CFB34DD-DB87-4511-9950-BD8AE7FFD5B5.jpg');">
+    <div class="hero-slide" id="slide2-content" style="background-image: url('images/hero-2.jpg');">
       <div class="hero-overlay"></div>
       <div class="container hero-inner">
         <h1>Exquisite <span class="accent">Gold Embroidery</span></h1>
@@ -250,8 +250,8 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
     
-    <!-- Slide 3 - UPDATED -->
-    <div class="hero-slide" id="slide3-content" style="background-image: url('https://i.postimg.cc/XvDHVBY5/79BD33D9-936A-4256-915D-25A91C291CA8.jpg');">
+    <!-- Slide 3 -->
+    <div class="hero-slide" id="slide3-content" style="background-image: url('images/hero-3.jpg');">
       <div class="hero-overlay"></div>
       <div class="container hero-inner">
         <h1>Bespoke <span class="accent">Native Wear</span></h1>
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
   
-  <!-- Navigation Arrows (Labels) -->
+  <!-- Navigation Arrows -->
   <div class="hero-nav">
     <label for="slide3" class="hero-prev">‹</label>
     <label for="slide2" class="hero-next">›</label>
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   <!-- Dots -->
   <div class="hero-dots">
-    <label for="slide1" class="hero-dot active"></label>
+    <label for="slide1" class="hero-dot"></label>
     <label for="slide2" class="hero-dot"></label>
     <label for="slide3" class="hero-dot"></label>
   </div>

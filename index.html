@@ -214,8 +214,24 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </header>
 
-<section class="hero fade-in">
-  <div class="container hero-inner">
+<section class="hero fade-in" style="
+  background-image: url('https://i.postimg.cc/2jGwcYn1/FB8D45C4-09A9-470E-8EE7-0858F22B8EBF.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  min-height: 80vh;
+">
+  <!-- Dark overlay for text readability -->
+  <div style="
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.55);
+  "></div>
+  
+  <div class="container hero-inner" style="position: relative; z-index: 1;">
     <h1>Premium Menswear, <span class="accent">Perfectly Stitched</span>.</h1>
     <p class="lead">At FAWLUX, we craft timeless pieces — agbada, kaftan, shirts and trousers — tailored to your exact fit and lifestyle.</p>
     <div class="hero-cta">

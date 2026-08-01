@@ -215,58 +215,69 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 <!-- ===== HERO SLIDER WITH 3 IMAGES ===== -->
+<!-- ===== HERO SLIDER WITH 3 IMAGES (Pure CSS - No JS needed!) ===== -->
 <section class="hero hero-slider">
-  <!-- Slide 1 -->
-  <div class="hero-slide active" style="background-image: url('https://i.postimg.cc/rmdXqJVt/9C023524-8F97-4D4E-B0D7-AF3437BA29DB.jpg');">
-    <div class="hero-overlay"></div>
-    <div class="container hero-inner">
-      <h1>Premium Menswear, <span class="accent">Perfectly Stitched</span>.</h1>
-      <p class="lead">At FAWLUX, we craft timeless pieces — agbada, kaftan, shirts and trousers — tailored to your exact fit and lifestyle.</p>
-      <div class="hero-cta">
-        <a class="btn-cta" href="https://wa.me/2348079444199" target="_blank" rel="noopener">Book an Appointment</a>
-        <a class="btn-ghost" href="gallery.html">View Gallery</a>
+  <!-- Radio buttons for navigation -->
+  <input type="radio" name="hero-slide" id="slide1" checked>
+  <input type="radio" name="hero-slide" id="slide2">
+  <input type="radio" name="hero-slide" id="slide3">
+  
+  <!-- Slides -->
+  <div class="hero-slides">
+    <!-- Slide 1 -->
+    <div class="hero-slide" id="slide1-content" style="background-image: url('https://i.postimg.cc/rmdXqJVt/9C023524-8F97-4D4E-B0D7-AF3437BA29DB.jpg');">
+      <div class="hero-overlay"></div>
+      <div class="container hero-inner">
+        <h1>Premium Menswear, <span class="accent">Perfectly Stitched</span>.</h1>
+        <p class="lead">At FAWLUX, we craft timeless pieces — agbada, kaftan, shirts and trousers — tailored to your exact fit and lifestyle.</p>
+        <div class="hero-cta">
+          <a class="btn-cta" href="https://wa.me/2348079444199" target="_blank" rel="noopener">Book an Appointment</a>
+          <a class="btn-ghost" href="gallery.html">View Gallery</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 2 -->
+    <div class="hero-slide" id="slide2-content" style="background-image: url('https://i.postimg.cc/bwW16xCx/1CFB34DD-DB87-4511-9950-BD8AE7FFD5B5.jpg');">
+      <div class="hero-overlay"></div>
+      <div class="container hero-inner">
+        <h1>Exquisite <span class="accent">Gold Embroidery</span></h1>
+        <p class="lead">Each piece is a masterpiece of craftsmanship and luxury.</p>
+        <div class="hero-cta">
+          <a class="btn-cta" href="https://wa.me/2348079444199" target="_blank" rel="noopener">Order Yours</a>
+          <a class="btn-ghost" href="gallery.html">Explore Gallery</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 3 - UPDATED -->
+    <div class="hero-slide" id="slide3-content" style="background-image: url('https://i.postimg.cc/XvDHVBY5/79BD33D9-936A-4256-915D-25A91C291CA8.jpg');">
+      <div class="hero-overlay"></div>
+      <div class="container hero-inner">
+        <h1>Bespoke <span class="accent">Native Wear</span></h1>
+        <p class="lead">Traditional elegance meets modern tailoring.</p>
+        <div class="hero-cta">
+          <a class="btn-cta" href="https://wa.me/2348079444199" target="_blank" rel="noopener">Book Now</a>
+          <a class="btn-ghost" href="gallery.html">See More</a>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- Slide 2 -->
-  <div class="hero-slide" style="background-image: url('https://i.postimg.cc/bwW16xCx/1CFB34DD-DB87-4511-9950-BD8AE7FFD5B5.jpg');">
-    <div class="hero-overlay"></div>
-    <div class="container hero-inner">
-      <h1>Exquisite <span class="accent">Gold Embroidery</span></h1>
-      <p class="lead">Each piece is a masterpiece of craftsmanship and luxury.</p>
-      <div class="hero-cta">
-        <a class="btn-cta" href="https://wa.me/2348079444199" target="_blank" rel="noopener">Order Yours</a>
-        <a class="btn-ghost" href="gallery.html">Explore Gallery</a>
-      </div>
-    </div>
+  
+  <!-- Navigation Arrows (Labels) -->
+  <div class="hero-nav">
+    <label for="slide3" class="hero-prev">‹</label>
+    <label for="slide2" class="hero-next">›</label>
   </div>
-
-  <!-- Slide 3 -->
-  <div class="hero-slide" style="background-image: url('https://i.postimg.cc/cCP696mb/C284080D-CCF7-44F6-A191-55BBBEAB5555.png');">
-    <div class="hero-overlay"></div>
-    <div class="container hero-inner">
-      <h1>Bespoke <span class="accent">Native Wear</span></h1>
-      <p class="lead">Traditional elegance meets modern tailoring.</p>
-      <div class="hero-cta">
-        <a class="btn-cta" href="https://wa.me/2348079444199" target="_blank" rel="noopener">Book Now</a>
-        <a class="btn-ghost" href="gallery.html">See More</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navigation Arrows -->
-  <button class="hero-prev" aria-label="Previous slide">‹</button>
-  <button class="hero-next" aria-label="Next slide">›</button>
-
-  <!-- Dots Indicator -->
+  
+  <!-- Dots -->
   <div class="hero-dots">
-    <span class="hero-dot active" data-slide="0"></span>
-    <span class="hero-dot" data-slide="1"></span>
-    <span class="hero-dot" data-slide="2"></span>
+    <label for="slide1" class="hero-dot active"></label>
+    <label for="slide2" class="hero-dot"></label>
+    <label for="slide3" class="hero-dot"></label>
   </div>
 </section>
-
+  
 <section class="about container fade-in">
   <h2>About FAWLUX</h2>
   <p>Founded by Abdulkareem Fawaz, the visionary behind FAWLUX (formerly AMSUCC BESPOKE),

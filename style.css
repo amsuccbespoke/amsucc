@@ -981,7 +981,7 @@ a:hover { text-decoration: underline; }
 }
 
 
-/* ===== PURE CSS HERO SLIDER (FIXED FOR THEME SWITCHING) ===== */
+/* ===== PURE CSS HERO SLIDER (NO CSS ANIMATIONS - JS Controls Everything) ===== */
 
 .hero-slider {
   position: relative;
@@ -1017,14 +1017,14 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   z-index: 1;
+  pointer-events: none;
 }
 
-/* Show slide when its radio is checked */
-#slide1:checked ~ .hero-slides #slide1-content,
-#slide2:checked ~ .hero-slides #slide2-content,
-#slide3:checked ~ .hero-slides #slide3-content {
+/* Show slide when active class is added by JavaScript */
+.hero-slide.active {
   opacity: 1;
   z-index: 2;
+  pointer-events: auto;
 }
 
 /* ===== OVERLAY - FIXED FOR THEME SWITCHING ===== */
@@ -1139,12 +1139,10 @@ a:hover { text-decoration: underline; }
 }
 
 /* Active dot */
-#slide1:checked ~ .hero-dots label[for="slide1"],
-#slide2:checked ~ .hero-dots label[for="slide2"],
-#slide3:checked ~ .hero-dots label[for="slide3"] {
-  background: #d4af37;
-  transform: scale(1.3);
-  border-color: #fff;
+.hero-dot.active {
+  background: #d4af37 !important;
+  transform: scale(1.3) !important;
+  border-color: #fff !important;
 }
 
 .hero-dot:hover {
@@ -1158,8 +1156,8 @@ a:hover { text-decoration: underline; }
 }
 
 [data-theme="white"] .hero-dot.active {
-  background: #333;
-  border-color: #333;
+  background: #333 !important;
+  border-color: #333 !important;
 }
 
 /* ===== TEXT SHADOWS ===== */

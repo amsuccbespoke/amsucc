@@ -1,7 +1,4 @@
-/* ============================================
-   FAWLUX - TAILORING WEBSITE CSS
-   Updated with Warm Cream Light Theme
-   ============================================ */
+
 
 /* ===== CSS VARIABLES ===== */
 :root {
@@ -56,17 +53,15 @@ a:hover { text-decoration: underline; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10,10,10,.75);
-  backdrop-filter: blur(6px);
+  background: rgba(10,10,10,.85);
   border-bottom: 1px solid #1d1d1d;
   transition: all 0.4s ease;
 }
 
 /* Light theme header */
 [data-theme="white"] .site-header {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
   border-bottom-color: rgba(0,0,0,0.06);
-  backdrop-filter: blur(10px);
 }
 
 /* Centered Header Layout */
@@ -652,7 +647,6 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: center;
   transition: all 0.3s var(--ease);
-  backdrop-filter: blur(10px);
   position: static;
   transform: none;
 }
@@ -755,7 +749,6 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: center;
   transition: all 0.3s var(--ease);
-  backdrop-filter: blur(10px);
   z-index: 10;
 }
 [data-theme="white"] .testimonial-arrow {
@@ -1030,7 +1023,7 @@ a:hover { text-decoration: underline; }
   .portfolio-info { padding: 1rem; }
 }
 
-/* ===== HERO SLIDER - IMAGE VISIBLE WITH CLEAR TEXT ===== */
+/* ===== HERO SLIDER - CRYSTAL CLEAR ON ALL DEVICES ===== */
 .hero-slider {
   position: relative;
   overflow: hidden;
@@ -1073,7 +1066,7 @@ a:hover { text-decoration: underline; }
   pointer-events: auto;
 }
 
-/* ===== OVERLAY - LIGHTER SO IMAGE IS VISIBLE ===== */
+/* ===== OVERLAY - CLEAN & SHARP ===== */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -1084,41 +1077,39 @@ a:hover { text-decoration: underline; }
   transition: background 0.4s ease;
 }
 
-/* Default (Dark mode) - Lighter overlay */
+/* Default (Dark mode) */
 .hero-overlay {
-  background: linear-gradient(135deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.20) 100%);
 }
 
-/* Light mode - Even lighter so image shows */
+/* Light mode */
 [data-theme="white"] .hero-overlay {
-  background: linear-gradient(135deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.08) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.12) 100%);
 }
 
-/* Dark mode - Slightly darker but image still visible */
+/* Dark mode - explicit */
 [data-theme="dark"] .hero-overlay {
-  background: linear-gradient(135deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.30) 100%);
 }
 
-/* ===== TEXT BOX - Semi-transparent so image shows behind ===== */
+/* ===== TEXT BOX - CLEAN & SHARP (NO BLUR!) ===== */
 .hero-slide .hero-inner {
   position: relative;
   z-index: 2;
   max-width: 700px;
 }
 
-/* Light mode text box - subtle background */
+/* Light mode text box - solid semi-transparent background */
 [data-theme="white"] .hero-slide .hero-inner {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.50);
   padding: 40px 50px;
   border-radius: 16px;
   border-left: 4px solid #c9a84c;
 }
 
-/* Dark mode text box - subtle dark background */
+/* Dark mode text box - solid semi-transparent background */
 [data-theme="dark"] .hero-slide .hero-inner {
-  background: rgba(0, 0, 0, 0.30);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.55);
   padding: 40px 50px;
   border-radius: 16px;
   border-left: 4px solid #d4af37;
@@ -1190,7 +1181,7 @@ a:hover { text-decoration: underline; }
   background: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* ===== NAVIGATION ARROWS ===== */
+/* ===== NAVIGATION ARROWS - NO BLUR ===== */
 .hero-nav {
   position: absolute;
   top: 50%;
@@ -1207,7 +1198,7 @@ a:hover { text-decoration: underline; }
 .hero-prev,
 .hero-next {
   pointer-events: auto;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   color: #fff;
   border: 2px solid rgba(255, 255, 255, 0.3);
   padding: 10px 16px;
@@ -1216,7 +1207,6 @@ a:hover { text-decoration: underline; }
   border-radius: 50%;
   transition: all 0.3s ease;
   line-height: 1;
-  backdrop-filter: blur(5px);
   width: 44px;
   height: 44px;
   display: flex;
@@ -1236,7 +1226,7 @@ a:hover { text-decoration: underline; }
 
 [data-theme="white"] .hero-prev,
 [data-theme="white"] .hero-next {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.25);
   border-color: rgba(255, 255, 255, 0.4);
   color: #fff;
 }

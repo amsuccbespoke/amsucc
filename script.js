@@ -1,44 +1,39 @@
-// Theme Management
-function initTheme() {
-  const themeSwitcher = document.getElementById('themeSwitcher');
+// ===== THEME MANAGEMENT - ALWAYS FOLLOW DEVICE THEME =====
+
+// Function to apply theme based on device preference
+function applyDeviceTheme() {
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  // Get saved theme or use system preference
-  const savedTheme = localStorage.getItem('fawlux-theme');
-  const currentTheme = savedTheme || (prefersDark ? 'dark' : 'white');
-
-  // Apply theme
-  document.documentElement.setAttribute('data-theme', currentTheme);
-
-  // Update switcher state
-  if (themeSwitcher) {
-    themeSwitcher.setAttribute('aria-label', 
-      currentTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
-    );
-  }
-}
-
-function toggleTheme() {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'white' : 'dark';
-
-  // Apply new theme
-  document.documentElement.setAttribute('data-theme', newTheme);
-  localStorage.setItem('fawlux-theme', newTheme);
-
-  // Update switcher
+  const theme = prefersDark ? 'dark' : 'white';
+  
+  // Apply theme to HTML
+  document.documentElement.setAttribute('data-theme', theme);
+  
+  // Update theme switcher button
   const themeSwitcher = document.getElementById('themeSwitcher');
   if (themeSwitcher) {
     themeSwitcher.setAttribute('aria-label', 
-      newTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+      theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
     );
   }
 }
 
-// Initialize theme on load
-document.addEventListener('DOMContentLoaded', initTheme);
+// Listen for device theme changes (LIVE UPDATES!)
+const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-// Mobile Navigation
+// This fires whenever user changes their device theme
+darkModeMediaQuery.addEventListener('change', function(e) {
+  applyDeviceTheme();
+});
+
+// Apply theme on page load
+document.addEventListener('DOMContentLoaded', applyDeviceTheme);
+
+// Also apply immediately if script runs after DOM is ready
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  applyDeviceTheme();
+}
+
+// ===== MOBILE NAVIGATION =====
 document.addEventListener('DOMContentLoaded', function() {
   const burger = document.getElementById('hamburger');
   const nav = document.getElementById('primary-nav');
@@ -68,10 +63,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Theme switcher event listener
+  // ===== THEME SWITCHER - Manual override (resets on refresh) =====
   const themeSwitcher = document.getElementById('themeSwitcher');
   if (themeSwitcher) {
-    themeSwitcher.addEventListener('click', toggleTheme);
+    themeSwitcher.addEventListener('click', function() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'white' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      
+      themeSwitcher.setAttribute('aria-label', 
+        newTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+      );
+    });
   }
 });
 
@@ -96,7 +99,7 @@ const fadeInOnScroll = () => {
 window.addEventListener('load', fadeInOnScroll);
 window.addEventListener('scroll', fadeInOnScroll);
 
-// Loading Spinner
+// ===== LOADING SPINNER =====
 window.addEventListener('load', function() {
   const spinner = document.getElementById('loading-spinner');
   setTimeout(() => {
@@ -106,7 +109,7 @@ window.addEventListener('load', function() {
   }, 1000);
 });
 
-// Back to Top Button
+// ===== BACK TO TOP BUTTON =====
 const backToTopButton = document.getElementById('back-to-top');
 
 window.addEventListener('scroll', () => {
@@ -128,7 +131,7 @@ if (backToTopButton) {
   });
 }
 
-// Animated Statistics Counter
+// ===== ANIMATED STATISTICS COUNTER =====
 function animateCounter() {
   const statNumbers = document.querySelectorAll('.stat-number');
 
@@ -169,7 +172,7 @@ if (statsSection) {
   statsObserver.observe(statsSection);
 }
 
-// Portfolio Sliders
+// ===== PORTFOLIO SLIDERS =====
 function initPortfolioSliders() {
   const sliders = document.querySelectorAll('.portfolio-slider');
 
@@ -271,7 +274,7 @@ function initPortfolioSliders() {
   });
 }
 
-// Testimonials Slider
+// ===== TESTIMONIALS SLIDER =====
 function initTestimonialsSlider() {
   const testimonialSlides = document.querySelectorAll('.testimonial-slide');
   const testimonialDots = document.querySelectorAll('.testimonial-dot');
@@ -344,9 +347,8 @@ function initTestimonialsSlider() {
   }
 }
 
-// Google Business Integration
+// ===== GOOGLE BUSINESS INTEGRATION =====
 function initGoogleBusiness() {
-  // Add business hours dynamically to contact page
   const contactTopRow = document.querySelector('.contact-top-row');
   if (contactTopRow && window.location.pathname.includes('contact.html')) {
     const businessHoursHTML = `
@@ -360,7 +362,6 @@ function initGoogleBusiness() {
       </div>
     `;
 
-    // Add business hours to the contact card
     const contactCard = contactTopRow.querySelector('.contact-card:last-child');
     if (contactCard) {
       contactCard.insertAdjacentHTML('beforeend', businessHoursHTML);
@@ -368,15 +369,12 @@ function initGoogleBusiness() {
   }
 }
 
-// Initialize all functionality
+// ===== INITIALIZE ALL FUNCTIONALITY =====
 document.addEventListener('DOMContentLoaded', function() {
-  initTheme();
   initPortfolioSliders();
   initTestimonialsSlider();
   initGoogleBusiness();
-  
 
-  // Loading spinner
   const spinner = document.getElementById('loading-spinner');
   if (spinner) {
     setTimeout(() => {
@@ -385,12 +383,12 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Enhanced error handling
+// ===== ENHANCED ERROR HANDLING =====
 window.addEventListener('error', (e) => {
   console.error('Script error:', e.error);
 });
 
-// ===== HERO SLIDER (FIXED - JavaScript Controls Everything) =====
+// ===== HERO SLIDER =====
 document.addEventListener('DOMContentLoaded', function() {
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.hero-dot');
@@ -400,47 +398,38 @@ document.addEventListener('DOMContentLoaded', function() {
   let slideInterval;
   const autoPlayDelay = 5000;
 
-  // Only run if we have slides
   if (!slides.length) return;
 
-  // Remove any inline styles that might conflict
   slides.forEach(slide => {
     slide.style.animation = 'none';
     slide.style.opacity = '';
     slide.style.zIndex = '';
   });
 
-  // Function to show a specific slide
   function showSlide(index) {
-    // Remove active class from all slides and dots
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
 
-    // Add active class to current slide and dot
     if (slides[index]) slides[index].classList.add('active');
     if (dots[index]) dots[index].classList.add('active');
     currentSlide = index;
   }
 
-  // Next slide
   function nextSlide() {
     const next = (currentSlide + 1) % slides.length;
     showSlide(next);
   }
 
-  // Previous slide
   function prevSlide() {
     const prev = (currentSlide - 1 + slides.length) % slides.length;
     showSlide(prev);
   }
 
-  // Start auto-play
   function startAutoPlay() {
     if (slideInterval) clearInterval(slideInterval);
     slideInterval = setInterval(nextSlide, autoPlayDelay);
   }
 
-  // Stop auto-play
   function stopAutoPlay() {
     if (slideInterval) {
       clearInterval(slideInterval);
@@ -448,7 +437,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Event listeners for arrows
   if (nextBtn) {
     nextBtn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -469,7 +457,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Dot click events
   dots.forEach((dot, index) => {
     dot.addEventListener('click', function(e) {
       e.preventDefault();
@@ -480,14 +467,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Pause on hover
   const slider = document.querySelector('.hero-slider');
   if (slider) {
     slider.addEventListener('mouseenter', stopAutoPlay);
     slider.addEventListener('mouseleave', startAutoPlay);
   }
 
-  // Keyboard navigation
   document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       e.preventDefault();
@@ -502,11 +487,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Show first slide initially
   showSlide(0);
-
-  // Start auto-play
   startAutoPlay();
-
-  console.log('Hero slider initialized with ' + slides.length + ' slides');
 });

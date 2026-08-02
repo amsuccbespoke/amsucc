@@ -1030,7 +1030,7 @@ a:hover { text-decoration: underline; }
   .portfolio-info { padding: 1rem; }
 }
 
-/* ===== HERO SLIDER ===== */
+/* ===== HERO SLIDER - IMAGE VISIBLE WITH CLEAR TEXT ===== */
 .hero-slider {
   position: relative;
   overflow: hidden;
@@ -1073,7 +1073,7 @@ a:hover { text-decoration: underline; }
   pointer-events: auto;
 }
 
-/* ===== OVERLAY - FIXED FOR READABILITY ===== */
+/* ===== OVERLAY - LIGHTER SO IMAGE IS VISIBLE ===== */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -1084,71 +1084,113 @@ a:hover { text-decoration: underline; }
   transition: background 0.4s ease;
 }
 
-/* Default (Dark mode) */
+/* Default (Dark mode) - Lighter overlay */
 .hero-overlay {
-  background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 100%);
 }
 
-/* Light mode - darker overlay for text readability */
+/* Light mode - Even lighter so image shows */
 [data-theme="white"] .hero-overlay {
-  background: linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.08) 100%);
 }
 
-/* Dark mode - darkest */
+/* Dark mode - Slightly darker but image still visible */
 [data-theme="dark"] .hero-overlay {
-  background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 100%);
 }
 
-/* ===== TEXT BOX FOR LIGHT MODE (Optional but recommended) ===== */
-[data-theme="white"] .hero-slide .hero-inner {
-  background: rgba(0, 0, 0, 0.40);
-  padding: 40px 50px;
-  border-radius: 16px;
-  backdrop-filter: blur(8px);
-  border-left: 4px solid #c9a84c;
+/* ===== TEXT BOX - Semi-transparent so image shows behind ===== */
+.hero-slide .hero-inner {
+  position: relative;
+  z-index: 2;
   max-width: 700px;
 }
 
-[data-theme="white"] .hero-slide h1,
-[data-theme="white"] .hero-slide .lead,
+/* Light mode text box - subtle background */
 [data-theme="white"] .hero-slide .hero-inner {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  padding: 40px 50px;
+  border-radius: 16px;
+  border-left: 4px solid #c9a84c;
+}
+
+/* Dark mode text box - subtle dark background */
+[data-theme="dark"] .hero-slide .hero-inner {
+  background: rgba(0, 0, 0, 0.30);
+  backdrop-filter: blur(4px);
+  padding: 40px 50px;
+  border-radius: 16px;
+  border-left: 4px solid #d4af37;
+}
+
+/* ===== TEXT COLORS ===== */
+.hero-slide h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+  margin: 0 0 12px;
+}
+
+.hero-slide .lead {
+  color: #ffffff;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+  max-width: 720px;
+}
+
+[data-theme="white"] .hero-slide h1,
+[data-theme="white"] .hero-slide .lead {
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .hero-slide h1,
+[data-theme="dark"] .hero-slide .lead {
+  color: #ffffff;
+  text-shadow: 0 2px 25px rgba(0, 0, 0, 0.8);
+}
+
+/* Accent color in hero */
+.hero-slide .accent {
+  color: #d4af37;
+}
+
+[data-theme="white"] .hero-slide .accent {
+  color: #c9a84c;
+}
+
+/* ===== BUTTONS IN HERO ===== */
+.hero-slide .btn-cta {
+  background: #d4af37 !important;
+  border-color: #d4af37 !important;
+  color: #000 !important;
+}
+
+[data-theme="white"] .hero-slide .btn-cta {
+  background: #c9a84c !important;
+  border-color: #c9a84c !important;
+  color: #000 !important;
+}
+
+.hero-slide .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.6) !important;
   color: #ffffff !important;
 }
 
-[data-theme="white"] .hero-slide h1 {
-  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.9) !important;
-}
-
-[data-theme="white"] .hero-slide .lead {
-  text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.8) !important;
+.hero-slide .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #ffffff !important;
 }
 
 [data-theme="white"] .hero-slide .btn-ghost {
-  border-color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
   color: #ffffff !important;
 }
 
 [data-theme="white"] .hero-slide .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: #c9a84c !important;
-  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  [data-theme="white"] .hero-slide .hero-inner {
-    padding: 25px 20px;
-    margin: 0 15px;
-  }
-}
-
-.hero-slide .container {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-}
-
-/* Navigation Arrows */
+/* ===== NAVIGATION ARROWS ===== */
 .hero-nav {
   position: absolute;
   top: 50%;
@@ -1165,9 +1207,9 @@ a:hover { text-decoration: underline; }
 .hero-prev,
 .hero-next {
   pointer-events: auto;
-  background: rgba(212, 175, 55, 0.25);
+  background: rgba(0, 0, 0, 0.3);
   color: #fff;
-  border: 2px solid #d4af37;
+  border: 2px solid rgba(255, 255, 255, 0.3);
   padding: 10px 16px;
   font-size: 1.5rem;
   cursor: pointer;
@@ -1188,24 +1230,25 @@ a:hover { text-decoration: underline; }
 .hero-next:hover {
   background: #d4af37;
   color: #000;
+  border-color: #d4af37;
   transform: scale(1.1);
 }
 
 [data-theme="white"] .hero-prev,
 [data-theme="white"] .hero-next {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: #ffffff;
-  color: #ffffff;
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
 }
 
 [data-theme="white"] .hero-prev:hover,
 [data-theme="white"] .hero-next:hover {
   background: #c9a84c;
-  color: #fff;
+  color: #000;
   border-color: #c9a84c;
 }
 
-/* Dots */
+/* ===== DOTS ===== */
 .hero-dots {
   position: absolute;
   bottom: 40px;
@@ -1247,26 +1290,17 @@ a:hover { text-decoration: underline; }
   border-color: #c9a84c !important;
 }
 
-/* Text shadows for all modes */
-.hero-slide h1,
-.hero-slide .lead {
-  text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.8);
-}
-
-[data-theme="dark"] .hero-slide h1,
-[data-theme="dark"] .hero-slide .lead {
-  text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.9);
-}
-
-[data-theme="white"] .hero-slide h1,
-[data-theme="white"] .hero-slide .lead {
-  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.9);
-}
-
-/* Mobile */
+/* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   .hero-slider { min-height: 70vh; }
   .hero-slides { height: 70vh; }
+  
+  [data-theme="white"] .hero-slide .hero-inner,
+  [data-theme="dark"] .hero-slide .hero-inner {
+    padding: 25px 20px;
+    margin: 0 15px;
+  }
+  
   .hero-prev,
   .hero-next {
     padding: 8px 12px;

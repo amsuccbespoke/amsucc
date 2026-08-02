@@ -389,7 +389,8 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('error', (e) => {
   console.error('Script error:', e.error);
 });
-// ===== HERO SLIDER =====
+
+// ===== HERO SLIDER (FIXED - No CSS animation conflict) =====
 document.addEventListener('DOMContentLoaded', function() {
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.hero-dot');
@@ -399,7 +400,14 @@ document.addEventListener('DOMContentLoaded', function() {
   let slideInterval;
   const autoPlayDelay = 5000; // 5 seconds
 
-  // Function to show a specific slide
+  // Only run if we have slides
+  if (!slides.length) return;
+
+  // Remove CSS animations to prevent conflict
+  slides.forEach(slide => {
+    slide.style.animation = 'none';
+  });
+
   function showSlide(index) {
     // Remove active class from all slides and dots
     slides.forEach(slide => slide.classList.remove('active'));
@@ -407,29 +415,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add active class to current slide and dot
     slides[index].classList.add('active');
-    dots[index].classList.add('active');
+    if (dots[index]) dots[index].classList.add('active');
     currentSlide = index;
   }
 
-  // Next slide
   function nextSlide() {
     const next = (currentSlide + 1) % slides.length;
     showSlide(next);
   }
 
-  // Previous slide
   function prevSlide() {
     const prev = (currentSlide - 1 + slides.length) % slides.length;
     showSlide(prev);
   }
 
-  // Start auto-play
   function startAutoPlay() {
     if (slideInterval) clearInterval(slideInterval);
     slideInterval = setInterval(nextSlide, autoPlayDelay);
   }
 
-  // Stop auto-play
   function stopAutoPlay() {
     if (slideInterval) {
       clearInterval(slideInterval);
@@ -439,7 +443,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Event listeners
   if (nextBtn) {
-    nextBtn.addEventListener('click', function() {
+    nextBtn.addEventListener('click', function(e) {
+      e.preventDefault();
       stopAutoPlay();
       nextSlide();
       startAutoPlay();
@@ -447,7 +452,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (prevBtn) {
-    prevBtn.addEventListener('click', function() {
+    prevBtn.addEventListener('click', function(e) {
+      e.preventDefault();
       stopAutoPlay();
       prevSlide();
       startAutoPlay();
@@ -456,7 +462,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Dot click events
   dots.forEach((dot, index) => {
-    dot.addEventListener('click', function() {
+    dot.addEventListener('click', function(e) {
+      e.preventDefault();
       stopAutoPlay();
       showSlide(index);
       startAutoPlay();
@@ -473,17 +480,21 @@ document.addEventListener('DOMContentLoaded', function() {
   // Keyboard navigation
   document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight') {
+      e.preventDefault();
       stopAutoPlay();
       nextSlide();
       startAutoPlay();
     } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
       stopAutoPlay();
       prevSlide();
       startAutoPlay();
     }
   });
 
+  // Ensure first slide is active
+  showSlide(0);
+
   // Start auto-play
   startAutoPlay();
 });
-

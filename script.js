@@ -490,3 +490,254 @@ document.addEventListener('DOMContentLoaded', function() {
   showSlide(0);
   startAutoPlay();
 });
+
+// ===== PRODUCT SLIDER =====
+function initProductSliders() {
+  const sliders = document.querySelectorAll('.product-slider');
+
+  sliders.forEach(slider => {
+    const track = slider.querySelector('.slider-track');
+    const slides = track.querySelectorAll('.product-card');
+    const dotsContainer = slider.parentElement.querySelector('.slider-dots');
+    const prevBtn = slider.querySelector('.prev-slide');
+    const nextBtn = slider.querySelector('.next-slide');
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let slidesPerView = getSlidesPerView();
+    let totalSlides = slides.length;
+    let maxIndex = Math.max(0, totalSlides - slidesPerView);
+
+    // Create dots
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      const totalDots = Math.ceil(totalSlides / slidesPerView);
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.dataset.index = i;
+        dot.addEventListener('click', () => goToSlide(i * slidesPerView));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function getSlidesPerView() {
+      if (window.innerWidth < 600) return 1;
+      if (window.innerWidth < 900) return 2;
+      return 3;
+    }
+
+    function updateSlides() {
+      slidesPerView = getSlidesPerView();
+      maxIndex = Math.max(0, totalSlides - slidesPerView);
+      if (currentIndex > maxIndex) currentIndex = maxIndex;
+      updateSlider();
+    }
+
+    function updateSlider() {
+      const slideWidth = slides[0].offsetWidth + 20; // + gap
+      track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+      // Update active states
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i >= currentIndex && i < currentIndex + slidesPerView);
+      });
+
+      // Update dots
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        const activeDot = Math.floor(currentIndex / slidesPerView);
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === activeDot);
+        });
+      }
+    }
+
+    function goToSlide(index) {
+      currentIndex = Math.max(0, Math.min(index, maxIndex));
+      updateSlider();
+    }
+
+    function nextSlide() {
+      if (currentIndex + slidesPerView < totalSlides) {
+        goToSlide(currentIndex + slidesPerView);
+      } else {
+        goToSlide(0);
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex - slidesPerView >= 0) {
+        goToSlide(currentIndex - slidesPerView);
+      } else {
+        goToSlide(maxIndex);
+      }
+    }
+
+    // Event listeners
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    // Touch support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    });
+
+    // Resize handler
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateSlides, 200);
+    });
+
+    // Initial update
+    setTimeout(updateSlides, 100);
+  });
+}
+
+// ===== CART FUNCTIONALITY =====
+let cart = JSON.parse(localStorage.getItem('fawlux-cart')) || [];
+
+function updateCartBadge() {
+  const badge = document.getElementById('cartBadge');
+  if (badge) {
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    badge.textContent = total;
+    badge.classList.toggle('hidden', total === 0);
+  }
+}
+
+function renderCart() {
+  const cartItems = document.getElementById('cartItems');
+  if (!cartItems) return;
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+    return;
+  }
+
+  cartItems.innerHTML = cart.map((item, index) => `
+    <div class="cart-item">
+      <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+      <div class="cart-item-details">
+        <h4>${item.name}</h4>
+        <p>${item.code}</p>
+      </div>
+      <button class="cart-item-remove" data-index="${index}">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
+  `).join('');
+
+  // Remove buttons
+  cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const index = parseInt(this.dataset.index);
+      cart.splice(index, 1);
+      localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+      renderCart();
+      updateCartBadge();
+    });
+  });
+}
+
+function addToCart(productCode, productName, productImage) {
+  const existing = cart.find(item => item.code === productCode);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      code: productCode,
+      name: productName,
+      image: productImage,
+      quantity: 1
+    });
+  }
+  localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+  updateCartBadge();
+  renderCart();
+  
+  // Open cart modal
+  const modal = document.getElementById('cartModal');
+  if (modal) modal.classList.add('open');
+}
+
+// ===== CART EVENT LISTENERS =====
+document.addEventListener('DOMContentLoaded', function() {
+  // Add to cart buttons
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const card = this.closest('.product-card');
+      const code = this.dataset.code;
+      const name = card.dataset.name;
+      const image = card.dataset.image;
+      
+      addToCart(code, name, image);
+    });
+  });
+
+  // Cart icon toggle
+  const cartIcon = document.getElementById('cartIcon');
+  const cartModal = document.getElementById('cartModal');
+  const cartClose = document.getElementById('cartClose');
+
+  if (cartIcon && cartModal) {
+    cartIcon.addEventListener('click', () => {
+      cartModal.classList.toggle('open');
+      renderCart();
+    });
+  }
+
+  if (cartClose && cartModal) {
+    cartClose.addEventListener('click', () => {
+      cartModal.classList.remove('open');
+    });
+  }
+
+  // Close modal on outside click
+  if (cartModal) {
+    cartModal.addEventListener('click', (e) => {
+      if (e.target === cartModal) {
+        cartModal.classList.remove('open');
+      }
+    });
+  }
+
+  // Checkout button
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', function() {
+      if (cart.length === 0) return;
+      
+      let message = 'Hello FAWLUX! I\'d like to order:\n\n';
+      cart.forEach(item => {
+        message += `• ${item.name} (${item.code}) x${item.quantity}\n`;
+      });
+      message += '\n\nPlease let me know the total cost and delivery options.';
+      
+      const phone = '2348079444199';
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    });
+  }
+
+  // Initial render
+  updateCartBadge();
+  renderCart();
+
+  // Initialize sliders
+  initProductSliders();
+});

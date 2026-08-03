@@ -608,7 +608,7 @@ function initProductSliders() {
   });
 }
 
-// ===== CART FUNCTIONALITY =====
+// ===== CART FUNCTIONALITY (No Popup on Add) =====
 let cart = JSON.parse(localStorage.getItem('fawlux-cart')) || [];
 
 function updateCartBadge() {
@@ -642,7 +642,6 @@ function renderCart() {
     </div>
   `).join('');
 
-  // Remove buttons
   cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
     btn.addEventListener('click', function() {
       const index = parseInt(this.dataset.index);
@@ -669,15 +668,12 @@ function addToCart(productCode, productName, productImage) {
   localStorage.setItem('fawlux-cart', JSON.stringify(cart));
   updateCartBadge();
   renderCart();
-  
-  // Open cart modal
-  const modal = document.getElementById('cartModal');
-  if (modal) modal.classList.add('open');
+  // ❌ NO POPUP - just updates the badge!
 }
 
 // ===== CART EVENT LISTENERS =====
 document.addEventListener('DOMContentLoaded', function() {
-  // Add to cart buttons
+  // Add to cart buttons - NO POPUP
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -708,7 +704,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Close modal on outside click
   if (cartModal) {
     cartModal.addEventListener('click', (e) => {
       if (e.target === cartModal) {
@@ -734,10 +729,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Initial render
   updateCartBadge();
   renderCart();
-
-  // Initialize sliders
-  initProductSliders();
 });

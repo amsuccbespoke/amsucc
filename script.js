@@ -1,34 +1,21 @@
 // ===== THEME MANAGEMENT - ALWAYS FOLLOW DEVICE THEME =====
 
-// Function to apply theme based on device preference
 function applyDeviceTheme() {
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const theme = prefersDark ? 'dark' : 'white';
-  
-  // Apply theme to HTML
   document.documentElement.setAttribute('data-theme', theme);
-  
-  // Update theme switcher button
   const themeSwitcher = document.getElementById('themeSwitcher');
   if (themeSwitcher) {
-    themeSwitcher.setAttribute('aria-label', 
-      theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
-    );
+    themeSwitcher.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
   }
 }
 
-// Listen for device theme changes (LIVE UPDATES!)
 const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-// This fires whenever user changes their device theme
 darkModeMediaQuery.addEventListener('change', function(e) {
   applyDeviceTheme();
 });
 
-// Apply theme on page load
 document.addEventListener('DOMContentLoaded', applyDeviceTheme);
-
-// Also apply immediately if script runs after DOM is ready
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   applyDeviceTheme();
 }
@@ -46,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
       burger.setAttribute('aria-expanded', String(!expanded));
     });
 
-    // Close menu when clicking anywhere outside
     document.addEventListener('click', (e) => {
       if(!nav.contains(e.target) && !burger.contains(e.target)) {
         nav.classList.remove('open');
@@ -54,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Close menu when clicking on a link
     nav.addEventListener('click', (e) => {
       if(e.target.tagName === 'A') {
         nav.classList.remove('open');
@@ -63,17 +48,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ===== THEME SWITCHER - Manual override (resets on refresh) =====
   const themeSwitcher = document.getElementById('themeSwitcher');
   if (themeSwitcher) {
     themeSwitcher.addEventListener('click', function() {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'white' : 'dark';
       document.documentElement.setAttribute('data-theme', newTheme);
-      
-      themeSwitcher.setAttribute('aria-label', 
-        newTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
-      );
+      themeSwitcher.setAttribute('aria-label', newTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
     });
   }
 });
@@ -86,7 +67,6 @@ const fadeInOnScroll = () => {
     const elementTop = element.getBoundingClientRect().top;
     const elementBottom = element.getBoundingClientRect().bottom;
     const elementVisible = 150;
-
     if (elementTop < window.innerHeight - elementVisible && elementBottom > 0) {
       element.classList.add('visible');
     } else if (elementBottom < 0 || elementTop > window.innerHeight) {
@@ -95,7 +75,6 @@ const fadeInOnScroll = () => {
   });
 };
 
-// Run on load and scroll
 window.addEventListener('load', fadeInOnScroll);
 window.addEventListener('scroll', fadeInOnScroll);
 
@@ -109,7 +88,7 @@ window.addEventListener('load', function() {
   }, 1000);
 });
 
-// ===== BACK TO TOP BUTTON =====
+// ===== BACK TO TOP =====
 const backToTopButton = document.getElementById('back-to-top');
 
 window.addEventListener('scroll', () => {
@@ -124,153 +103,67 @@ window.addEventListener('scroll', () => {
 
 if (backToTopButton) {
   backToTopButton.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-}
-
-// ===== ANIMATED STATISTICS COUNTER =====
-function animateCounter() {
-  const statNumbers = document.querySelectorAll('.stat-number');
-
-  statNumbers.forEach(stat => {
-    const target = parseInt(stat.getAttribute('data-target'));
-    const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
-
-    const updateCounter = () => {
-      current += step;
-      if (current < target) {
-        stat.textContent = Math.ceil(current) + (stat.getAttribute('data-target') === '98' ? '%' : '+');
-        requestAnimationFrame(updateCounter);
-      } else {
-        stat.textContent = target + (stat.getAttribute('data-target') === '98' ? '%' : '+');
-        stat.classList.add('animated');
-      }
-    };
-
-    updateCounter();
-  });
-}
-
-// Intersection Observer to trigger animation when visible
-const statsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      animateCounter();
-      statsObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-
-// Observe stats section
-const statsSection = document.querySelector('.stats-section');
-if (statsSection) {
-  statsObserver.observe(statsSection);
 }
 
 // ===== PORTFOLIO SLIDERS =====
 function initPortfolioSliders() {
   const sliders = document.querySelectorAll('.portfolio-slider');
-
   sliders.forEach(slider => {
     const slides = slider.querySelectorAll('.portfolio-slide');
     const dots = slider.querySelectorAll('.dot');
     const prevArrow = slider.querySelector('.prev-arrow');
     const nextArrow = slider.querySelector('.next-arrow');
-
     if (!slides.length) return;
-
     let currentSlide = 0;
     let autoSlideInterval;
 
     function showSlide(n) {
       slides.forEach(slide => slide.classList.remove('active'));
       dots.forEach(dot => dot.classList.remove('active'));
-
       currentSlide = (n + slides.length) % slides.length;
-
       slides[currentSlide].classList.add('active');
       if (dots[currentSlide]) {
         dots[currentSlide].classList.add('active');
       }
     }
 
-    function nextSlide() {
-      showSlide(currentSlide + 1);
-    }
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
 
-    function prevSlide() {
-      showSlide(currentSlide - 1);
-    }
-
-    function startAutoSlide() {
-      autoSlideInterval = setInterval(nextSlide, 4000);
-    }
-
-    function stopAutoSlide() {
-      clearInterval(autoSlideInterval);
-    }
+    function startAutoSlide() { autoSlideInterval = setInterval(nextSlide, 4000); }
+    function stopAutoSlide() { clearInterval(autoSlideInterval); }
 
     if (nextArrow) {
-      nextArrow.addEventListener('click', () => {
-        stopAutoSlide();
-        nextSlide();
-        startAutoSlide();
-      });
+      nextArrow.addEventListener('click', () => { stopAutoSlide(); nextSlide(); startAutoSlide(); });
     }
-
     if (prevArrow) {
-      prevArrow.addEventListener('click', () => {
-        stopAutoSlide();
-        prevSlide();
-        startAutoSlide();
-      });
+      prevArrow.addEventListener('click', () => { stopAutoSlide(); prevSlide(); startAutoSlide(); });
     }
-
     dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        stopAutoSlide();
-        showSlide(index);
-        startAutoSlide();
-      });
+      dot.addEventListener('click', () => { stopAutoSlide(); showSlide(index); startAutoSlide(); });
     });
 
     startAutoSlide();
-
     slider.addEventListener('mouseenter', stopAutoSlide);
     slider.addEventListener('mouseleave', startAutoSlide);
 
-    // Touch support for mobile
     let touchStartX = 0;
     let touchEndX = 0;
-
     slider.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
       stopAutoSlide();
     });
-
     slider.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
       startAutoSlide();
     });
-
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = touchStartX - touchEndX;
-
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
-      }
-    }
   });
 }
 
@@ -280,66 +173,37 @@ function initTestimonialsSlider() {
   const testimonialDots = document.querySelectorAll('.testimonial-dot');
   const prevTestimonial = document.querySelector('.prev-testimonial');
   const nextTestimonial = document.querySelector('.next-testimonial');
-
   if (!testimonialSlides.length) return;
-
   let currentTestimonial = 0;
   let testimonialInterval;
 
   function showTestimonial(n) {
     testimonialSlides.forEach(slide => slide.classList.remove('active'));
     testimonialDots.forEach(dot => dot.classList.remove('active'));
-
     currentTestimonial = (n + testimonialSlides.length) % testimonialSlides.length;
-
     testimonialSlides[currentTestimonial].classList.add('active');
     if (testimonialDots[currentTestimonial]) {
       testimonialDots[currentTestimonial].classList.add('active');
     }
   }
 
-  function nextTestimonialSlide() {
-    showTestimonial(currentTestimonial + 1);
-  }
+  function nextTestimonialSlide() { showTestimonial(currentTestimonial + 1); }
+  function prevTestimonialSlide() { showTestimonial(currentTestimonial - 1); }
 
-  function prevTestimonialSlide() {
-    showTestimonial(currentTestimonial - 1);
-  }
-
-  function startTestimonialAutoSlide() {
-    testimonialInterval = setInterval(nextTestimonialSlide, 5000);
-  }
-
-  function stopTestimonialAutoSlide() {
-    clearInterval(testimonialInterval);
-  }
+  function startTestimonialAutoSlide() { testimonialInterval = setInterval(nextTestimonialSlide, 5000); }
+  function stopTestimonialAutoSlide() { clearInterval(testimonialInterval); }
 
   if (nextTestimonial) {
-    nextTestimonial.addEventListener('click', () => {
-      stopTestimonialAutoSlide();
-      nextTestimonialSlide();
-      startTestimonialAutoSlide();
-    });
+    nextTestimonial.addEventListener('click', () => { stopTestimonialAutoSlide(); nextTestimonialSlide(); startTestimonialAutoSlide(); });
   }
-
   if (prevTestimonial) {
-    prevTestimonial.addEventListener('click', () => {
-      stopTestimonialAutoSlide();
-      prevTestimonialSlide();
-      startTestimonialAutoSlide();
-    });
+    prevTestimonial.addEventListener('click', () => { stopTestimonialAutoSlide(); prevTestimonialSlide(); startTestimonialAutoSlide(); });
   }
-
   testimonialDots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-      stopTestimonialAutoSlide();
-      showTestimonial(index);
-      startTestimonialAutoSlide();
-    });
+    dot.addEventListener('click', () => { stopTestimonialAutoSlide(); showTestimonial(index); startTestimonialAutoSlide(); });
   });
 
   startTestimonialAutoSlide();
-
   const testimonialSlider = document.querySelector('.testimonials-slider');
   if (testimonialSlider) {
     testimonialSlider.addEventListener('mouseenter', stopTestimonialAutoSlide);
@@ -361,7 +225,6 @@ function initGoogleBusiness() {
         </ul>
       </div>
     `;
-
     const contactCard = contactTopRow.querySelector('.contact-card:last-child');
     if (contactCard) {
       contactCard.insertAdjacentHTML('beforeend', businessHoursHTML);
@@ -369,23 +232,225 @@ function initGoogleBusiness() {
   }
 }
 
-// ===== INITIALIZE ALL FUNCTIONALITY =====
-document.addEventListener('DOMContentLoaded', function() {
-  initPortfolioSliders();
-  initTestimonialsSlider();
-  initGoogleBusiness();
+// ===== PRODUCT SLIDER =====
+function initProductSliders() {
+  const sliders = document.querySelectorAll('.product-slider');
 
-  const spinner = document.getElementById('loading-spinner');
-  if (spinner) {
-    setTimeout(() => {
-      spinner.classList.add('hidden');
-    }, 1000);
+  sliders.forEach(slider => {
+    const track = slider.querySelector('.slider-track');
+    const slides = track.querySelectorAll('.product-card');
+    const dotsContainer = slider.parentElement.querySelector('.slider-dots');
+    const prevBtn = slider.querySelector('.prev-slide');
+    const nextBtn = slider.querySelector('.next-slide');
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let slidesPerView = getSlidesPerView();
+    let totalSlides = slides.length;
+    let maxIndex = Math.max(0, totalSlides - slidesPerView);
+
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      const totalDots = Math.ceil(totalSlides / slidesPerView);
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.dataset.index = i;
+        dot.addEventListener('click', () => goToSlide(i * slidesPerView));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function getSlidesPerView() {
+      if (window.innerWidth < 600) return 1;
+      if (window.innerWidth < 900) return 2;
+      return 3;
+    }
+
+    function updateSlides() {
+      slidesPerView = getSlidesPerView();
+      maxIndex = Math.max(0, totalSlides - slidesPerView);
+      if (currentIndex > maxIndex) currentIndex = maxIndex;
+      updateSlider();
+    }
+
+    function updateSlider() {
+      const slideWidth = slides[0].offsetWidth + 20;
+      track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i >= currentIndex && i < currentIndex + slidesPerView);
+      });
+
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        const activeDot = Math.floor(currentIndex / slidesPerView);
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === activeDot);
+        });
+      }
+    }
+
+    function goToSlide(index) {
+      currentIndex = Math.max(0, Math.min(index, maxIndex));
+      updateSlider();
+    }
+
+    function nextSlide() {
+      if (currentIndex + slidesPerView < totalSlides) {
+        goToSlide(currentIndex + slidesPerView);
+      } else {
+        goToSlide(0);
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex - slidesPerView >= 0) {
+        goToSlide(currentIndex - slidesPerView);
+      } else {
+        goToSlide(maxIndex);
+      }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    });
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateSlides, 200);
+    });
+
+    setTimeout(updateSlides, 100);
+  });
+}
+
+// ===== CART FUNCTIONALITY =====
+let cart = JSON.parse(localStorage.getItem('fawlux-cart')) || [];
+
+function updateCartBadge() {
+  const badge = document.getElementById('cartBadge');
+  if (badge) {
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    badge.textContent = total;
+    badge.classList.toggle('hidden', total === 0);
   }
-});
+}
 
-// ===== ENHANCED ERROR HANDLING =====
-window.addEventListener('error', (e) => {
-  console.error('Script error:', e.error);
+function renderCart() {
+  const cartItems = document.getElementById('cartItems');
+  if (!cartItems) return;
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+    return;
+  }
+
+  cartItems.innerHTML = cart.map((item, index) => `
+    <div class="cart-item">
+      <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+      <div class="cart-item-details">
+        <h4>${item.name}</h4>
+        <p>${item.code}</p>
+      </div>
+      <button class="cart-item-remove" data-index="${index}">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
+  `).join('');
+
+  cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const index = parseInt(this.dataset.index);
+      cart.splice(index, 1);
+      localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+      renderCart();
+      updateCartBadge();
+    });
+  });
+}
+
+function addToCart(productCode, productName, productImage) {
+  const existing = cart.find(item => item.code === productCode);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({ code: productCode, name: productName, image: productImage, quantity: 1 });
+  }
+  localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+  updateCartBadge();
+  renderCart();
+}
+
+// ===== CART EVENT LISTENERS =====
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const card = this.closest('.product-card');
+      const code = this.dataset.code;
+      const name = card.dataset.name;
+      const image = card.dataset.image;
+      addToCart(code, name, image);
+    });
+  });
+
+  const cartIcon = document.getElementById('cartIcon');
+  const cartModal = document.getElementById('cartModal');
+  const cartClose = document.getElementById('cartClose');
+
+  if (cartIcon && cartModal) {
+    cartIcon.addEventListener('click', () => {
+      cartModal.classList.toggle('open');
+      renderCart();
+    });
+  }
+
+  if (cartClose && cartModal) {
+    cartClose.addEventListener('click', () => {
+      cartModal.classList.remove('open');
+    });
+  }
+
+  if (cartModal) {
+    cartModal.addEventListener('click', (e) => {
+      if (e.target === cartModal) {
+        cartModal.classList.remove('open');
+      }
+    });
+  }
+
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', function() {
+      if (cart.length === 0) return;
+      let message = 'Hello FAWLUX! I\'d like to order:\n\n';
+      cart.forEach(item => {
+        message += `• ${item.name} (${item.code}) x${item.quantity}\n`;
+      });
+      message += '\n\nPlease let me know the total cost and delivery options.';
+      const phone = '2348079444199';
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    });
+  }
+
+  updateCartBadge();
+  renderCart();
 });
 
 // ===== HERO SLIDER =====
@@ -409,7 +474,6 @@ document.addEventListener('DOMContentLoaded', function() {
   function showSlide(index) {
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
-
     if (slides[index]) slides[index].classList.add('active');
     if (dots[index]) dots[index].classList.add('active');
     currentSlide = index;
@@ -491,244 +555,22 @@ document.addEventListener('DOMContentLoaded', function() {
   startAutoPlay();
 });
 
-// ===== PRODUCT SLIDER =====
-function initProductSliders() {
-  const sliders = document.querySelectorAll('.product-slider');
-
-  sliders.forEach(slider => {
-    const track = slider.querySelector('.slider-track');
-    const slides = track.querySelectorAll('.product-card');
-    const dotsContainer = slider.parentElement.querySelector('.slider-dots');
-    const prevBtn = slider.querySelector('.prev-slide');
-    const nextBtn = slider.querySelector('.next-slide');
-
-    if (!slides.length) return;
-
-    let currentIndex = 0;
-    let slidesPerView = getSlidesPerView();
-    let totalSlides = slides.length;
-    let maxIndex = Math.max(0, totalSlides - slidesPerView);
-
-    // Create dots
-    if (dotsContainer) {
-      dotsContainer.innerHTML = '';
-      const totalDots = Math.ceil(totalSlides / slidesPerView);
-      for (let i = 0; i < totalDots; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'dot' + (i === 0 ? ' active' : '');
-        dot.dataset.index = i;
-        dot.addEventListener('click', () => goToSlide(i * slidesPerView));
-        dotsContainer.appendChild(dot);
-      }
-    }
-
-    function getSlidesPerView() {
-      if (window.innerWidth < 600) return 1;
-      if (window.innerWidth < 900) return 2;
-      return 3;
-    }
-
-    function updateSlides() {
-      slidesPerView = getSlidesPerView();
-      maxIndex = Math.max(0, totalSlides - slidesPerView);
-      if (currentIndex > maxIndex) currentIndex = maxIndex;
-      updateSlider();
-    }
-
-    function updateSlider() {
-      const slideWidth = slides[0].offsetWidth + 20; // + gap
-      track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-      // Update active states
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i >= currentIndex && i < currentIndex + slidesPerView);
-      });
-
-      // Update dots
-      if (dotsContainer) {
-        const dots = dotsContainer.querySelectorAll('.dot');
-        const activeDot = Math.floor(currentIndex / slidesPerView);
-        dots.forEach((dot, i) => {
-          dot.classList.toggle('active', i === activeDot);
-        });
-      }
-    }
-
-    function goToSlide(index) {
-      currentIndex = Math.max(0, Math.min(index, maxIndex));
-      updateSlider();
-    }
-
-    function nextSlide() {
-      if (currentIndex + slidesPerView < totalSlides) {
-        goToSlide(currentIndex + slidesPerView);
-      } else {
-        goToSlide(0);
-      }
-    }
-
-    function prevSlide() {
-      if (currentIndex - slidesPerView >= 0) {
-        goToSlide(currentIndex - slidesPerView);
-      } else {
-        goToSlide(maxIndex);
-      }
-    }
-
-    // Event listeners
-    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-
-    // Touch support
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    slider.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    slider.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) nextSlide();
-        else prevSlide();
-      }
-    });
-
-    // Resize handler
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(updateSlides, 200);
-    });
-
-    // Initial update
-    setTimeout(updateSlides, 100);
-  });
-}
-
-// ===== CART FUNCTIONALITY (No Popup on Add) =====
-let cart = JSON.parse(localStorage.getItem('fawlux-cart')) || [];
-
-function updateCartBadge() {
-  const badge = document.getElementById('cartBadge');
-  if (badge) {
-    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-    badge.textContent = total;
-    badge.classList.toggle('hidden', total === 0);
-  }
-}
-
-function renderCart() {
-  const cartItems = document.getElementById('cartItems');
-  if (!cartItems) return;
-
-  if (cart.length === 0) {
-    cartItems.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
-    return;
-  }
-
-  cartItems.innerHTML = cart.map((item, index) => `
-    <div class="cart-item">
-      <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-      <div class="cart-item-details">
-        <h4>${item.name}</h4>
-        <p>${item.code}</p>
-      </div>
-      <button class="cart-item-remove" data-index="${index}">
-        <i class="fa-solid fa-trash"></i>
-      </button>
-    </div>
-  `).join('');
-
-  cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const index = parseInt(this.dataset.index);
-      cart.splice(index, 1);
-      localStorage.setItem('fawlux-cart', JSON.stringify(cart));
-      renderCart();
-      updateCartBadge();
-    });
-  });
-}
-
-function addToCart(productCode, productName, productImage) {
-  const existing = cart.find(item => item.code === productCode);
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cart.push({
-      code: productCode,
-      name: productName,
-      image: productImage,
-      quantity: 1
-    });
-  }
-  localStorage.setItem('fawlux-cart', JSON.stringify(cart));
-  updateCartBadge();
-  renderCart();
-  // ❌ NO POPUP - just updates the badge!
-}
-
-// ===== CART EVENT LISTENERS =====
+// ===== INITIALIZE ALL FUNCTIONALITY =====
 document.addEventListener('DOMContentLoaded', function() {
-  // Add to cart buttons - NO POPUP
-  document.querySelectorAll('.add-to-cart').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const card = this.closest('.product-card');
-      const code = this.dataset.code;
-      const name = card.dataset.name;
-      const image = card.dataset.image;
-      
-      addToCart(code, name, image);
-    });
-  });
+  initPortfolioSliders();
+  initTestimonialsSlider();
+  initGoogleBusiness();
+  initProductSliders();
 
-  // Cart icon toggle
-  const cartIcon = document.getElementById('cartIcon');
-  const cartModal = document.getElementById('cartModal');
-  const cartClose = document.getElementById('cartClose');
-
-  if (cartIcon && cartModal) {
-    cartIcon.addEventListener('click', () => {
-      cartModal.classList.toggle('open');
-      renderCart();
-    });
+  const spinner = document.getElementById('loading-spinner');
+  if (spinner) {
+    setTimeout(() => {
+      spinner.classList.add('hidden');
+    }, 1000);
   }
+});
 
-  if (cartClose && cartModal) {
-    cartClose.addEventListener('click', () => {
-      cartModal.classList.remove('open');
-    });
-  }
-
-  if (cartModal) {
-    cartModal.addEventListener('click', (e) => {
-      if (e.target === cartModal) {
-        cartModal.classList.remove('open');
-      }
-    });
-  }
-
-  // Checkout button
-  const checkoutBtn = document.getElementById('checkoutBtn');
-  if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', function() {
-      if (cart.length === 0) return;
-      
-      let message = 'Hello FAWLUX! I\'d like to order:\n\n';
-      cart.forEach(item => {
-        message += `• ${item.name} (${item.code}) x${item.quantity}\n`;
-      });
-      message += '\n\nPlease let me know the total cost and delivery options.';
-      
-      const phone = '2348079444199';
-      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
-    });
-  }
-
-  updateCartBadge();
-  renderCart();
+// ===== ERROR HANDLING =====
+window.addEventListener('error', (e) => {
+  console.error('Script error:', e.error);
 });

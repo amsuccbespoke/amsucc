@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </a>
 
     <div class="header-controls">
+      <!-- Theme Switcher -->
       <button class="theme-switcher" id="themeSwitcher" aria-label="Switch theme">
         <svg class="theme-icon sun" viewBox="0 0 24 24" width="20" height="20">
           <path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM6.34 5.16l-1.42 1.42c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.42-1.42c.39-.39.39-1.02 0-1.41a.996.996 0 00-1.41 0zm13.08 12.42l1.42 1.42c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.42-1.42c-.39-.39-1.02-.39-1.41 0a.996.996 0 000 1.41zM5.16 17.66l1.42-1.42c.39-.39.39-1.02 0-1.41a.996.996 0 00-1.41 0l-1.42 1.42c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0zm12.42-13.08l1.42-1.42c.39-.39.39-1.02 0-1.41a.996.996 0 00-1.41 0l-1.42 1.42c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0z"/>
@@ -192,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </svg>
       </button>
 
+      <!-- ===== CART ICON (NEW) ===== -->
       <button class="cart-icon" id="cartIcon" aria-label="Open cart">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
           <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0020 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
@@ -300,14 +302,14 @@ Every stitch is intentional — because you deserve nothing less.</p>
   </article>
 </section>
 
-<!-- ===== PRODUCT COLLECTION WITH CART (MOVED UP) ===== -->
+<!-- ===== PRODUCT COLLECTION WITH CART (REPLACES FEATURED WORK) ===== -->
 <section class="product-collection container fade-in">
   <h2>Our Collection</h2>
   <p class="section-subtitle">Browse our premium agbada and kaftan collections</p>
 
   <!-- AGBADA SLIDER -->
   <div class="category-section">
-    <div class="category-header" style="justify-content:center;">
+    <div class="category-header">
       <h3>Agbada</h3>
     </div>
 
@@ -363,7 +365,7 @@ Every stitch is intentional — because you deserve nothing less.</p>
 
   <!-- KAFTAN SLIDER -->
   <div class="category-section">
-    <div class="category-header" style="justify-content:center;">
+    <div class="category-header">
       <h3>Kaftan</h3>
     </div>
 
@@ -422,7 +424,7 @@ Every stitch is intentional — because you deserve nothing less.</p>
   </div>
 </section>
 
-<!-- ===== TESTIMONIALS (MOVED DOWN - REPLACES STATISTICS) ===== -->
+<!-- ===== TESTIMONIALS (MOVED DOWN) ===== -->
 <section class="testimonials container fade-in">
   <h2>What Our Clients Say</h2>
 

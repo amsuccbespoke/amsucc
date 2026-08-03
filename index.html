@@ -66,6 +66,7 @@
 
 <body>
 
+<!-- Welcome Screen -->
 <div id="welcome-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0a url('images/hero-2.webp') center/cover no-repeat;display:flex;justify-content:center;align-items:center;z-index:10000;opacity:1;transition:opacity 0.6s ease;">
   <div style="text-align:center;color:white;padding:20px;max-width:500px;width:90%;background:rgba(0,0,0,0.65);border-radius:12px;">
     <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem, 5vw, 2.8rem);font-weight:900;letter-spacing:clamp(4px, 1vw, 6px);margin:0 0 12px 0;white-space:nowrap;overflow:visible;padding:0 5px;line-height:1.2;">F A W L U X</h1>
@@ -174,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </svg>
 </a>
 
+<!-- ===== HEADER ===== -->
 <header class="site-header">
   <div class="container nav-wrapper">
     <a class="brand" href="index.html" aria-label="FAWLUX Home">
@@ -181,7 +183,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </a>
 
     <div class="header-controls">
-      <!-- Theme Switcher -->
       <button class="theme-switcher" id="themeSwitcher" aria-label="Switch theme">
         <svg class="theme-icon sun" viewBox="0 0 24 24" width="20" height="20">
           <path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM6.34 5.16l-1.42 1.42c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.42-1.42c.39-.39.39-1.02 0-1.41a.996.996 0 00-1.41 0zm13.08 12.42l1.42 1.42c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.42-1.42c-.39-.39-1.02-.39-1.41 0a.996.996 0 000 1.41zM5.16 17.66l1.42-1.42c.39-.39.39-1.02 0-1.41a.996.996 0 00-1.41 0l-1.42 1.42c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0zm12.42-13.08l1.42-1.42c.39-.39.39-1.02 0-1.41a.996.996 0 00-1.41 0l-1.42 1.42c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0z"/>
@@ -191,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </svg>
       </button>
 
-      <!-- Cart Icon -->
       <button class="cart-icon" id="cartIcon" aria-label="Open cart">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
           <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0020 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
@@ -220,7 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
   <input type="radio" name="hero-slide" id="slide3">
   
   <div class="hero-slides">
-    <!-- Slide 1 -->
     <div class="hero-slide" id="slide1-content" style="background-image: url('images/hero-1.webp');">
       <div class="hero-overlay"></div>
       <div class="container hero-inner">
@@ -233,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
     
-    <!-- Slide 2 -->
     <div class="hero-slide" id="slide2-content" style="background-image: url('images/hero-2.webp');">
       <div class="hero-overlay"></div>
       <div class="container hero-inner">
@@ -246,7 +244,6 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
     
-    <!-- Slide 3 -->
     <div class="hero-slide" id="slide3-content" style="background-image: url('images/hero-3.webp');">
       <div class="hero-overlay"></div>
       <div class="container hero-inner">
@@ -303,7 +300,129 @@ Every stitch is intentional — because you deserve nothing less.</p>
   </article>
 </section>
 
-<!-- ===== TESTIMONIALS (MOVED HERE - REPLACES STATISTICS) ===== -->
+<!-- ===== PRODUCT COLLECTION WITH CART (MOVED UP) ===== -->
+<section class="product-collection container fade-in">
+  <h2>Our Collection</h2>
+  <p class="section-subtitle">Browse our premium agbada and kaftan collections</p>
+
+  <!-- AGBADA SLIDER -->
+  <div class="category-section">
+    <div class="category-header" style="justify-content:center;">
+      <h3>Agbada</h3>
+    </div>
+
+    <div class="product-slider">
+      <button class="slider-arrow prev-slide" aria-label="Previous">‹</button>
+      
+      <div class="slider-track" id="agbadaTrack">
+        <div class="product-card" data-code="FL-AGBADA-001" data-name="Embroidered Agbada" data-image="https://i.postimg.cc/2jGwcYn1/FB8D45C4-09A9-470E-8EE7-0858F22B8EBF.png">
+          <div class="product-image">
+            <img src="https://i.postimg.cc/2jGwcYn1/FB8D45C4-09A9-470E-8EE7-0858F22B8EBF.png" alt="Embroidered Agbada" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Embroidered Agbada</h4>
+            <p class="product-code">FL-AGBADA-001</p>
+            <button class="add-to-cart" data-code="FL-AGBADA-001">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-code="FL-AGBADA-002" data-name="Gold Embroidered Agbada" data-image="https://i.postimg.cc/HWvM8kQZ/AC5981B1-9DFE-47CF-A22C-AA978F4FCBF8.png">
+          <div class="product-image">
+            <img src="https://i.postimg.cc/HWvM8kQZ/AC5981B1-9DFE-47CF-A22C-AA978F4FCBF8.png" alt="Gold Embroidered Agbada" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Gold Embroidered Agbada</h4>
+            <p class="product-code">FL-AGBADA-002</p>
+            <button class="add-to-cart" data-code="FL-AGBADA-002">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-code="FL-AGBADA-003" data-name="Elegant Agbada" data-image="https://i.postimg.cc/cCP696mb/C284080D-CCF7-44F6-A191-55BBBEAB5555.png">
+          <div class="product-image">
+            <img src="https://i.postimg.cc/cCP696mb/C284080D-CCF7-44F6-A191-55BBBEAB5555.png" alt="Elegant Agbada" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Elegant Agbada</h4>
+            <p class="product-code">FL-AGBADA-003</p>
+            <button class="add-to-cart" data-code="FL-AGBADA-003">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button class="slider-arrow next-slide" aria-label="Next">›</button>
+    </div>
+
+    <div class="slider-dots" id="agbadaDots"></div>
+  </div>
+
+  <!-- KAFTAN SLIDER -->
+  <div class="category-section">
+    <div class="category-header" style="justify-content:center;">
+      <h3>Kaftan</h3>
+    </div>
+
+    <div class="product-slider">
+      <button class="slider-arrow prev-slide" aria-label="Previous">‹</button>
+      
+      <div class="slider-track" id="kaftanTrack">
+        <div class="product-card" data-code="FL-KAF-001" data-name="Kaftan Detail" data-image="https://i.postimg.cc/HxJvZGnR/2-CF76677-775-F-45-CD-8316-897-A9525-FA1-E.jpg">
+          <div class="product-image">
+            <img src="https://i.postimg.cc/HxJvZGnR/2-CF76677-775-F-45-CD-8316-897-A9525-FA1-E.jpg" alt="Kaftan Detail" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Kaftan Detail</h4>
+            <p class="product-code">FL-KAF-001</p>
+            <button class="add-to-cart" data-code="FL-KAF-001">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-code="FL-KAF-002" data-name="Embroidered Kaftan" data-image="https://i.postimg.cc/Ls1d0ZJF/726-F423-D-A05-E-43-EC-9103-56968043-ADCF.jpg">
+          <div class="product-image">
+            <img src="https://i.postimg.cc/Ls1d0ZJF/726-F423-D-A05-E-43-EC-9103-56968043-ADCF.jpg" alt="Embroidered Kaftan" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Embroidered Kaftan</h4>
+            <p class="product-code">FL-KAF-002</p>
+            <button class="add-to-cart" data-code="FL-KAF-002">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-code="FL-KAF-003" data-name="Elegant Kaftan" data-image="https://i.postimg.cc/4ddzj76K/81A57184-5BD7-4CCD-B52B-1FBDA8D93FEF.jpg">
+          <div class="product-image">
+            <img src="https://i.postimg.cc/4ddzj76K/81A57184-5BD7-4CCD-B52B-1FBDA8D93FEF.jpg" alt="Elegant Kaftan" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Elegant Kaftan</h4>
+            <p class="product-code">FL-KAF-003</p>
+            <button class="add-to-cart" data-code="FL-KAF-003">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button class="slider-arrow next-slide" aria-label="Next">›</button>
+    </div>
+
+    <div class="slider-dots" id="kaftanDots"></div>
+  </div>
+
+  <div class="collection-cta">
+    <a href="gallery.html" class="btn-cta">View Full Gallery</a>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS (MOVED DOWN - REPLACES STATISTICS) ===== -->
 <section class="testimonials container fade-in">
   <h2>What Our Clients Say</h2>
 
@@ -366,134 +485,6 @@ Every stitch is intentional — because you deserve nothing less.</p>
       <span class="testimonial-dot" data-slide="3"></span>
       <span class="testimonial-dot" data-slide="4"></span>
     </div>
-  </div>
-</section>
-
-<!-- ===== PRODUCT COLLECTION WITH CART ===== -->
-<section class="product-collection container fade-in">
-  <h2>Our Collection</h2>
-  <p class="section-subtitle">Browse our premium agbada and kaftan collections</p>
-
-  <!-- ===== AGBADA SLIDER ===== -->
-  <div class="category-section">
-    <div class="category-header">
-      <h3 style="text-align:center; width:100%;">Agbada</h3>
-    </div>
-
-    <div class="product-slider">
-      <button class="slider-arrow prev-slide" aria-label="Previous">‹</button>
-      
-      <div class="slider-track" id="agbadaTrack">
-        <!-- Product 1 -->
-        <div class="product-card" data-code="FL-AGBADA-001" data-name="Embroidered Agbada" data-image="https://i.postimg.cc/2jGwcYn1/FB8D45C4-09A9-470E-8EE7-0858F22B8EBF.png">
-          <div class="product-image">
-            <img src="https://i.postimg.cc/2jGwcYn1/FB8D45C4-09A9-470E-8EE7-0858F22B8EBF.png" alt="Embroidered Agbada" loading="lazy">
-          </div>
-          <div class="product-info">
-            <h4>Embroidered Agbada</h4>
-            <p class="product-code">FL-AGBADA-001</p>
-            <button class="add-to-cart" data-code="FL-AGBADA-001">
-              <i class="fa-solid fa-plus"></i> Add to Cart
-            </button>
-          </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="product-card" data-code="FL-AGBADA-002" data-name="Gold Embroidered Agbada" data-image="https://i.postimg.cc/HWvM8kQZ/AC5981B1-9DFE-47CF-A22C-AA978F4FCBF8.png">
-          <div class="product-image">
-            <img src="https://i.postimg.cc/HWvM8kQZ/AC5981B1-9DFE-47CF-A22C-AA978F4FCBF8.png" alt="Gold Embroidered Agbada" loading="lazy">
-          </div>
-          <div class="product-info">
-            <h4>Gold Embroidered Agbada</h4>
-            <p class="product-code">FL-AGBADA-002</p>
-            <button class="add-to-cart" data-code="FL-AGBADA-002">
-              <i class="fa-solid fa-plus"></i> Add to Cart
-            </button>
-          </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-card" data-code="FL-AGBADA-003" data-name="Elegant Agbada" data-image="https://i.postimg.cc/cCP696mb/C284080D-CCF7-44F6-A191-55BBBEAB5555.png">
-          <div class="product-image">
-            <img src="https://i.postimg.cc/cCP696mb/C284080D-CCF7-44F6-A191-55BBBEAB5555.png" alt="Elegant Agbada" loading="lazy">
-          </div>
-          <div class="product-info">
-            <h4>Elegant Agbada</h4>
-            <p class="product-code">FL-AGBADA-003</p>
-            <button class="add-to-cart" data-code="FL-AGBADA-003">
-              <i class="fa-solid fa-plus"></i> Add to Cart
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <button class="slider-arrow next-slide" aria-label="Next">›</button>
-    </div>
-
-    <div class="slider-dots" id="agbadaDots"></div>
-  </div>
-
-  <!-- ===== KAFTAN SLIDER ===== -->
-  <div class="category-section">
-    <div class="category-header">
-      <h3 style="text-align:center; width:100%;">Kaftan</h3>
-    </div>
-
-    <div class="product-slider">
-      <button class="slider-arrow prev-slide" aria-label="Previous">‹</button>
-      
-      <div class="slider-track" id="kaftanTrack">
-        <!-- Product 1 -->
-        <div class="product-card" data-code="FL-KAF-001" data-name="Kaftan Detail" data-image="https://i.postimg.cc/HxJvZGnR/2-CF76677-775-F-45-CD-8316-897-A9525-FA1-E.jpg">
-          <div class="product-image">
-            <img src="https://i.postimg.cc/HxJvZGnR/2-CF76677-775-F-45-CD-8316-897-A9525-FA1-E.jpg" alt="Kaftan Detail" loading="lazy">
-          </div>
-          <div class="product-info">
-            <h4>Kaftan Detail</h4>
-            <p class="product-code">FL-KAF-001</p>
-            <button class="add-to-cart" data-code="FL-KAF-001">
-              <i class="fa-solid fa-plus"></i> Add to Cart
-            </button>
-          </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="product-card" data-code="FL-KAF-002" data-name="Embroidered Kaftan" data-image="https://i.postimg.cc/Ls1d0ZJF/726-F423-D-A05-E-43-EC-9103-56968043-ADCF.jpg">
-          <div class="product-image">
-            <img src="https://i.postimg.cc/Ls1d0ZJF/726-F423-D-A05-E-43-EC-9103-56968043-ADCF.jpg" alt="Embroidered Kaftan" loading="lazy">
-          </div>
-          <div class="product-info">
-            <h4>Embroidered Kaftan</h4>
-            <p class="product-code">FL-KAF-002</p>
-            <button class="add-to-cart" data-code="FL-KAF-002">
-              <i class="fa-solid fa-plus"></i> Add to Cart
-            </button>
-          </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-card" data-code="FL-KAF-003" data-name="Elegant Kaftan" data-image="https://i.postimg.cc/4ddzj76K/81A57184-5BD7-4CCD-B52B-1FBDA8D93FEF.jpg">
-          <div class="product-image">
-            <img src="https://i.postimg.cc/4ddzj76K/81A57184-5BD7-4CCD-B52B-1FBDA8D93FEF.jpg" alt="Elegant Kaftan" loading="lazy">
-          </div>
-          <div class="product-info">
-            <h4>Elegant Kaftan</h4>
-            <p class="product-code">FL-KAF-003</p>
-            <button class="add-to-cart" data-code="FL-KAF-003">
-              <i class="fa-solid fa-plus"></i> Add to Cart
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <button class="slider-arrow next-slide" aria-label="Next">›</button>
-    </div>
-
-    <div class="slider-dots" id="kaftanDots"></div>
-  </div>
-
-  <div class="collection-cta">
-    <a href="gallery.html" class="btn-cta">View Full Gallery</a>
   </div>
 </section>
 

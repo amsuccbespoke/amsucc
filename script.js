@@ -346,7 +346,7 @@ let cart = JSON.parse(localStorage.getItem('fawlux-cart')) || [];
 function updateCartBadge() {
   const badge = document.getElementById('cartBadge');
   if (badge) {
-    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const total = cart.length; // Count unique products, not quantity
     badge.textContent = total;
     badge.classList.toggle('hidden', total === 0);
   }
@@ -377,28 +377,76 @@ function renderCart() {
   cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
     btn.addEventListener('click', function() {
       const index = parseInt(this.dataset.index);
+      const removedItem = cart[index];
       cart.splice(index, 1);
       localStorage.setItem('fawlux-cart', JSON.stringify(cart));
       renderCart();
       updateCartBadge();
+      updateAllCartButtons(removedItem.code); // Reset button to "Add to Cart"
     });
   });
 }
 
 function addToCart(productCode, productName, productImage) {
+  // Check if product already exists in cart
   const existing = cart.find(item => item.code === productCode);
+  
   if (existing) {
-    existing.quantity += 1;
+    // If already in cart, remove it (toggle off)
+    cart = cart.filter(item => item.code !== productCode);
+    localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+    renderCart();
+    updateCartBadge();
+    updateButtonState(productCode, false); // Change button to "Add to Cart"
   } else {
-    cart.push({ code: productCode, name: productName, image: productImage, quantity: 1 });
+    // If not in cart, add it (toggle on)
+    cart.push({ code: productCode, name: productName, image: productImage });
+    localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+    renderCart();
+    updateCartBadge();
+    updateButtonState(productCode, true); // Change button to "Remove from Cart"
   }
-  localStorage.setItem('fawlux-cart', JSON.stringify(cart));
-  updateCartBadge();
-  renderCart();
+}
+
+function updateButtonState(productCode, isInCart) {
+  // Find all buttons with this product code and update them
+  document.querySelectorAll(`.add-to-cart[data-code="${productCode}"]`).forEach(btn => {
+    if (isInCart) {
+      btn.innerHTML = '<i class="fa-solid fa-trash"></i> Remove from Cart';
+      btn.classList.add('in-cart');
+    } else {
+      btn.innerHTML = '<i class="fa-solid fa-plus"></i> Add to Cart';
+      btn.classList.remove('in-cart');
+    }
+  });
+}
+
+function updateAllCartButtons(productCode) {
+  // Reset button for a specific product
+  document.querySelectorAll(`.add-to-cart[data-code="${productCode}"]`).forEach(btn => {
+    btn.innerHTML = '<i class="fa-solid fa-plus"></i> Add to Cart';
+    btn.classList.remove('in-cart');
+  });
+}
+
+function syncCartButtons() {
+  // On page load, update all buttons based on current cart
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    const code = btn.dataset.code;
+    const isInCart = cart.some(item => item.code === code);
+    if (isInCart) {
+      btn.innerHTML = '<i class="fa-solid fa-trash"></i> Remove from Cart';
+      btn.classList.add('in-cart');
+    } else {
+      btn.innerHTML = '<i class="fa-solid fa-plus"></i> Add to Cart';
+      btn.classList.remove('in-cart');
+    }
+  });
 }
 
 // ===== CART EVENT LISTENERS =====
 document.addEventListener('DOMContentLoaded', function() {
+  // Add/Remove to cart buttons (toggle)
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -441,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (cart.length === 0) return;
       let message = 'Hello FAWLUX! I\'d like to order:\n\n';
       cart.forEach(item => {
-        message += `• ${item.name} (${item.code}) x${item.quantity}\n`;
+        message += `• ${item.name} (${item.code})\n`;
       });
       message += '\n\nPlease let me know the total cost and delivery options.';
       const phone = '2348079444199';
@@ -449,6 +497,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Sync all buttons on page load
+  syncCartButtons();
   updateCartBadge();
   renderCart();
 });

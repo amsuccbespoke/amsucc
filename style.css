@@ -1237,3 +1237,18 @@ a:hover { text-decoration: underline; }
 }
 .note { padding-bottom: 56px; }
 .inline-cta { font-weight: 700; }
+
+/* ===== In Cart Button State ===== */
+.add-to-cart.in-cart {
+  background: #ff6b6b !important;
+  color: #fff !important;
+  border-color: #ff6b6b !important;
+}
+.add-to-cart.in-cart:hover {
+  background: #e74c3c !important;
+  transform: scale(1.05) !important;
+}
+[data-theme="white"] .add-to-cart.in-cart {
+  background: #e74c3c !important;
+  color: #fff !important;
+}

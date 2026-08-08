@@ -98,131 +98,245 @@
   </div>
 </section>
 
-<!-- ===== GALLERY FILTERS ===== -->
-<section class="container gallery-filters fade-in">
-  <div class="filter-buttons">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="agbada">Agbada</button>
-    <button class="filter-btn" data-filter="kaftan">Kaftan</button>
-    <button class="filter-btn" data-filter="native">Native Wear</button>
+<!-- ===== GALLERY TABS ===== -->
+<section class="container gallery-tabs fade-in">
+  <div class="tab-buttons">
+    <button class="tab-btn active" data-tab="our-work">Our Work</button>
+    <button class="tab-btn" data-tab="lookbook">The Lookbook</button>
   </div>
 </section>
 
-<!-- ===== GALLERY GRID ===== -->
-<section class="container gallery-grid fade-in">
-  <div class="gallery-masonry" id="galleryMasonry">
+<!-- ===== TAB 1: OUR WORK ===== -->
+<section class="container gallery-tab-content active" id="tab-our-work">
+  
+  <!-- Filters -->
+  <div class="gallery-filters">
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="agbada">Agbada</button>
+      <button class="filter-btn" data-filter="kaftan">Kaftan</button>
+      <button class="filter-btn" data-filter="native">Native Wear</button>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div class="gallery-grid">
     
-    <!-- Item 1: CEO Kaftan -->
-    <div class="gallery-item" data-category="kaftan">
-      <img src="https://i.postimg.cc/8zRchXb5/463EFB3C-1F71-46FA-B7CE-3FFD362B04B8.png" 
-           alt="FAWLUX CEO in premium kaftan" loading="lazy">
-      <div class="gallery-overlay">
-        <h3>CEO Kaftan</h3>
-        <p>Kaftan</p>
-        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
-      </div>
-    </div>
-
-    <!-- Item 2: Premium Embroidered Kaftan -->
-    <div class="gallery-item" data-category="kaftan">
-      <img src="https://i.postimg.cc/wMkH1npF/A45B9D28-75E9-4F8A-BA67-E5824A852F6E.jpg" 
-           alt="Premium embroidered Kaftan" loading="lazy">
-      <div class="gallery-overlay">
-        <h3>Premium Embroidered Kaftan</h3>
-        <p>Kaftan</p>
-        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
-      </div>
-    </div>
-
-    <!-- Item 3: Bold Blue Kaftan -->
-    <div class="gallery-item" data-category="kaftan">
-      <img src="https://i.postimg.cc/285gd1F8/329E64F0-3C86-4FE6-9489-1A2FC3CA3A7E.jpg" 
-           alt="Bold blue bespoke kaftan" loading="lazy">
-      <div class="gallery-overlay">
-        <h3>Bold Blue Kaftan</h3>
-        <p>Kaftan</p>
-        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
-      </div>
-    </div>
-
-    <!-- Item 4: Bespoke Shirt & Trouser -->
-    <div class="gallery-item" data-category="native">
-      <img src="https://i.postimg.cc/nLfdWr7K/419CD854-1538-4A36-B727-08006AF245DA.jpg" 
-           alt="Bespoke shirt and trouser" loading="lazy">
-      <div class="gallery-overlay">
-        <h3>Bespoke Shirt & Trouser</h3>
-        <p>Native Wear</p>
-        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
-      </div>
-    </div>
-
-    <!-- Item 5: Subtle Embroidery White Kaftan -->
-    <div class="gallery-item" data-category="kaftan">
-      <img src="https://i.postimg.cc/8kyttDVZ/4181DFF3-DA4B-4B47-89C1-5F2701ECC5D9.jpg" 
-           alt="Subtle embroidered white kaftan" loading="lazy">
-      <div class="gallery-overlay">
-        <h3>White Embroidered Kaftan</h3>
-        <p>Kaftan</p>
-        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
-      </div>
-    </div>
-
-    <!-- Item 6: Elaborate Embroidery White Kaftan -->
-    <div class="gallery-item" data-category="kaftan">
-      <img src="https://i.postimg.cc/tRr22yHm/AD4B4DA8-B5B6-4453-930E-1F4F99708204.jpg" 
-           alt="Elaborate white embroidered kaftan" loading="lazy">
-      <div class="gallery-overlay">
-        <h3>Elaborate White Kaftan</h3>
-        <p>Kaftan</p>
-        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
-      </div>
-    </div>
-
-    <!-- Item 7: Navy & Gold Kaftan -->
-    <div class="gallery-item" data-category="kaftan">
-      <img src="https://i.postimg.cc/25w4yFk4/00B6877A-A9FD-4696-9041-4BA0477D4285.jpg" 
-           alt="Navy and gold embroidered kaftan" loading="lazy">
-      <div class="gallery-overlay">
-        <h3>Navy & Gold Kaftan</h3>
-        <p>Kaftan</p>
-        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
-      </div>
-    </div>
-
-    <!-- Item 8: Agbada Sample -->
+    <!-- Item 1: Agbada -->
     <div class="gallery-item" data-category="agbada">
-      <img src="https://i.postimg.cc/2jGwcYn1/FB8D45C4-09A9-470E-8EE7-0858F22B8EBF.png" 
-           alt="Luxury Agbada with intricate embroidery" loading="lazy">
+      <img src="https://i.postimg.cc/2jGwcYn1/FB8D45C4-09A9-470E-8EE7-0858F22B8EBF.png" alt="Embroidered Agbada" loading="lazy">
       <div class="gallery-overlay">
         <h3>Embroidered Agbada</h3>
         <p>Agbada</p>
         <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20Embroidered%20Agbada" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
       </div>
     </div>
 
-    <!-- Item 9: Gold Embroidered Agbada -->
+    <!-- Item 2: Gold Agbada -->
     <div class="gallery-item" data-category="agbada">
-      <img src="https://i.postimg.cc/HWvM8kQZ/AC5981B1-9DFE-47CF-A22C-AA978F4FCBF8.png" 
-           alt="Gold embroidered Agbada" loading="lazy">
+      <img src="https://i.postimg.cc/HWvM8kQZ/AC5981B1-9DFE-47CF-A22C-AA978F4FCBF8.png" alt="Gold Embroidered Agbada" loading="lazy">
       <div class="gallery-overlay">
         <h3>Gold Embroidered Agbada</h3>
         <p>Agbada</p>
         <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20Gold%20Embroidered%20Agbada" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
       </div>
     </div>
 
-    <!-- Item 10: Elegant Agbada -->
+    <!-- Item 3: Elegant Agbada -->
     <div class="gallery-item" data-category="agbada">
-      <img src="https://i.postimg.cc/cCP696mb/C284080D-CCF7-44F6-A191-55BBBEAB5555.png" 
-           alt="Elegant Agbada design" loading="lazy">
+      <img src="https://i.postimg.cc/cCP696mb/C284080D-CCF7-44F6-A191-55BBBEAB5555.png" alt="Elegant Agbada" loading="lazy">
       <div class="gallery-overlay">
         <h3>Elegant Agbada</h3>
         <p>Agbada</p>
         <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20Elegant%20Agbada" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
+      </div>
+    </div>
+
+    <!-- Item 4: Premium Kaftan -->
+    <div class="gallery-item" data-category="kaftan">
+      <img src="https://i.postimg.cc/wMkH1npF/A45B9D28-75E9-4F8A-BA67-E5824A852F6E.jpg" alt="Premium Embroidered Kaftan" loading="lazy">
+      <div class="gallery-overlay">
+        <h3>Premium Embroidered Kaftan</h3>
+        <p>Kaftan</p>
+        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20Premium%20Embroidered%20Kaftan" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
+      </div>
+    </div>
+
+    <!-- Item 5: Bold Blue Kaftan -->
+    <div class="gallery-item" data-category="kaftan">
+      <img src="https://i.postimg.cc/285gd1F8/329E64F0-3C86-4FE6-9489-1A2FC3CA3A7E.jpg" alt="Bold Blue Kaftan" loading="lazy">
+      <div class="gallery-overlay">
+        <h3>Bold Blue Kaftan</h3>
+        <p>Kaftan</p>
+        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20Bold%20Blue%20Kaftan" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
+      </div>
+    </div>
+
+    <!-- Item 6: White Kaftan -->
+    <div class="gallery-item" data-category="kaftan">
+      <img src="https://i.postimg.cc/8kyttDVZ/4181DFF3-DA4B-4B47-89C1-5F2701ECC5D9.jpg" alt="White Embroidered Kaftan" loading="lazy">
+      <div class="gallery-overlay">
+        <h3>White Embroidered Kaftan</h3>
+        <p>Kaftan</p>
+        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20White%20Embroidered%20Kaftan" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
+      </div>
+    </div>
+
+    <!-- Item 7: Bespoke Shirt & Trouser -->
+    <div class="gallery-item" data-category="native">
+      <img src="https://i.postimg.cc/nLfdWr7K/419CD854-1538-4A36-B727-08006AF245DA.jpg" alt="Bespoke Shirt and Trouser" loading="lazy">
+      <div class="gallery-overlay">
+        <h3>Bespoke Shirt & Trouser</h3>
+        <p>Native Wear</p>
+        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20Bespoke%20Shirt%20%26%20Trouser" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
+      </div>
+    </div>
+
+    <!-- Item 8: Navy & Gold Kaftan -->
+    <div class="gallery-item" data-category="kaftan">
+      <img src="https://i.postimg.cc/25w4yFk4/00B6877A-A9FD-4696-9041-4BA0477D4285.jpg" alt="Navy and Gold Kaftan" loading="lazy">
+      <div class="gallery-overlay">
+        <h3>Navy & Gold Kaftan</h3>
+        <p>Kaftan</p>
+        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20Navy%20%26%20Gold%20Kaftan" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
+      </div>
+    </div>
+
+    <!-- Item 9: Elaborate White Kaftan -->
+    <div class="gallery-item" data-category="kaftan">
+      <img src="https://i.postimg.cc/tRr22yHm/AD4B4DA8-B5B6-4453-930E-1F4F99708204.jpg" alt="Elaborate White Kaftan" loading="lazy">
+      <div class="gallery-overlay">
+        <h3>Elaborate White Kaftan</h3>
+        <p>Kaftan</p>
+        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20Elaborate%20White%20Kaftan" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
+      </div>
+    </div>
+
+    <!-- Item 10: CEO Kaftan -->
+    <div class="gallery-item" data-category="kaftan">
+      <img src="https://i.postimg.cc/8zRchXb5/463EFB3C-1F71-46FA-B7CE-3FFD362B04B8.png" alt="FAWLUX CEO in Kaftan" loading="lazy">
+      <div class="gallery-overlay">
+        <h3>CEO Kaftan</h3>
+        <p>Kaftan</p>
+        <span class="gallery-view"><i class="fa-regular fa-eye"></i> View</span>
+        <a href="https://wa.me/2348079444199?text=Hello%20FAWLUX!%20I'm%20interested%20in%20the%20CEO%20Kaftan" target="_blank" class="gallery-order">
+          <i class="fa-brands fa-whatsapp"></i> Order Similar
+        </a>
       </div>
     </div>
 
   </div>
+</section>
+
+<!-- ===== TAB 2: THE LOOKBOOK ===== -->
+<section class="container gallery-tab-content" id="tab-lookbook">
+  
+  <div class="lookbook-header">
+    <h3>The Lookbook</h3>
+    <p>Real fits, real confidence — our clients and team wearing FAWLUX.</p>
+  </div>
+
+  <!-- Masonry Grid -->
+  <div class="lookbook-masonry">
+    
+    <!-- Item 1 -->
+    <div class="lookbook-item">
+      <img src="https://i.postimg.cc/8zRchXb5/463EFB3C-1F71-46FA-B7CE-3FFD362B04B8.png" alt="Client fit" loading="lazy">
+      <div class="lookbook-overlay">
+        <span class="lookbook-tag">#ClientFit</span>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="lookbook-item">
+      <img src="https://i.postimg.cc/wMkH1npF/A45B9D28-75E9-4F8A-BA67-E5824A852F6E.jpg" alt="Personal style" loading="lazy">
+      <div class="lookbook-overlay">
+        <span class="lookbook-tag">#PersonalStyle</span>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="lookbook-item">
+      <img src="https://i.postimg.cc/285gd1F8/329E64F0-3C86-4FE6-9489-1A2FC3CA3A7E.jpg" alt="Client fit" loading="lazy">
+      <div class="lookbook-overlay">
+        <span class="lookbook-tag">#ClientFit</span>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="lookbook-item">
+      <img src="https://i.postimg.cc/nLfdWr7K/419CD854-1538-4A36-B727-08006AF245DA.jpg" alt="Behind the scenes" loading="lazy">
+      <div class="lookbook-overlay">
+        <span class="lookbook-tag">#BTS</span>
+      </div>
+    </div>
+
+    <!-- Item 5 -->
+    <div class="lookbook-item">
+      <img src="https://i.postimg.cc/8kyttDVZ/4181DFF3-DA4B-4B47-89C1-5F2701ECC5D9.jpg" alt="Client fit" loading="lazy">
+      <div class="lookbook-overlay">
+        <span class="lookbook-tag">#ClientFit</span>
+      </div>
+    </div>
+
+    <!-- Item 6 -->
+    <div class="lookbook-item">
+      <img src="https://i.postimg.cc/tRr22yHm/AD4B4DA8-B5B6-4453-930E-1F4F99708204.jpg" alt="Personal style" loading="lazy">
+      <div class="lookbook-overlay">
+        <span class="lookbook-tag">#PersonalStyle</span>
+      </div>
+    </div>
+
+    <!-- Item 7 -->
+    <div class="lookbook-item">
+      <img src="https://i.postimg.cc/25w4yFk4/00B6877A-A9FD-4696-9041-4BA0477D4285.jpg" alt="Client fit" loading="lazy">
+      <div class="lookbook-overlay">
+        <span class="lookbook-tag">#ClientFit</span>
+      </div>
+    </div>
+
+    <!-- Item 8 -->
+    <div class="lookbook-item">
+      <img src="https://i.postimg.cc/2jGwcYn1/FB8D45C4-09A9-470E-8EE7-0858F22B8EBF.png" alt="Behind the scenes" loading="lazy">
+      <div class="lookbook-overlay">
+        <span class="lookbook-tag">#BTS</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- UGC Prompt -->
+  <div class="ugc-banner">
+    <p><i class="fa-regular fa-camera"></i> Tag us <strong>@fawlux_</strong> to get featured in The Lookbook!</p>
+  </div>
+
 </section>
 
 <!-- ===== CTA ===== -->
@@ -292,14 +406,36 @@
 </div>
 
 <script>
+// ===== TABS =====
+document.addEventListener('DOMContentLoaded', function() {
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.gallery-tab-content');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Update active tab button
+      tabButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+
+      // Update active tab content
+      const tabId = this.dataset.tab;
+      tabContents.forEach(content => {
+        content.classList.remove('active');
+        if (content.id === 'tab-' + tabId) {
+          content.classList.add('active');
+        }
+      });
+    });
+  });
+});
+
 // ===== GALLERY FILTERS =====
 document.addEventListener('DOMContentLoaded', function() {
   const filterButtons = document.querySelectorAll('.filter-btn');
-  const galleryItems = document.querySelectorAll('.gallery-item');
+  const galleryItems = document.querySelectorAll('#tab-our-work .gallery-item');
 
   filterButtons.forEach(btn => {
     btn.addEventListener('click', function() {
-      // Update active button
       filterButtons.forEach(b => b.classList.remove('active'));
       this.classList.add('active');
 
@@ -325,12 +461,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const lightboxClose = document.getElementById('lightboxClose');
   const lightboxPrev = document.getElementById('lightboxPrev');
   const lightboxNext = document.getElementById('lightboxNext');
-  const galleryItems = document.querySelectorAll('.gallery-item');
+  const allItems = document.querySelectorAll('#tab-our-work .gallery-item');
   let currentIndex = 0;
 
-  // Get all image URLs from gallery items
   const imageUrls = [];
-  galleryItems.forEach(item => {
+  allItems.forEach(item => {
     const img = item.querySelector('img');
     if (img) imageUrls.push(img.src);
   });
@@ -357,15 +492,14 @@ document.addEventListener('DOMContentLoaded', function() {
     lightboxImage.src = imageUrls[currentIndex];
   }
 
-  // Click on gallery item to open lightbox
-  galleryItems.forEach((item, index) => {
+  allItems.forEach((item, index) => {
     item.addEventListener('click', function(e) {
-      // Don't open if clicking on overlay text (optional)
-      openLightbox(index);
+      if (!e.target.closest('.gallery-order') && !e.target.closest('.gallery-view')) {
+        openLightbox(index);
+      }
     });
   });
 
-  // Close lightbox
   if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
   if (lightbox) {
     lightbox.addEventListener('click', function(e) {
@@ -373,7 +507,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Keyboard navigation
   document.addEventListener('keydown', function(e) {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
@@ -381,7 +514,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.key === 'ArrowRight') showNext();
   });
 
-  // Prev/Next buttons
   if (lightboxPrev) lightboxPrev.addEventListener('click', showPrev);
   if (lightboxNext) lightboxNext.addEventListener('click', showNext);
 });

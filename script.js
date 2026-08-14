@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
     overlay.classList.remove('active');
     body.style.overflow = '';
     burger.setAttribute('aria-expanded', 'false');
-    // Close any open dropdowns
     document.querySelectorAll('.dropdown-menu.open').forEach(d => d.classList.remove('open'));
     document.querySelectorAll('.dropdown-trigger i.open').forEach(i => i.classList.remove('open'));
   }
@@ -68,20 +67,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Close on overlay click
   overlay.addEventListener('click', closeMenu);
-
-  // Close on close button click
   closeBtn.addEventListener('click', closeMenu);
 
-  // Close on Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && nav.classList.contains('open')) {
       closeMenu();
     }
   });
 
-  // Close on link click (except dropdown triggers)
   nav.addEventListener('click', function(e) {
     const target = e.target.closest('a');
     if (target && !target.closest('.dropdown-trigger')) {
@@ -89,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Mobile dropdown toggle
   const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
   dropdownTriggers.forEach(trigger => {
     trigger.addEventListener('click', function(e) {
@@ -103,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Theme switcher in header
   const themeSwitcher = document.getElementById('themeSwitcher');
   if (themeSwitcher) {
     themeSwitcher.addEventListener('click', function() {
@@ -295,7 +287,7 @@ let cart = JSON.parse(localStorage.getItem('fawlux-cart')) || [];
 function updateCartBadge() {
   const badge = document.getElementById('cartBadge');
   if (badge) {
-    const total = cart.length;
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
     badge.textContent = total;
     badge.classList.toggle('hidden', total === 0);
   }
@@ -316,14 +308,42 @@ function renderCart() {
       <div class="cart-item-details">
         <h4>${item.name}</h4>
         <p>${item.code}</p>
+        <div class="cart-item-quantity">
+          <button class="qty-btn cart-qty-minus" data-index="${index}">−</button>
+          <span class="qty-number">${item.quantity}</span>
+          <button class="qty-btn cart-qty-plus" data-index="${index}">+</button>
+          <button class="cart-item-remove" data-index="${index}">Remove</button>
+        </div>
       </div>
-      <button class="cart-item-remove" data-index="${index}">
-        <i class="fa-solid fa-trash"></i>
-      </button>
     </div>
   `).join('');
 
-  cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
+  // Quantity buttons in cart
+  document.querySelectorAll('.cart-qty-minus').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const index = parseInt(this.dataset.index);
+      if (cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+        localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+        renderCart();
+        updateCartBadge();
+        syncCartButtons();
+      }
+    });
+  });
+
+  document.querySelectorAll('.cart-qty-plus').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const index = parseInt(this.dataset.index);
+      cart[index].quantity += 1;
+      localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+      renderCart();
+      updateCartBadge();
+      syncCartButtons();
+    });
+  });
+
+  document.querySelectorAll('.cart-item-remove').forEach(btn => {
     btn.addEventListener('click', function() {
       const index = parseInt(this.dataset.index);
       const removedItem = cart[index];
@@ -331,45 +351,22 @@ function renderCart() {
       localStorage.setItem('fawlux-cart', JSON.stringify(cart));
       renderCart();
       updateCartBadge();
-      updateAllCartButtons(removedItem.code);
+      syncCartButtons();
     });
   });
 }
 
-function addToCart(productCode, productName, productImage) {
+function addToCart(productCode, productName, productImage, quantity) {
   const existing = cart.find(item => item.code === productCode);
   if (existing) {
-    cart = cart.filter(item => item.code !== productCode);
-    localStorage.setItem('fawlux-cart', JSON.stringify(cart));
-    renderCart();
-    updateCartBadge();
-    updateButtonState(productCode, false);
+    existing.quantity += quantity;
   } else {
-    cart.push({ code: productCode, name: productName, image: productImage });
-    localStorage.setItem('fawlux-cart', JSON.stringify(cart));
-    renderCart();
-    updateCartBadge();
-    updateButtonState(productCode, true);
+    cart.push({ code: productCode, name: productName, image: productImage, quantity: quantity });
   }
-}
-
-function updateButtonState(productCode, isInCart) {
-  document.querySelectorAll(`.add-to-cart[data-code="${productCode}"]`).forEach(btn => {
-    if (isInCart) {
-      btn.innerHTML = '<i class="fa-solid fa-trash"></i> Remove from Cart';
-      btn.classList.add('in-cart');
-    } else {
-      btn.innerHTML = '<i class="fa-solid fa-plus"></i> Add to Cart';
-      btn.classList.remove('in-cart');
-    }
-  });
-}
-
-function updateAllCartButtons(productCode) {
-  document.querySelectorAll(`.add-to-cart[data-code="${productCode}"]`).forEach(btn => {
-    btn.innerHTML = '<i class="fa-solid fa-plus"></i> Add to Cart';
-    btn.classList.remove('in-cart');
-  });
+  localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+  renderCart();
+  updateCartBadge();
+  syncCartButtons();
 }
 
 function syncCartButtons() {
@@ -386,8 +383,90 @@ function syncCartButtons() {
   });
 }
 
+// ===== PRODUCT DETAILS MODAL =====
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('productDetailsModal');
+  const closeBtn = document.getElementById('productDetailsClose');
+  const detailsImage = document.getElementById('detailsImage');
+  const detailsName = document.getElementById('detailsName');
+  const detailsCode = document.getElementById('detailsCode');
+  const detailsDescription = document.getElementById('detailsDescription');
+  const qtyNumber = document.getElementById('qtyNumber');
+  const qtyMinus = document.getElementById('qtyMinus');
+  const qtyPlus = document.getElementById('qtyPlus');
+  const addToCartBtn = document.getElementById('detailsAddToCart');
+  let currentProduct = null;
+  let currentQty = 1;
+
+  // Open modal when clicking a product card
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Don't open if clicking on the add-to-cart button
+      if (e.target.closest('.add-to-cart')) return;
+      
+      const code = this.dataset.code;
+      const name = this.dataset.name;
+      const image = this.dataset.image;
+      const description = this.dataset.description || 'Premium handcrafted piece.';
+      
+      currentProduct = { code, name, image, description };
+      currentQty = 1;
+      qtyNumber.textContent = currentQty;
+      detailsImage.src = image;
+      detailsImage.alt = name;
+      detailsName.textContent = name;
+      detailsCode.textContent = code;
+      detailsDescription.textContent = description;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Close modal
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  // Quantity controls
+  if (qtyMinus) {
+    qtyMinus.addEventListener('click', function() {
+      if (currentQty > 1) {
+        currentQty -= 1;
+        qtyNumber.textContent = currentQty;
+      }
+    });
+  }
+
+  if (qtyPlus) {
+    qtyPlus.addEventListener('click', function() {
+      currentQty += 1;
+      qtyNumber.textContent = currentQty;
+    });
+  }
+
+  // Add to cart from details modal
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener('click', function() {
+      if (currentProduct) {
+        addToCart(currentProduct.code, currentProduct.name, currentProduct.image, currentQty);
+        closeModal();
+      }
+    });
+  }
+});
+
 // ===== CART EVENT LISTENERS =====
 document.addEventListener('DOMContentLoaded', function() {
+  // Add/Remove to cart buttons (toggle)
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -395,7 +474,20 @@ document.addEventListener('DOMContentLoaded', function() {
       const code = this.dataset.code;
       const name = card.dataset.name;
       const image = card.dataset.image;
-      addToCart(code, name, image);
+      
+      // Check if product is already in cart
+      const existing = cart.find(item => item.code === code);
+      if (existing) {
+        // Remove from cart
+        cart = cart.filter(item => item.code !== code);
+        localStorage.setItem('fawlux-cart', JSON.stringify(cart));
+        renderCart();
+        updateCartBadge();
+        syncCartButtons();
+      } else {
+        // Add to cart with quantity 1
+        addToCart(code, name, image, 1);
+      }
     });
   });
 
@@ -430,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (cart.length === 0) return;
       let message = 'Hello FAWLUX! I\'d like to order:\n\n';
       cart.forEach(item => {
-        message += `• ${item.name} (${item.code})\n`;
+        message += `• ${item.name} (${item.code}) x${item.quantity}\n`;
       });
       message += '\n\nPlease let me know the total cost and delivery options.';
       const phone = '2348079444199';

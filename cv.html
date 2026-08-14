@@ -156,7 +156,7 @@
   <div class="product-grid">
 
     <!-- Product 1 -->
-    <div class="product-card" data-code="FL-CV-001" data-name="Corporate Shirt & Trouser" data-image="images/cv/cv1.webp">
+    <div class="product-card" data-code="FL-CV-001" data-name="Corporate Shirt & Trouser" data-image="images/cv/cv1.webp" data-description="Classic corporate shirt paired with perfectly tailored trousers. Ideal for the office or formal events.">
       <div class="product-image">
         <img src="images/cv/cv1.webp" alt="Corporate Shirt & Trouser" loading="lazy">
       </div>
@@ -170,7 +170,7 @@
     </div>
 
     <!-- Product 2 -->
-    <div class="product-card" data-code="FL-CV-002" data-name="Vintage Shirt" data-image="images/cv/cv2.webp">
+    <div class="product-card" data-code="FL-CV-002" data-name="Vintage Shirt" data-image="images/cv/cv2.webp" data-description="A timeless vintage-inspired shirt. Perfect for casual outings and stylish everyday wear.">
       <div class="product-image">
         <img src="images/cv/cv2.webp" alt="Vintage Shirt" loading="lazy">
       </div>
@@ -184,7 +184,7 @@
     </div>
 
     <!-- Product 3 -->
-    <div class="product-card" data-code="FL-CV-003" data-name="Premium Trouser" data-image="images/cv/cv3.webp">
+    <div class="product-card" data-code="FL-CV-003" data-name="Premium Trouser" data-image="images/cv/cv3.webp" data-description="Premium tailored trousers with a perfect drape. Versatile and elegant.">
       <div class="product-image">
         <img src="images/cv/cv3.webp" alt="Premium Trouser" loading="lazy">
       </div>
@@ -198,7 +198,7 @@
     </div>
 
     <!-- Product 4 -->
-    <div class="product-card" data-code="FL-CV-004" data-name="Classic Vintage Shirt" data-image="images/cv/cv4.webp">
+    <div class="product-card" data-code="FL-CV-004" data-name="Classic Vintage Shirt" data-image="images/cv/cv4.webp" data-description="A classic vintage shirt with modern tailoring. A wardrobe essential.">
       <div class="product-image">
         <img src="images/cv/cv4.webp" alt="Classic Vintage Shirt" loading="lazy">
       </div>
@@ -212,7 +212,7 @@
     </div>
 
     <!-- Product 5 -->
-    <div class="product-card" data-code="FL-CV-005" data-name="Executive Set" data-image="images/cv/cv5.webp">
+    <div class="product-card" data-code="FL-CV-005" data-name="Executive Set" data-image="images/cv/cv5.webp" data-description="The complete executive look. Shirt, trousers, and a vintage blazer — all in one set.">
       <div class="product-image">
         <img src="images/cv/cv5.webp" alt="Executive Set" loading="lazy">
       </div>
@@ -233,6 +233,29 @@
     <a href="gallery.html" class="btn-cta">View Full Gallery</a>
   </div>
 </section>
+
+<!-- ===== PRODUCT DETAILS MODAL ===== -->
+<div class="product-details-modal" id="productDetailsModal">
+  <div class="product-details-content">
+    <button class="product-details-close" id="productDetailsClose">&times;</button>
+    <div class="product-details-body">
+      <div class="product-details-image">
+        <img id="detailsImage" src="" alt="Product">
+      </div>
+      <div class="product-details-info">
+        <h2 id="detailsName">Product Name</h2>
+        <p class="product-code" id="detailsCode">FL-XXX-001</p>
+        <p class="product-details-description" id="detailsDescription">Product description goes here.</p>
+        <div class="product-details-quantity">
+          <button class="qty-btn" id="qtyMinus">−</button>
+          <span class="qty-number" id="qtyNumber">1</span>
+          <button class="qty-btn" id="qtyPlus">+</button>
+        </div>
+        <button class="btn-cta" id="detailsAddToCart">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ===== FOOTER ===== -->
 <footer class="site-footer">

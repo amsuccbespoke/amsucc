@@ -156,7 +156,7 @@
   <div class="product-grid">
 
     <!-- Product 1 -->
-    <div class="product-card" data-code="FL-KAF-001" data-name="Embroidered Kaftan" data-image="images/kaftan/kaftan1.webp">
+    <div class="product-card" data-code="FL-KAF-001" data-name="Embroidered Kaftan" data-image="images/kaftan/kaftan1.webp" data-description="Handcrafted with premium fabric and intricate embroidery. Perfect for weddings and special occasions.">
       <div class="product-image">
         <img src="images/kaftan/kaftan1.webp" alt="Embroidered Kaftan" loading="lazy">
       </div>
@@ -170,7 +170,7 @@
     </div>
 
     <!-- Product 2 -->
-    <div class="product-card" data-code="FL-KAF-002" data-name="Gold Kaftan" data-image="images/kaftan/kaftan2.webp">
+    <div class="product-card" data-code="FL-KAF-002" data-name="Gold Kaftan" data-image="images/kaftan/kaftan2.webp" data-description="Luxurious gold embroidery on premium fabric. A statement piece for royal occasions.">
       <div class="product-image">
         <img src="images/kaftan/kaftan2.webp" alt="Gold Kaftan" loading="lazy">
       </div>
@@ -184,7 +184,7 @@
     </div>
 
     <!-- Product 3 -->
-    <div class="product-card" data-code="FL-KAF-003" data-name="Royal Kaftan" data-image="images/kaftan/kaftan3.webp">
+    <div class="product-card" data-code="FL-KAF-003" data-name="Royal Kaftan" data-image="images/kaftan/kaftan3.webp" data-description="Designed for royalty. Rich fabric with exquisite detailing.">
       <div class="product-image">
         <img src="images/kaftan/kaftan3.webp" alt="Royal Kaftan" loading="lazy">
       </div>
@@ -198,7 +198,7 @@
     </div>
 
     <!-- Product 4 -->
-    <div class="product-card" data-code="FL-KAF-004" data-name="Classic Kaftan" data-image="images/kaftan/kaftan4.webp">
+    <div class="product-card" data-code="FL-KAF-004" data-name="Classic Kaftan" data-image="images/kaftan/kaftan4.webp" data-description="A timeless classic. Clean lines, perfect fit, and premium fabric.">
       <div class="product-image">
         <img src="images/kaftan/kaftan4.webp" alt="Classic Kaftan" loading="lazy">
       </div>
@@ -212,7 +212,7 @@
     </div>
 
     <!-- Product 5 -->
-    <div class="product-card" data-code="FL-KAF-005" data-name="Premium Kaftan" data-image="images/kaftan/kaftan5.webp">
+    <div class="product-card" data-code="FL-KAF-005" data-name="Premium Kaftan" data-image="images/kaftan/kaftan5.webp" data-description="Our most premium Kaftan. Hand-stitched with care, using the finest fabrics.">
       <div class="product-image">
         <img src="images/kaftan/kaftan5.webp" alt="Premium Kaftan" loading="lazy">
       </div>
@@ -233,6 +233,29 @@
     <a href="gallery.html" class="btn-cta">View Full Gallery</a>
   </div>
 </section>
+
+<!-- ===== PRODUCT DETAILS MODAL ===== -->
+<div class="product-details-modal" id="productDetailsModal">
+  <div class="product-details-content">
+    <button class="product-details-close" id="productDetailsClose">&times;</button>
+    <div class="product-details-body">
+      <div class="product-details-image">
+        <img id="detailsImage" src="" alt="Product">
+      </div>
+      <div class="product-details-info">
+        <h2 id="detailsName">Product Name</h2>
+        <p class="product-code" id="detailsCode">FL-XXX-001</p>
+        <p class="product-details-description" id="detailsDescription">Product description goes here.</p>
+        <div class="product-details-quantity">
+          <button class="qty-btn" id="qtyMinus">−</button>
+          <span class="qty-number" id="qtyNumber">1</span>
+          <button class="qty-btn" id="qtyPlus">+</button>
+        </div>
+        <button class="btn-cta" id="detailsAddToCart">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ===== FOOTER ===== -->
 <footer class="site-footer">

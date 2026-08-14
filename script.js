@@ -281,6 +281,114 @@ function initGoogleBusiness() {
   }
 }
 
+// ===== PRODUCT SLIDER =====
+function initProductSliders() {
+  const sliders = document.querySelectorAll('.product-slider');
+
+  sliders.forEach(slider => {
+    const track = slider.querySelector('.slider-track');
+    const slides = track.querySelectorAll('.product-card');
+    const dotsContainer = slider.parentElement.querySelector('.slider-dots');
+    const prevBtn = slider.querySelector('.prev-slide');
+    const nextBtn = slider.querySelector('.next-slide');
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let slidesPerView = getSlidesPerView();
+    let totalSlides = slides.length;
+    let maxIndex = Math.max(0, totalSlides - slidesPerView);
+
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      const totalDots = Math.ceil(totalSlides / slidesPerView);
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.dataset.index = i;
+        dot.addEventListener('click', () => goToSlide(i * slidesPerView));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function getSlidesPerView() {
+      if (window.innerWidth < 600) return 1;
+      if (window.innerWidth < 900) return 2;
+      return 3;
+    }
+
+    function updateSlides() {
+      slidesPerView = getSlidesPerView();
+      maxIndex = Math.max(0, totalSlides - slidesPerView);
+      if (currentIndex > maxIndex) currentIndex = maxIndex;
+      updateSlider();
+    }
+
+    function updateSlider() {
+      const slideWidth = slides[0].offsetWidth + 20;
+      track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i >= currentIndex && i < currentIndex + slidesPerView);
+      });
+
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        const activeDot = Math.floor(currentIndex / slidesPerView);
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === activeDot);
+        });
+      }
+    }
+
+    function goToSlide(index) {
+      currentIndex = Math.max(0, Math.min(index, maxIndex));
+      updateSlider();
+    }
+
+    function nextSlide() {
+      if (currentIndex + slidesPerView < totalSlides) {
+        goToSlide(currentIndex + slidesPerView);
+      } else {
+        goToSlide(0);
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex - slidesPerView >= 0) {
+        goToSlide(currentIndex - slidesPerView);
+      } else {
+        goToSlide(maxIndex);
+      }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    });
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateSlides, 200);
+    });
+
+    setTimeout(updateSlides, 100);
+  });
+}
+
 // ===== CART FUNCTIONALITY =====
 let cart = JSON.parse(localStorage.getItem('fawlux-cart')) || [];
 
@@ -535,6 +643,96 @@ document.addEventListener('DOMContentLoaded', function() {
   renderCart();
 });
 
+// ===== COLLECTION SLIDER (2 Products) =====
+function initCollectionSliders() {
+  const sliders = document.querySelectorAll('.collection-slider');
+
+  sliders.forEach(slider => {
+    const track = slider.querySelector('.collection-slider-track');
+    const slides = track.querySelectorAll('.product-card');
+    const dotsContainer = slider.parentElement.querySelector('.slider-dots');
+    const prevBtn = slider.querySelector('.prev-slide');
+    const nextBtn = slider.querySelector('.next-slide');
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let totalSlides = slides.length;
+    let maxIndex = totalSlides - 1;
+
+    // Create dots
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.dataset.index = i;
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updateSlider() {
+      const slideWidth = slides[0].offsetWidth + 24;
+      track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentIndex);
+        });
+      }
+    }
+
+    function goToSlide(index) {
+      currentIndex = Math.max(0, Math.min(index, maxIndex));
+      updateSlider();
+    }
+
+    function nextSlide() {
+      if (currentIndex < maxIndex) {
+        goToSlide(currentIndex + 1);
+      } else {
+        goToSlide(0);
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        goToSlide(currentIndex - 1);
+      } else {
+        goToSlide(maxIndex);
+      }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    // Touch support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    });
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateSlider, 200);
+    });
+
+    setTimeout(updateSlider, 100);
+  });
+}
+
 // ===== HERO SLIDER =====
 document.addEventListener('DOMContentLoaded', function() {
   const slides = document.querySelectorAll('.hero-slide');
@@ -642,6 +840,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initPortfolioSliders();
   initTestimonialsSlider();
   initGoogleBusiness();
+  initProductSliders();
+  initCollectionSliders();
 
   const spinner = document.getElementById('loading-spinner');
   if (spinner) {

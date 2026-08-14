@@ -143,233 +143,158 @@
   </div>
 </section>
 
-<!-- ===== AGBADA SECTION ===== -->
-<section class="collection-grid-section fade-in">
+<!-- ===== AGBADA SLIDER ===== -->
+<section class="collection-slider-section fade-in">
   <div class="container">
     <div class="collection-section-header">
       <h2>Agbada</h2>
-      <a href="agbada.html" class="btn-ghost">View All <i class="fa-solid fa-arrow-right"></i></a>
     </div>
-    <div class="product-grid collection-grid">
-      <!-- Product 1 -->
-      <div class="product-card" data-code="FL-AGB-001" data-name="Embroidered Agbada" data-image="images/agbada/agbada1.webp" data-description="Handcrafted with premium fabric and intricate embroidery. Perfect for weddings and special occasions.">
-        <div class="product-image">
-          <img src="images/agbada/agbada1.webp" alt="Embroidered Agbada" loading="lazy">
+    
+    <div class="collection-slider">
+      <button class="slider-arrow prev-slide" aria-label="Previous">‹</button>
+      
+      <div class="collection-slider-track" id="agbadaTrack">
+        <!-- Product 1 -->
+        <div class="product-card" data-code="FL-AGB-001" data-name="Embroidered Agbada" data-image="images/agbada/agbada1.webp" data-description="Handcrafted with premium fabric and intricate embroidery. Perfect for weddings and special occasions.">
+          <div class="product-image">
+            <img src="images/agbada/agbada1.webp" alt="Embroidered Agbada" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Embroidered Agbada</h4>
+            <p class="product-code">FL-AGB-001</p>
+            <button class="add-to-cart" data-code="FL-AGB-001">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
         </div>
-        <div class="product-info">
-          <h4>Embroidered Agbada</h4>
-          <p class="product-code">FL-AGB-001</p>
-          <button class="add-to-cart" data-code="FL-AGB-001">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      <!-- Product 2 -->
-      <div class="product-card" data-code="FL-AGB-002" data-name="Gold Agbada" data-image="images/agbada/agbada2.webp" data-description="Luxurious gold embroidery on premium fabric. A statement piece for royal occasions.">
-        <div class="product-image">
-          <img src="images/agbada/agbada2.webp" alt="Gold Agbada" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Gold Agbada</h4>
-          <p class="product-code">FL-AGB-002</p>
-          <button class="add-to-cart" data-code="FL-AGB-002">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      <!-- Product 3 -->
-      <div class="product-card" data-code="FL-AGB-003" data-name="Royal Agbada" data-image="images/agbada/agbada3.webp" data-description="Designed for royalty. Rich fabric with exquisite detailing.">
-        <div class="product-image">
-          <img src="images/agbada/agbada3.webp" alt="Royal Agbada" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Royal Agbada</h4>
-          <p class="product-code">FL-AGB-003</p>
-          <button class="add-to-cart" data-code="FL-AGB-003">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
+
+        <!-- Product 2 -->
+        <div class="product-card" data-code="FL-AGB-002" data-name="Gold Agbada" data-image="images/agbada/agbada2.webp" data-description="Luxurious gold embroidery on premium fabric. A statement piece for royal occasions.">
+          <div class="product-image">
+            <img src="images/agbada/agbada2.webp" alt="Gold Agbada" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Gold Agbada</h4>
+            <p class="product-code">FL-AGB-002</p>
+            <button class="add-to-cart" data-code="FL-AGB-002">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
         </div>
       </div>
-      <!-- Product 4 -->
-      <div class="product-card" data-code="FL-AGB-004" data-name="Classic Agbada" data-image="images/agbada/agbada4.webp" data-description="A timeless classic. Clean lines, perfect fit, and premium fabric.">
-        <div class="product-image">
-          <img src="images/agbada/agbada4.webp" alt="Classic Agbada" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Classic Agbada</h4>
-          <p class="product-code">FL-AGB-004</p>
-          <button class="add-to-cart" data-code="FL-AGB-004">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      <!-- Product 5 -->
-      <div class="product-card" data-code="FL-AGB-005" data-name="Premium Agbada" data-image="images/agbada/agbada5.webp" data-description="Our most premium Agbada. Hand-stitched with care, using the finest fabrics.">
-        <div class="product-image">
-          <img src="images/agbada/agbada5.webp" alt="Premium Agbada" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Premium Agbada</h4>
-          <p class="product-code">FL-AGB-005</p>
-          <button class="add-to-cart" data-code="FL-AGB-005">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
+
+      <button class="slider-arrow next-slide" aria-label="Next">›</button>
+    </div>
+
+    <div class="slider-dots" id="agbadaDots"></div>
+
+    <!-- View All -->
+    <div class="collection-view-all">
+      <a href="agbada.html" class="btn-ghost">View All Agbada <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
 
-<!-- ===== KAFTAN SECTION ===== -->
-<section class="collection-grid-section fade-in">
+<!-- ===== KAFTAN SLIDER ===== -->
+<section class="collection-slider-section fade-in">
   <div class="container">
     <div class="collection-section-header">
       <h2>Kaftan</h2>
-      <a href="kaftan.html" class="btn-ghost">View All <i class="fa-solid fa-arrow-right"></i></a>
     </div>
-    <div class="product-grid collection-grid">
-      <!-- Product 1 -->
-      <div class="product-card" data-code="FL-KAF-001" data-name="Embroidered Kaftan" data-image="images/kaftan/kaftan1.webp" data-description="Handcrafted with premium fabric and intricate embroidery. Perfect for weddings and special occasions.">
-        <div class="product-image">
-          <img src="images/kaftan/kaftan1.webp" alt="Embroidered Kaftan" loading="lazy">
+    
+    <div class="collection-slider">
+      <button class="slider-arrow prev-slide" aria-label="Previous">‹</button>
+      
+      <div class="collection-slider-track" id="kaftanTrack">
+        <!-- Product 1 -->
+        <div class="product-card" data-code="FL-KAF-001" data-name="Embroidered Kaftan" data-image="images/kaftan/kaftan1.webp" data-description="Handcrafted with premium fabric and intricate embroidery. Perfect for weddings and special occasions.">
+          <div class="product-image">
+            <img src="images/kaftan/kaftan1.webp" alt="Embroidered Kaftan" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Embroidered Kaftan</h4>
+            <p class="product-code">FL-KAF-001</p>
+            <button class="add-to-cart" data-code="FL-KAF-001">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
         </div>
-        <div class="product-info">
-          <h4>Embroidered Kaftan</h4>
-          <p class="product-code">FL-KAF-001</p>
-          <button class="add-to-cart" data-code="FL-KAF-001">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      <!-- Product 2 -->
-      <div class="product-card" data-code="FL-KAF-002" data-name="Gold Kaftan" data-image="images/kaftan/kaftan2.webp" data-description="Luxurious gold embroidery on premium fabric. A statement piece for royal occasions.">
-        <div class="product-image">
-          <img src="images/kaftan/kaftan2.webp" alt="Gold Kaftan" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Gold Kaftan</h4>
-          <p class="product-code">FL-KAF-002</p>
-          <button class="add-to-cart" data-code="FL-KAF-002">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      <!-- Product 3 -->
-      <div class="product-card" data-code="FL-KAF-003" data-name="Royal Kaftan" data-image="images/kaftan/kaftan3.webp" data-description="Designed for royalty. Rich fabric with exquisite detailing.">
-        <div class="product-image">
-          <img src="images/kaftan/kaftan3.webp" alt="Royal Kaftan" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Royal Kaftan</h4>
-          <p class="product-code">FL-KAF-003</p>
-          <button class="add-to-cart" data-code="FL-KAF-003">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
+
+        <!-- Product 2 -->
+        <div class="product-card" data-code="FL-KAF-002" data-name="Gold Kaftan" data-image="images/kaftan/kaftan2.webp" data-description="Luxurious gold embroidery on premium fabric. A statement piece for royal occasions.">
+          <div class="product-image">
+            <img src="images/kaftan/kaftan2.webp" alt="Gold Kaftan" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Gold Kaftan</h4>
+            <p class="product-code">FL-KAF-002</p>
+            <button class="add-to-cart" data-code="FL-KAF-002">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
         </div>
       </div>
-      <!-- Product 4 -->
-      <div class="product-card" data-code="FL-KAF-004" data-name="Classic Kaftan" data-image="images/kaftan/kaftan4.webp" data-description="A timeless classic. Clean lines, perfect fit, and premium fabric.">
-        <div class="product-image">
-          <img src="images/kaftan/kaftan4.webp" alt="Classic Kaftan" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Classic Kaftan</h4>
-          <p class="product-code">FL-KAF-004</p>
-          <button class="add-to-cart" data-code="FL-KAF-004">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      <!-- Product 5 -->
-      <div class="product-card" data-code="FL-KAF-005" data-name="Premium Kaftan" data-image="images/kaftan/kaftan5.webp" data-description="Our most premium Kaftan. Hand-stitched with care, using the finest fabrics.">
-        <div class="product-image">
-          <img src="images/kaftan/kaftan5.webp" alt="Premium Kaftan" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Premium Kaftan</h4>
-          <p class="product-code">FL-KAF-005</p>
-          <button class="add-to-cart" data-code="FL-KAF-005">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
+
+      <button class="slider-arrow next-slide" aria-label="Next">›</button>
+    </div>
+
+    <div class="slider-dots" id="kaftanDots"></div>
+
+    <!-- View All -->
+    <div class="collection-view-all">
+      <a href="kaftan.html" class="btn-ghost">View All Kaftan <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
 
-<!-- ===== CORPORATE & VINTAGE SECTION ===== -->
-<section class="collection-grid-section fade-in">
+<!-- ===== CORPORATE & VINTAGE SLIDER ===== -->
+<section class="collection-slider-section fade-in">
   <div class="container">
     <div class="collection-section-header">
       <h2>Corporate & Vintage</h2>
-      <a href="cv.html" class="btn-ghost">View All <i class="fa-solid fa-arrow-right"></i></a>
     </div>
-    <div class="product-grid collection-grid">
-      <!-- Product 1 -->
-      <div class="product-card" data-code="FL-CV-001" data-name="Corporate Shirt & Trouser" data-image="images/cv/cv1.webp" data-description="Classic corporate shirt paired with perfectly tailored trousers. Ideal for the office or formal events.">
-        <div class="product-image">
-          <img src="images/cv/cv1.webp" alt="Corporate Shirt & Trouser" loading="lazy">
+    
+    <div class="collection-slider">
+      <button class="slider-arrow prev-slide" aria-label="Previous">‹</button>
+      
+      <div class="collection-slider-track" id="cvTrack">
+        <!-- Product 1 -->
+        <div class="product-card" data-code="FL-CV-001" data-name="Corporate Shirt & Trouser" data-image="images/cv/cv1.webp" data-description="Classic corporate shirt paired with perfectly tailored trousers. Ideal for the office or formal events.">
+          <div class="product-image">
+            <img src="images/cv/cv1.webp" alt="Corporate Shirt & Trouser" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Corporate Shirt & Trouser</h4>
+            <p class="product-code">FL-CV-001</p>
+            <button class="add-to-cart" data-code="FL-CV-001">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
         </div>
-        <div class="product-info">
-          <h4>Corporate Shirt & Trouser</h4>
-          <p class="product-code">FL-CV-001</p>
-          <button class="add-to-cart" data-code="FL-CV-001">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      <!-- Product 2 -->
-      <div class="product-card" data-code="FL-CV-002" data-name="Vintage Shirt" data-image="images/cv/cv2.webp" data-description="A timeless vintage-inspired shirt. Perfect for casual outings and stylish everyday wear.">
-        <div class="product-image">
-          <img src="images/cv/cv2.webp" alt="Vintage Shirt" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Vintage Shirt</h4>
-          <p class="product-code">FL-CV-002</p>
-          <button class="add-to-cart" data-code="FL-CV-002">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      <!-- Product 3 -->
-      <div class="product-card" data-code="FL-CV-003" data-name="Premium Trouser" data-image="images/cv/cv3.webp" data-description="Premium tailored trousers with a perfect drape. Versatile and elegant.">
-        <div class="product-image">
-          <img src="images/cv/cv3.webp" alt="Premium Trouser" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Premium Trouser</h4>
-          <p class="product-code">FL-CV-003</p>
-          <button class="add-to-cart" data-code="FL-CV-003">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
+
+        <!-- Product 2 -->
+        <div class="product-card" data-code="FL-CV-002" data-name="Vintage Shirt" data-image="images/cv/cv2.webp" data-description="A timeless vintage-inspired shirt. Perfect for casual outings and stylish everyday wear.">
+          <div class="product-image">
+            <img src="images/cv/cv2.webp" alt="Vintage Shirt" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>Vintage Shirt</h4>
+            <p class="product-code">FL-CV-002</p>
+            <button class="add-to-cart" data-code="FL-CV-002">
+              <i class="fa-solid fa-plus"></i> Add to Cart
+            </button>
+          </div>
         </div>
       </div>
-      <!-- Product 4 -->
-      <div class="product-card" data-code="FL-CV-004" data-name="Classic Vintage Shirt" data-image="images/cv/cv4.webp" data-description="A classic vintage shirt with modern tailoring. A wardrobe essential.">
-        <div class="product-image">
-          <img src="images/cv/cv4.webp" alt="Classic Vintage Shirt" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Classic Vintage Shirt</h4>
-          <p class="product-code">FL-CV-004</p>
-          <button class="add-to-cart" data-code="FL-CV-004">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      <!-- Product 5 -->
-      <div class="product-card" data-code="FL-CV-005" data-name="Executive Set" data-image="images/cv/cv5.webp" data-description="The complete executive look. Shirt, trousers, and a vintage blazer — all in one set.">
-        <div class="product-image">
-          <img src="images/cv/cv5.webp" alt="Executive Set" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h4>Executive Set</h4>
-          <p class="product-code">FL-CV-005</p>
-          <button class="add-to-cart" data-code="FL-CV-005">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
+
+      <button class="slider-arrow next-slide" aria-label="Next">›</button>
+    </div>
+
+    <div class="slider-dots" id="cvDots"></div>
+
+    <!-- View All -->
+    <div class="collection-view-all">
+      <a href="cv.html" class="btn-ghost">View All Corporate & Vintage <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>

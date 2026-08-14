@@ -2158,3 +2158,127 @@ a:hover { text-decoration: underline; }
     font-size: 1.6rem;
   }
 }
+
+/* ===== COLLECTION SLIDER (2 Products) ===== */
+.collection-slider-section {
+  padding: 2rem 0 3rem;
+  border-bottom: 1px solid var(--muted);
+  opacity: 0.6;
+}
+
+.collection-slider-section:last-child {
+  border-bottom: none;
+}
+
+.collection-section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.collection-slider {
+  position: relative;
+  overflow: hidden;
+  padding: 0 40px;
+}
+
+.collection-slider-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s ease;
+}
+
+.collection-slider .product-card {
+  flex: 0 0 calc(50% - 12px);
+  min-width: 250px;
+}
+
+.collection-slider .slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--card);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: var(--shadow);
+}
+
+.collection-slider .slider-arrow:hover {
+  background: var(--accent);
+  color: #000;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.collection-slider .prev-slide {
+  left: 0;
+}
+
+.collection-slider .next-slide {
+  right: 0;
+}
+
+/* ===== SLIDER DOTS ===== */
+.collection-slider-section .slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+.collection-slider-section .slider-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: 0.3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.collection-slider-section .slider-dots .dot.active {
+  opacity: 1;
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+/* ===== VIEW ALL BUTTON ===== */
+.collection-view-all {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.collection-view-all .btn-ghost {
+  padding: 12px 36px;
+  font-size: 1rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .collection-slider .product-card {
+    flex: 0 0 calc(100% - 12px);
+  }
+  .collection-slider {
+    padding: 0 30px;
+  }
+  .collection-slider .slider-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+  }
+  .collection-section-header h2 {
+    font-size: 1.6rem;
+  }
+}

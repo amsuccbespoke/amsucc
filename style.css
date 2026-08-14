@@ -2113,3 +2113,48 @@ a:hover { text-decoration: underline; }
     font-size: 1rem;
   }
 }
+
+/* ===== COLLECTION PAGE GRID ===== */
+.collection-grid-section {
+  padding: 2rem 0;
+}
+
+.collection-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.collection-section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
+  .collection-section-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  .collection-section-header h2 {
+    font-size: 1.6rem;
+  }
+}

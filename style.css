@@ -2304,3 +2304,29 @@ a:hover { text-decoration: underline; }
   padding: 12px 36px;
   font-size: 1rem;
 }
+
+/* ===== HOME COLLECTION SLIDER ===== */
+.home-collection-slider {
+  padding: 3rem 0;
+}
+
+.home-collection-header {
+  text-align: center;
+}
+
+.home-collection-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.home-collection-view-all {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.home-collection-view-all .btn-ghost {
+  padding: 12px 36px;
+  font-size: 1rem;
+}

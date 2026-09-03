@@ -965,3 +965,111 @@ document.addEventListener('DOMContentLoaded', function() {
   // Make closeSearch globally accessible for onclick in results
   window.closeSearch = closeSearch;
 });
+
+// ===== NEW HAMBURGER — CIRCLE RIPPLE + DROP =====
+document.addEventListener('DOMContentLoaded', function() {
+  const wrapper = document.getElementById('hamburgerWrapper');
+  const panel = document.getElementById('menuPanel');
+  const overlay = document.getElementById('menuOverlay');
+  const closeBtn = document.getElementById('menuClose');
+  const trigger = document.getElementById('collectionTriggerMobile');
+  const dropdown = document.getElementById('collectionDropdownMobile');
+  const searchInput = document.getElementById('menuSearchInput');
+  const searchBtn = document.getElementById('menuSearchBtn');
+  let isOpen = false;
+  let collectionClickCount = 0;
+
+  if (!wrapper || !panel) return;
+
+  function toggleMenu() {
+    isOpen = !isOpen;
+
+    if (isOpen) {
+      wrapper.classList.add('active');
+      panel.classList.add('open');
+      overlay.classList.add('open');
+      dropdown.classList.remove('open');
+      trigger.querySelector('i').classList.remove('open');
+      document.body.style.overflow = 'hidden';
+      // Reset collection click count when menu opens
+      collectionClickCount = 0;
+    } else {
+      wrapper.classList.remove('active');
+      panel.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+      // Close search input when menu closes
+      if (searchInput) {
+        searchInput.classList.remove('open');
+        searchInput.value = '';
+      }
+    }
+  }
+
+  // Toggle menu on hamburger click
+  wrapper.addEventListener('click', function(e) {
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  // Close on overlay click
+  overlay.addEventListener('click', toggleMenu);
+
+  // Close on close button
+  closeBtn.addEventListener('click', toggleMenu);
+
+  // ===== COLLECTION SHAKE + NAVIGATE =====
+  trigger.addEventListener('click', function(e) {
+    e.stopPropagation();
+
+    // Shake animation
+    const parentItem = this.closest('.menu-item');
+    parentItem.classList.remove('shake');
+    // Force reflow
+    void parentItem.offsetWidth;
+    parentItem.classList.add('shake');
+
+    // Increment click count
+    collectionClickCount++;
+
+    // Toggle dropdown
+    const icon = this.querySelector('i');
+    dropdown.classList.toggle('open');
+    icon.classList.toggle('open');
+
+    // On second click, navigate to collection.html
+    if (collectionClickCount >= 2) {
+      window.location.href = 'collection.html';
+    }
+  });
+
+  // ===== SEARCH INSIDE HAMBURGER =====
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      searchInput.classList.toggle('open');
+      if (searchInput.classList.contains('open')) {
+        searchInput.focus();
+      }
+    });
+
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && this.value.trim().length > 0) {
+        // Redirect to collection.html with search query
+        window.location.href = 'collection.html?search=' + encodeURIComponent(this.value.trim());
+      }
+    });
+  }
+
+  // ===== CLOSE MENU ON LINK CLICK =====
+  document.querySelectorAll('.menu-panel a:not(.dropdown-trigger)').forEach(link => {
+    link.addEventListener('click', function() {
+      if (isOpen) toggleMenu();
+    });
+  });
+
+  // ===== CLOSE ON ESC =====
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && isOpen) toggleMenu();
+  });
+});

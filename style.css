@@ -2327,3 +2327,20 @@ a:hover { text-decoration: underline; }
     font-size: 1rem;
   }
 }
+
+/* Force hamburger to show on mobile */
+@media (max-width: 860px) {
+  .hamburger-wrapper {
+    display: flex !important;
+    z-index: 1001 !important; /* Above the menu */
+  }
+}
+
+/* Make sure the menu panel is hidden by default */
+.menu-panel-slide {
+  right: -65% !important; /* Hidden off-screen */
+}
+
+.menu-panel-slide.open {
+  right: 0 !important; /* Slides in when open */
+}

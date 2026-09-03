@@ -966,7 +966,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.closeSearch = closeSearch;
 });
 
-// ===== NEW HAMBURGER — CIRCLE RIPPLE + DROP =====
+// ===== NEW HAMBURGER — CIRCLE RIPPLE + SLIDE FROM RIGHT =====
 document.addEventListener('DOMContentLoaded', function() {
   const wrapper = document.getElementById('hamburgerWrapper');
   const panel = document.getElementById('menuPanel');
@@ -991,14 +991,12 @@ document.addEventListener('DOMContentLoaded', function() {
       dropdown.classList.remove('open');
       trigger.querySelector('i').classList.remove('open');
       document.body.style.overflow = 'hidden';
-      // Reset collection click count when menu opens
       collectionClickCount = 0;
     } else {
       wrapper.classList.remove('active');
       panel.classList.remove('open');
       overlay.classList.remove('open');
       document.body.style.overflow = '';
-      // Close search input when menu closes
       if (searchInput) {
         searchInput.classList.remove('open');
         searchInput.value = '';
@@ -1006,38 +1004,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Toggle menu on hamburger click
   wrapper.addEventListener('click', function(e) {
     e.stopPropagation();
     toggleMenu();
   });
 
-  // Close on overlay click
   overlay.addEventListener('click', toggleMenu);
-
-  // Close on close button
   closeBtn.addEventListener('click', toggleMenu);
 
   // ===== COLLECTION SHAKE + NAVIGATE =====
   trigger.addEventListener('click', function(e) {
     e.stopPropagation();
 
-    // Shake animation
     const parentItem = this.closest('.menu-item');
     parentItem.classList.remove('shake');
-    // Force reflow
     void parentItem.offsetWidth;
     parentItem.classList.add('shake');
 
-    // Increment click count
     collectionClickCount++;
 
-    // Toggle dropdown
     const icon = this.querySelector('i');
     dropdown.classList.toggle('open');
     icon.classList.toggle('open');
 
-    // On second click, navigate to collection.html
     if (collectionClickCount >= 2) {
       window.location.href = 'collection.html';
     }
@@ -1055,14 +1044,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     searchInput.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' && this.value.trim().length > 0) {
-        // Redirect to collection.html with search query
         window.location.href = 'collection.html?search=' + encodeURIComponent(this.value.trim());
       }
     });
   }
 
   // ===== CLOSE MENU ON LINK CLICK =====
-  document.querySelectorAll('.menu-panel a:not(.dropdown-trigger)').forEach(link => {
+  document.querySelectorAll('.menu-panel-slide a:not(.dropdown-trigger)').forEach(function(link) {
     link.addEventListener('click', function() {
       if (isOpen) toggleMenu();
     });
